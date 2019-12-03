@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/summernote/summernote-bs4.css') }}">
+    
+    <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+    
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('css')
 </head>
@@ -121,10 +124,13 @@
                 </li>
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="form-inline">
+                        @csrf
+                        <a href="#" class="nav-link" onclick="event.target.parentNode.submit();">
+                            <i class="fas fa-sign-out-alt"></i> Salir
+                        </a>
+                    
+                    </form>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
                         <div class="dropdown-divider"></div>
@@ -146,11 +152,11 @@
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -159,19 +165,20 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="{{ asset('img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                {{-- <img src="{{ asset('img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
+                <span class="brand-text font-weight-light">Brick</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    <div class="image ">
+                        <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2 d-none" alt="User Image">
+                        <i class="far fa-user text-white"></i>
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block"> {{ Auth::user()->name }}</a>
                     </div>
                 </div>
 
@@ -180,41 +187,13 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./index.html" class="nav-link active">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="./index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="admin/pedido" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Widgets
-                                    <span class="right badge badge-danger">New</span>
+                                    Pedido
+                                    
                                 </p>
                             </a>
                         </li>
@@ -726,6 +705,11 @@
     <script src="{{ asset('vendor_assets/admin_lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('vendor_assets/admin_lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    
+    {{-- data table --}}
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    {{-- data table --}}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         /* $.widget.bridge('uibutton', $.ui.button) */
@@ -743,6 +727,7 @@
     {{-- <script src="{{ asset('vendor_assets/admin_lte/plugins/jquery-knob/jquery.knob.min.js') }}"></script> --}}
     <!-- daterangepicker -->
     <script src="{{ asset('vendor_assets/admin_lte/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor_assets/admin_lte/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{ asset('vendor_assets/admin_lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
@@ -750,6 +735,7 @@
     <script src="{{ asset('vendor_assets/admin_lte/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('vendor_assets/admin_lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('vendor_assets/admin_lte/js/adminlte.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
