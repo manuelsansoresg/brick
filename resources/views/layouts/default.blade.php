@@ -25,9 +25,11 @@
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/summernote/summernote-bs4.css') }}">
-    
+
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('css')
 </head>
@@ -129,7 +131,7 @@
                         <a href="#" class="nav-link" onclick="event.target.parentNode.submit();">
                             <i class="fas fa-sign-out-alt"></i> Salir
                         </a>
-                    
+
                     </form>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -195,7 +197,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="admin/pedido" class="nav-link">
+                                    <a href="/admin/pedido" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>PEDIDOS</p>
                                     </a>
@@ -223,19 +225,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link">
+                                    <a href="/admin/unidad" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>UNIDAD DE MEDIDA</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/boxed.html" class="nav-link">
+                                    <a href="/admin/marca" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>MARCAS</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <a href="/admin/color" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>COLORES</p>
                                     </a>
@@ -295,7 +297,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>SALIDA A ALMACEN</p>
                                     </a>
-                                </li>                                
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item has-treeview">
@@ -341,9 +343,9 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>CERRAR SESSIÓN</p>
                                     </a>
-                                </li>                                
+                                </li>
                             </ul>
-                        </li>                                                                       
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -354,9 +356,9 @@
         <!-- Content Wrapper. Contains page content -->
 
         {{-- contenido pagina --}}
-            @yield('content')
+        @yield('content')
         {{-- contenido pagina --}}
-        
+
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
@@ -378,10 +380,13 @@
     <script src="{{ asset('vendor_assets/admin_lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('vendor_assets/admin_lte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    
+
     {{-- data table --}}
     <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js') }}"></script>
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('vendor_assets/admin_lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     {{-- data table --}}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>

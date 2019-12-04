@@ -20,4 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('/pedido', 'PedidoController');
- });
+    Route::resource('/unidad', 'UnidadController');
+    Route::resource('/marca', 'MarcaController');
+    Route::resource('/color', 'ColorController');
+});
