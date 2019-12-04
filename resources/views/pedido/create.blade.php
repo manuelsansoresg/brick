@@ -86,7 +86,7 @@
                                     <div class="col-12 text-right pb-4" style="padding-bottom:20px;">
                                         <button class="btn btn-success" id="addArticulo" data-toggle="tooltip" data-placement="left" title="AGREGAR PRODUCTO"> <i class="glyphicon glyphicon-plus-sign"></i> AGREGAR PRODUCTO </button>
                                     </div> <!-- /div-action -->
-                                    <table id="tblpedido" class="table table-default table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <table id="tblpedido" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                             <tr>
                                                 <th>CLAVE</th>
