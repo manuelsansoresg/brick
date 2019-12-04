@@ -80,10 +80,13 @@
                                             <span class="text-danger"> {{$errors->first('FechaEntrega')}}</span>
                                         @endif    
                                     </div>   
-                            </div>
+                            </div>                           
                             <div class="row ">
                                     <div class="col-12 col-md-12">
-                                        <table id="tblpedido" class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                            <div class="col-12 text-right pb-4" style="padding-bottom:20px;">
+                                            <button class="btn btn-success" id="addArticulo" data-toggle="tooltip" data-placement="left" title="AGREGAR PRODUCTO"> <i class="glyphicon glyphicon-plus-sign"></i> AGREGAR PRODUCTO </button>
+                                        </div> <!-- /div-action -->
+                                        <table id="tblpedido" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                             <thead>
                                                 <tr>
                                                     <th>CLAVE</th>
@@ -100,7 +103,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-lg-8 col-md-5 col-sm-5 col-xs-5">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                                         <div class="form-group mb-2">
                                             <label class="small">OBSERVACIONES </label>
                                             <div class="w-100"></div>
@@ -111,7 +114,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-2 col-sm-3 col-xs-2">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                         <div class="form-group mb-2">
                                             <label class="small">SUBTOTAL</label>                                        
                                             <input type="text" name="Subtotal" class="form-control form-control-sm" readonly placeholder="SUBTOTAL">                                        
@@ -168,7 +171,6 @@
     })
     </script>
 
-<!-- <script src="{{ asset('vendor/adminlte/plugins/datatable/js/responsive.js') }}"></script> -->
 <script>
     $(function() {      
 
@@ -178,6 +180,10 @@
             "pageLength": 5,
             "searching": false,
             "pagingType": "simple",
+            "bPaginate": false, 
+            "bFilter": false , 
+            "bLengthMenu" : false, //thought this line could hide the LengthMenu
+            "bInfo":false,          
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
