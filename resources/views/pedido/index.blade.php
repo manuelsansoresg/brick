@@ -32,7 +32,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No.PEDIDO</th>
-                                                <th>NOMBRE</th>
+                                                <th>NOMBRE CLIENTE</th>
                                                 <th>FECHA</th>
                                                 <th>IMPORTE</th>                                                
                                                 <th>ESTATUS</th>
