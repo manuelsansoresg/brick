@@ -7,21 +7,19 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Pedido</h1>
+                    <h1 class="m-0 text-dark">PEDIDOS</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Pedidos</li>
+                        <li class="breadcrumb-item"><a href="#">MENU</a></li>
+                        <li class="breadcrumb-item active">PEDIDOS</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">
-                            Lista de pedidos
-                        </div>
+                        <div class="card-header"> .:: LISTA DE PEDIDOS ::.</div>
                         <div class="card-body">
                             <div class="row justify-content-end mt-3">
                                 <div class="col-2">
@@ -33,10 +31,11 @@
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                             <tr>
-                                                <th>Fecha entrega</th>
-                                                <th>Proveedor</th>
-                                                <th>Modelo</th>
-                                                <th>Estatus</th>
+                                                <th>No.PEDIDO</th>
+                                                <th>NOMBRE</th>
+                                                <th>FECHA</th>
+                                                <th>IMPORTE</th>                                                
+                                                <th>ESTATUS</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
