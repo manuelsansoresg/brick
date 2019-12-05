@@ -25,4 +25,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/color', 'ColorController');
     Route::resource('/familia', 'FamiliaController');
     Route::resource('/modelo', 'TipoModeloController');
+    Route::resource('/almacen', 'AlmacenController');
 });

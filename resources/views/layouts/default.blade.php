@@ -255,25 +255,25 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                    <a href="/admin/almacen" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>ALMACEN</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                    <a href="/admin/articulo" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>ARTÍCULOS</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                    <a href="/admin/cliente" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>CLIENTES</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                    <a href="/admin/proveedor" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>PROVEEDORES</p>
                                     </a>
