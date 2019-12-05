@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/Marca">FAMILIA</a> </li>
+                        <li class="breadcrumb-item"> <a href="/admin/familia">FAMILIA</a> </li>
                         <li class="breadcrumb-item active">EDITAR</li>
                     </ol>
                 </div><!-- /.col -->

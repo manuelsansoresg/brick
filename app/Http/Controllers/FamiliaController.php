@@ -76,7 +76,7 @@ class FamiliaController extends Controller
     {
         Familia::createUpdate($request, $id);
         flash('Elemento guardado');
-        return redirect('/admin/unidad');
+        return redirect('/admin/familia');
     }
 
     /**
