@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Familia extends Model
 {
     protected $table      = 'familia';
-    protected $fillable   = ['descripcion', 'Estatus'];
+    protected $primaryKey = 'Id';
+    protected $fillable   = ['Descripcion', 'Estatus'];
+
+    static function getById($id)
+    {
+        $familia = Familia::where('Id', $id)->first();
+        return $familia;
+    }
 
     static function getAll()
     {
@@ -32,4 +39,11 @@ class Familia extends Model
 
 
     }
+
+    static function drop($id)
+    {
+        $familia = Familia::find($id);
+        $familia->delete();
+    }
+
 }

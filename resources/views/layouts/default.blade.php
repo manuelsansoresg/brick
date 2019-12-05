@@ -243,7 +243,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="admin/familia" class="nav-link">
+                                    <a href="/admin/familia" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>FAMILIA</p>
                                     </a>

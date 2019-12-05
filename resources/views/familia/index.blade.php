@@ -49,8 +49,8 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ Form::open(['route' => ['familia.destroy', $familia->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                                    <a href="{{route('familia.edit', $familia->id)}}" class="btn btn-sm btn-primary">
+                                                    {{ Form::open(['route' => ['familia.destroy', $familia->Id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                                    <a href="{{route('familia.edit', $familia->Id)}}" class="btn btn-sm btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
                                                     <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">

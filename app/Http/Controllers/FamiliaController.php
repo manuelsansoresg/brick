@@ -56,11 +56,12 @@ class FamiliaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Familia  $familia
+     * @param  \App\Familia  $family
      * @return \Illuminate\Http\Response
      */
-    public function edit(Familia $familia)
+    public function edit($id)
     {
+        $familia = Familia::getById($id);
         return view('familia.edit', compact('familia'));
     }
 
@@ -71,11 +72,11 @@ class FamiliaController extends Controller
      * @param  \App\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function update(FamiliaRequest $request, Familia $familia)
+    public function update(FamiliaRequest $request, $id)
     {
-        Familia::createUpdate($request, $familia->Id);
+        Familia::createUpdate($request, $id);
         flash('Elemento guardado');
-        return redirect('/admin/familia');
+        return redirect('/admin/unidad');
     }
 
     /**
@@ -84,9 +85,9 @@ class FamiliaController extends Controller
      * @param  \App\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Familia $familia)
+    public function destroy($id)
     {
-        $familia->delete();
+        Familia::drop($id);
         flash('Elemento borrado');
         return redirect('/admin/familia');
     }

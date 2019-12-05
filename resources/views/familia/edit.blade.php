@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-header">EDITAR FAMILIA</div>
                         <div class="card-body">
-                            {{ Form::open(['route' => ['familia.update', $familia->id], 'method' => 'PUT']) }}                            
+                            {{ Form::open(['route' => ['familia.update', $familia->Id], 'method' => 'PUT']) }}
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">

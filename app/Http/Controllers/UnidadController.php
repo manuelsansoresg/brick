@@ -87,6 +87,7 @@ class UnidadController extends Controller
      */
     public function destroy(Unidad $unidad)
     {
+        
         $unidad->delete();
         flash('Elemento borrado');
         return redirect('/admin/unidad');
