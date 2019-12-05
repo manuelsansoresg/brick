@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ModeloRequest;
 use App\TipoModelo;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class TipoModeloController extends Controller
      */
     public function index()
     {
-        //
+        $modelos = TipoModelo::getAll();
+        return view('modelo.index', compact('modelos'));
     }
 
     /**
@@ -24,7 +26,7 @@ class TipoModeloController extends Controller
      */
     public function create()
     {
-        //
+        return view('modelo.create');
     }
 
     /**
@@ -33,9 +35,11 @@ class TipoModeloController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ModeloRequest $request)
     {
-        //
+        TipoModelo::createUpdate($request);
+        flash('Elemento guardado');
+        return redirect('/admin/modelo');
     }
 
     /**
@@ -55,9 +59,10 @@ class TipoModeloController extends Controller
      * @param  \App\TipoModelo  $tipoModelo
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoModelo $tipoModelo)
+    public function edit($id)
     {
-        //
+        $modelo = TipoModelo::getById($id);
+        return view('modelo.edit', compact('modelo'));
     }
 
     /**
@@ -67,9 +72,11 @@ class TipoModeloController extends Controller
      * @param  \App\TipoModelo  $tipoModelo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipoModelo $tipoModelo)
+    public function update(ModeloRequest $request, $id)
     {
-        //
+        TipoModelo::createUpdate($request, $id);
+        flash('Elemento guardado');
+        return redirect('/admin/modelo');
     }
 
     /**
@@ -78,8 +85,10 @@ class TipoModeloController extends Controller
      * @param  \App\TipoModelo  $tipoModelo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipoModelo $tipoModelo)
+    public function destroy($id)
     {
-        //
+        TipoModelo::drop($id);
+        flash('Elemento borrado');
+        return redirect('/admin/modelo');
     }
 }

@@ -249,7 +249,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/layout/fixed-footer.html" class="nav-link">
+                                    <a href="/admin/modelo" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>MODELOS</p>
                                     </a>
