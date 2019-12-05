@@ -29,7 +29,7 @@
                                     <div class="form-group mb-2">
                                         <label class="small">DESCRIPCIÓN </label>
                                         <div class="w-100"></div>
-                                        <input type="text" name="Descripcion" class=form-control form-control-sm>
+                                        <input type="text" name="Descripcion" class="form-control form-control-sm">
                                         <div class="w-100"></div>
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Descripcion')}}</span>

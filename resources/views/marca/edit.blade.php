@@ -28,7 +28,7 @@
                                     <div class="form-group mb-2">
                                         <label class="small">DESCRIPCIÓN</label>
                                         <div class="w-100"></div>
-                                        <input type="text" name="Descripcion" class="form-control" value="{{ $marca->Descripcion }}">
+                                        <input type="text" name="Descripcion" class="form-control form-control-sm" value="{{ $marca->Descripcion }}">
                                         <div class="w-100"></div>
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Descripcion')}}</span>
