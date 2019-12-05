@@ -11,8 +11,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Marca</li>
+                        <li class="breadcrumb-item"><a href="#">INICIO</a></li>
+                        <li class="breadcrumb-item active">MARCAS</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -20,21 +20,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Lista de marcas
-                        </div>
-                        <div class="card-body">
-                            <div class="row justify-content-end mt-3">
-                                <div class="col-2">
-                                    <a href="/admin/marca/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> Nuevo</a>
+                            <div class="d-flex align-items-center">
+                              <h3 class="mr-auto">LISTADO DE MARCAS</h3>
+                                <div>
+                                    <a href="/admin/marca/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-body">                            
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                             <tr>
-                                                <th>Descripcion</th>
-                                                <th>Estatus</th>
+                                                <th>DESCRIPCION</th>
+                                                <th>ESTATUS</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

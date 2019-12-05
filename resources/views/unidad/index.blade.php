@@ -11,8 +11,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Unidad</li>
+                        <li class="breadcrumb-item"><a href="#">INICIO</a></li>
+                        <li class="breadcrumb-item active">UNIDAD</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -20,22 +20,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Lista de unidades
-                        </div>
-                        <div class="card-body">
-                            <div class="row justify-content-end mt-3">
-                                <div class="col-2">
-                                    <a href="/admin/unidad/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> Nuevo</a>
+                            <div class="d-flex align-items-center">
+                              <h3 class="mr-auto">LISTA DE UNIDADES</h3>
+                                <div>
+                                    <a href="/admin/unidad/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="card-body">                            
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                             <tr>
-                                                <th>Descripcion</th>
-                                                <th>Abreviatura</th>
-                                                <th>Estatus</th>
+                                                <th>DESCRIPCION</th>
+                                                <th>ABREVIATURA</th>
+                                                <th>ESTATUS</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -46,9 +46,9 @@
                                                 <td>{{ $unidad->Abreviatura }}</td>
                                                 <td>
                                                     @if($unidad->Estatus == 1)
-                                                    <i class="fas fa-ban text-success"></i> Activo
+                                                    <i class="fas fa-ban text-success"></i> ACTIVO
                                                     @else
-                                                    <i class="fas fa-ban text-danger"></i> Inactivo
+                                                    <i class="fas fa-ban text-danger"></i> INACTIVO
                                                     @endif
                                                 </td>
                                                 <td>
