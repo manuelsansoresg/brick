@@ -15,4 +15,16 @@ class Proveedor extends Model
         $proveedor = Proveedor::all();
         return $proveedor;
     }
+    static function createUpdate($request , $id=null)
+    {        
+
+        if( $id == null ){
+            $proveedor = new Proveedor($request->except('_token'));            
+            $proveedor->save();
+        }else{
+            $proveedor = Proveedor::find($id);
+            $proveedor->fill($request->except('_token'));            
+            $proveedor->update();
+        }
+    }
 }

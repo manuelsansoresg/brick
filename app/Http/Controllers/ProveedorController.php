@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProveedorRequest;
 use App\Proveedor;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class ProveedorController extends Controller
      */
     public function index()
     {
-        //
+        $proveedores = Proveedor::getAll();
+        return view('proveedor.index', compact('proveedores'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        //
+        return view('proveedor.create');
     }
 
     /**
