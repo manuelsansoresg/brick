@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">FAMILIA</h1>
+                    <h1 class="m-0 text-dark">MODELO</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">INICIO</a></li>
-                        <li class="breadcrumb-item active">FAMILIA</li>
+                        <li class="breadcrumb-item active">MODELO</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -20,9 +20,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h3 class="mr-auto">LISTADO DE FAMILIAS</h3>
+                                <h3 class="mr-auto">LISTADO DE MODELOS</h3>
                                 <div>
-                                    <a href="/admin/familia/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
+                                    <a href="/admin/modelo/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
                                 </div>
                             </div>
                         </div>

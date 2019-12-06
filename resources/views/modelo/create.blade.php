@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">FAMILIA</h1>
+                    <h1 class="m-0 text-dark">MODELO</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/familia">FAMILIA</a> </li>
+                        <li class="breadcrumb-item"> <a href="/admin/modelo">MODELO</a> </li>
                         <li class="breadcrumb-item active">NUEVO</li>
                     </ol>
                 </div><!-- /.col -->
@@ -20,10 +20,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">REGISTRAR FAMILIA</div>
+                        <div class="card-header">REGISTRAR MODELO</div>
                         <div class="card-body">
 
-                            {{ Form::open(['route' => 'familia.store', 'method' => 'POST']) }}                            
+                            {{ Form::open(['route' => 'modelo.store', 'method' => 'POST']) }}                            
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">
@@ -50,7 +50,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 text-right pb-4">
-                                    <button class="btn btn-primary">Guardar</button>
+                                    <button class="btn btn-primary">ACEPTAR</button>
                                 </div>
                             </div>
                             {{ Form::close() }}

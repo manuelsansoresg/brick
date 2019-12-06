@@ -50,7 +50,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 text-right pb-4">
-                                    <button class="btn btn-primary">Guardar</button>
+                                    <button class="btn btn-primary">ACEPTAR</button>
                                 </div>
                             </div>
                             {{ Form::close() }}
