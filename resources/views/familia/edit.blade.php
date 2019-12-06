@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/Marca">FAMILIA</a> </li>
+                        <li class="breadcrumb-item"> <a href="/admin/familia">FAMILIA</a> </li>
                         <li class="breadcrumb-item active">EDITAR</li>
                     </ol>
                 </div><!-- /.col -->
@@ -53,7 +53,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
-                                    <button class="btn btn-primary">Guardar</button>
+                                    <button class="btn btn-primary">ACEPTAR</button>
                                 </div>
                             </div>
                             {{ Form::close() }}
