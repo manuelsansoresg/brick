@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card border-primary">
-                        <div class="card-header">DATOS GENERALES</div>
+                        <div class="card-header">AGREGAR PROVEEDORES</div>
                         <div class="card-body">
                             {{ Form::open(['route' => 'proveedor.store', 'method' => 'POST']) }}
                             <div class="row">
