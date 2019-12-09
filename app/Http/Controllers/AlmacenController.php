@@ -89,6 +89,6 @@ class AlmacenController extends Controller
     {
         Almacen::drop($id);
         flash('Elemento borrado');
-        return redirect('/admin/familia');
+        return redirect('/admin/almacen');
     }
 }
