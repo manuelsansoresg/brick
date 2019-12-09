@@ -37,7 +37,9 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Proveedor::createUpdate($request);
+        flash('Elemento guardado');
+        return redirect('/admin/proveedor');
     }
 
     /**
@@ -60,6 +62,7 @@ class ProveedorController extends Controller
     public function edit(Proveedor $proveedor)
     {
         //
+        return view('proveedor.edit', compact('proveedor'));
     }
 
     /**
@@ -72,6 +75,9 @@ class ProveedorController extends Controller
     public function update(Request $request, Proveedor $proveedor)
     {
         //
+        proveedor::createUpdate($request, $proveedor->id);
+        flash('Elemento guardado');
+        return redirect('/admin/proveedor');
     }
 
     /**
@@ -83,5 +89,8 @@ class ProveedorController extends Controller
     public function destroy(Proveedor $proveedor)
     {
         //
+        $proveedor->delete();
+        flash('Elemento borrado');
+        return redirect('/admin/proveedor');
     }
 }
