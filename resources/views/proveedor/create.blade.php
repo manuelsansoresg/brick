@@ -6,7 +6,8 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6"><h1 class="m-0 text-dark"></h1>
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark"></h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,6 +31,10 @@
                                 <div class="col-12 col-md-3">
                                     <label class="small">RFC</label>
                                     <input class="form-control form-control-sm" type="text" placeholder="RFC" name="RFC">
+                                    <div class="w-100"></div>
+                                    @if($errors)
+                                    <span class="text-danger"> {{$errors->first('RFC')}}</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
@@ -40,7 +45,7 @@
                                 <div class="col-12 col-md-3">
                                     <label class="small">CP</label>
                                     <input class="form-control form-control-sm" type="text" placeholder="CODIGO POSTAL" name="CodigoPostal">
-                                </div>                              
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-2">
@@ -58,7 +63,7 @@
                                 <div class="col-12 col-md-3">
                                     <label class="small">CIUDAD</label>
                                     <input class="form-control form-control-sm" type="text" placeholder="CIUDAD" name="Ciudad">
-                                </div>                             
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-2">
@@ -110,14 +115,14 @@
                                 <div class="col-12 col-md-8">
                                     <label class="small">CONTACTO</label>
                                     <input class="form-control form-control-sm" type="text" placeholder="CONTACTO" name="Contacto">
-                                </div> 
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-8">
                                     <label class="small">EMAIL</label>
                                     <input class="form-control form-control-sm" type="email" aria-describedby="emailHelp" placeholder="EMAIL" name="Email">
                                     <small id="emailHelp" class="form-text text-muted">Nunca compartiremos su correo electrónico con nadie más.</small>
-                                </div> 
+                                </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
