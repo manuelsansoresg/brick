@@ -59,9 +59,9 @@ class ProveedorController extends Controller
      * @param  \App\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedor $proveedor)
+    public function edit($id)
     {
-        //
+        $proveedor = Proveedor::getById($id);
         return view('proveedor.edit', compact('proveedor'));
     }
 
@@ -72,10 +72,10 @@ class ProveedorController extends Controller
      * @param  \App\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedor $proveedor)
+    public function update(Request $request, $id)
     {
         //
-        proveedor::createUpdate($request, $proveedor->id);
+        proveedor::createUpdate($request, $id);
         flash('Elemento guardado');
         return redirect('/admin/proveedor');
     }
@@ -86,10 +86,10 @@ class ProveedorController extends Controller
      * @param  \App\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedor $proveedor)
+    public function destroy($id)
     {
         //
-        $proveedor->delete();
+        proveedor::drop($id);
         flash('Elemento borrado');
         return redirect('/admin/proveedor');
     }
