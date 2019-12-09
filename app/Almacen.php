@@ -24,16 +24,19 @@ class Almacen extends Model
 
     static function createUpdate($request, $id = null)
     {
-        $Estatus = isset($request->Estatus) ? 1 : 0;
+        $Estatus = isset($request->Estatus) ? 1: 0;
+        $Matriz  = isset($request->Matriz) ? 1:  0;
 
         if ($id == null) {
             $almacen = new Almacen($request->except('_token'));
             $almacen->Estatus = $Estatus;
+            $almacen->Matriz = $Matriz;
             $almacen->save();
         } else {
             $almacen = Almacen::find($id);
             $almacen->fill($request->except('_token'));
             $almacen->Estatus = $Estatus;
+            $almacen->Matriz = $Matriz;
             $almacen->update();
         }
     }

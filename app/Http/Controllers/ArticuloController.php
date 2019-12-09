@@ -16,7 +16,7 @@ class ArticuloController extends Controller
     public function index()
     {
         $articulos = Articulo::getAll();
-        return view('familia.index', compact('articulos'));
+        return view('articulo.index', compact('articulos'));
     }
 
     /**
