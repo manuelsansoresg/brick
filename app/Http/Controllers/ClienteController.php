@@ -15,6 +15,8 @@ class ClienteController extends Controller
     public function index()
     {
         //
+        $clientes = Cliente::getAll();
+        return view('cliente.index', compact('clientes'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ClienteController extends Controller
     public function create()
     {
         //
+        return view('cliente.create');
     }
 
     /**
@@ -33,9 +36,12 @@ class ClienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Cliente $request)
+    public function store(ClienteRequest $request)
     {
         //
+        Cliente::createUpdate($request);
+        flash('Elemento guardado');
+        return redirect('/admin/cliente');
     }
 
     /**
@@ -55,9 +61,10 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit($id)
     {
-        //
+        $cliente = Cliente::getById($id);
+        return view('cliente.edit', compact('cliente'));
     }
 
     /**
@@ -67,9 +74,12 @@ class ClienteController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update(Cliente $request, $id)
+    public function update(ClienteRequest $request, $id)
     {
         //
+        cliente::createUpdate($request, $id);
+        flash('Elemento guardado');
+        return redirect('/admin/cliente');
     }
 
     /**
@@ -81,5 +91,8 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+        cliente::drop($id);
+        flash('Elemento borrado');
+        return redirect('/admin/proveedor');
     }
 }

@@ -12,33 +12,31 @@ class Cliente extends Model
 
     static function getById($id)
     {
-        $familia = Familia::where('Id', $id)->first();
-        return $familia;
+        $cliente = Cliente::where('Id', $id)->first();
+        return $cliente;
     }
 
     static function getAll()
     {
-        $familia = Familia::all();
-        return $familia;
+        $cliente = Cliente::all();
+        return $cliente;
     }
 
     static function createUpdate($request, $id = null)
     {
-       
-
         if ($id == null) {
-            $familia = new Familia($request->except('_token'));
-            $familia->save();
+            $cliente = new Cliente($request->except('_token'));
+            $cliente->save();
         } else {
-            $familia = Familia::find($id);
-            $familia->fill($request->except('_token'));
-            $familia->update();
+            $cliente = Cliente::find($id);
+            $cliente->fill($request->except('_token'));
+            $cliente->update();
         }
     }
 
     static function drop($id)
     {
-        $familia = Familia::find($id);
-        $familia->delete();
+        $cliente = Cliente::find($id);
+        $cliente->delete();
     }
 }
