@@ -24,7 +24,8 @@ class ProveedorRequest extends FormRequest
     public function rules()
     {
         return [
-            'Nombre' => 'required'
+            'Nombre' => 'required',
+            'RFC' => 'required|max:12'
         ];
     }
 }

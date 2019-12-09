@@ -35,7 +35,7 @@ class ProveedorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProveedorRequest $request)
     {
         Proveedor::createUpdate($request);
         flash('Elemento guardado');
@@ -72,7 +72,7 @@ class ProveedorController extends Controller
      * @param  \App\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProveedorRequest $request, $id)
     {
         //
         proveedor::createUpdate($request, $id);
