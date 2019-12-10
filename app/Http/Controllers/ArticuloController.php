@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Articulo;
+use App\Proveedor;
+use App\Color;
+use App\Familia;
 use App\Http\Requests\ArticuloRequest;
 use Illuminate\Http\Request;
 
@@ -26,6 +29,10 @@ class ArticuloController extends Controller
      */
     public function create()
     {
+        $proveedores = Proveedor::getAll();
+        $colores = Color::getAll();
+        $Familias = Familia::getAll();
+
         return view('articulo.create');
     }
 
@@ -61,6 +68,10 @@ class ArticuloController extends Controller
      */
     public function edit($id)
     {
+        $proveedores = Proveedor::getAll();
+        $colores = Color::getAll();
+        $Familias = Familia::getAll();
+        
         $articulo = Articulo::getById($id);
         return view('articulo.edit', compact('articulo'));
     }
