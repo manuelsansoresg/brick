@@ -19,6 +19,7 @@ class ArticuloController extends Controller
     public function index()
     {
         $articulos = Articulo::getAll();
+        
         return view('articulo.index', compact('articulos'));
     }
 
@@ -30,10 +31,10 @@ class ArticuloController extends Controller
     public function create()
     {
         $proveedores = Proveedor::getAll();
-        $colores = Color::getAll();
-        $Familias = Familia::getAll();
+        $colores     = Color::getAll();
+        $familias    = Familia::getAll();
 
-        return view('articulo.create');
+        return view('articulo.create', compact('proveedores', 'colores', 'familias'));
     }
 
     /**
@@ -69,11 +70,11 @@ class ArticuloController extends Controller
     public function edit($id)
     {
         $proveedores = Proveedor::getAll();
-        $colores = Color::getAll();
-        $Familias = Familia::getAll();
+        $colores     = Color::getAll();
+        $familias    = Familia::getAll();
         
         $articulo = Articulo::getById($id);
-        return view('articulo.edit', compact('articulo'));
+        return view('articulo.edit', compact('articulo', 'colores', 'proveedores', 'familias'));
     }
 
     /**

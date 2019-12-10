@@ -24,8 +24,8 @@ class ArticuloRequest extends FormRequest
     public function rules()
     {
         return [
-            'Nombre' => 'required',
-            'Modelo' => 'required',
+            'ClaveInterna' => 'required',
+           
         ];
     }
 }

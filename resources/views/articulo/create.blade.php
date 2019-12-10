@@ -41,7 +41,7 @@
                                 <div class="col-12 col-md-12">
                                     <label class="small">PROVEEDORES</label>
                                     <select name="IdProveedor" class="form-control form-control-sm">
-                                        @foreach ($errors as $proveedor)
+                                        @foreach ($proveedores as $proveedor)
                                             <option value="{{ $proveedor->Id }}"> {{ $proveedor->Nombre }} </option>
                                         @endforeach
                                     </select>
@@ -51,7 +51,7 @@
                                 <div class="col-12 col-md-3">
                                     <label class="small">COLOR</label>
                                     <select name="colores" class="form-control form-control-sm">
-                                        @foreach ($errors as $color)
+                                        @foreach ($colores as $color)
                                             <option value="{{  $color->id }}"> {{ $color->Descripcion }} </option>
                                         @endforeach
                                     </select>                                    

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Color;
+use App\Http\Requests\ClienteRequest;
+use App\Proveedor;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -14,8 +17,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
-        $clientes = Cliente::getAll();
+        
+        $clientes    = Cliente::getAll();
+
         return view('cliente.index', compact('clientes'));
     }
 
@@ -64,6 +68,8 @@ class ClienteController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::getById($id);
+      
+
         return view('cliente.edit', compact('cliente'));
     }
 

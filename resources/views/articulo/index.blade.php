@@ -48,8 +48,8 @@
                                                 <td>{{ $articulo->DescripcionProveedor }}</td>
                                                 <td>{{ $articulo->IdUnidadVenta }}</td>                                                
                                                 <td>
-                                                    {{ Form::open(['route' => ['articulo.destroy', $articulo->Id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                                    <a href="{{route('articulo.edit', $articulo->Id)}}" class="btn btn-sm btn-primary">
+                                                    {{ Form::open(['route' => ['articulo.destroy', $articulo->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                                    <a href="{{route('articulo.edit', $articulo->id)}}" class="btn btn-sm btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
                                                     <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">
