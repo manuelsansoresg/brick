@@ -101,6 +101,8 @@
 
 /* require('./bootstrap'); */
 __webpack_require__(/*! ./components/datatable.js */ "./resources/js/components/datatable.js");
+
+__webpack_require__(/*! ./components/articulo.js */ "./resources/js/components/articulo.js");
 /* window.Vue = require('vue'); */
 
 /**
@@ -124,6 +126,20 @@ __webpack_require__(/*! ./components/datatable.js */ "./resources/js/components/
 /* const app = new Vue({
     el: '#app',
 }); */
+
+/***/ }),
+
+/***/ "./resources/js/components/articulo.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/articulo.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.loadFile = function (event, output) {
+  var output = document.getElementById(output);
+  output.src = URL.createObjectURL(event.target.files[0]);
+};
 
 /***/ }),
 

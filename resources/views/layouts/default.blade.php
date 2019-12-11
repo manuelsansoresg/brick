@@ -420,6 +420,7 @@
     <script src="{{ asset('vendor_assets/admin_lte/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('vendor_assets/admin_lte/js/demo.js') }}"></script>
+    <script src="{{ asset('vendor_assets/sark-decimal/sark-decimal.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('js')
 </body>

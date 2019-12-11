@@ -7,10 +7,19 @@ use App\Proveedor;
 use App\Color;
 use App\Familia;
 use App\Http\Requests\ArticuloRequest;
+use App\Unidad;
 use Illuminate\Http\Request;
 
 class ArticuloController extends Controller
 {
+    protected $path_image;
+    
+    public function __construct()
+    {
+       $this->path_image = './img/articulo';
+    }
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -33,8 +42,9 @@ class ArticuloController extends Controller
         $proveedores = Proveedor::getAll();
         $colores     = Color::getAll();
         $familias    = Familia::getAll();
+        $unidades    = Unidad::getAll();
 
-        return view('articulo.create', compact('proveedores', 'colores', 'familias'));
+        return view('articulo.create', compact('proveedores', 'colores', 'familias', 'unidades'));
     }
 
     /**
@@ -45,7 +55,7 @@ class ArticuloController extends Controller
      */
     public function store(ArticuloRequest $request)
     {
-        Articulo::createUpdate($request);
+        Articulo::createUpdate($request, $this->path_image);
         flash('Elemento guardado');
         return redirect('/admin/articulo');
     }
@@ -72,9 +82,10 @@ class ArticuloController extends Controller
         $proveedores = Proveedor::getAll();
         $colores     = Color::getAll();
         $familias    = Familia::getAll();
+        $unidades    = Unidad::getAll();
         
         $articulo = Articulo::getById($id);
-        return view('articulo.edit', compact('articulo', 'colores', 'proveedores', 'familias'));
+        return view('articulo.edit', compact('articulo', 'colores', 'proveedores', 'familias', 'unidades'));
     }
 
     /**
@@ -86,7 +97,7 @@ class ArticuloController extends Controller
      */
     public function update(ArticuloRequest $request, $id)
     {
-        Articulo::createUpdate($request, $id);
+        Articulo::createUpdate($request, $this->path_image, $id);
         flash('Elemento guardado');
         return redirect('/admin/articulo');
     }
@@ -99,7 +110,9 @@ class ArticuloController extends Controller
      */
     public function destroy($id)
     {
-        Articulo::drop($id);
+       
+        
+        Articulo::drop($id, $this->path_image);
         flash('Elemento borrado');
         return redirect('/admin/articulo');
     }

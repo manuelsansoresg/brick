@@ -6,6 +6,7 @@
 
 /* require('./bootstrap'); */
 require('./components/datatable.js');
+require('./components/articulo.js');
 
 /* window.Vue = require('vue'); */
 
