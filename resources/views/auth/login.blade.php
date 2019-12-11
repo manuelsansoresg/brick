@@ -4,7 +4,7 @@
 
 <section class="container-fluid pt-4">
     <div class="row">
-        <div class="col-md-3 mx-auto">
+        <div class="col-4 md-4 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">                        
