@@ -12,28 +12,29 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/cliente">ARTÍCULO</a> </li>
+                        <li class="breadcrumb-item"> <a href="/admin/articulo">ARTÍCULO</a> </li>
                         <li class="breadcrumb-item active">NUEVO</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
+            {{ Form::open(['route' => 'articulo.store', 'method' => 'POST', 'files' => true]) }}
             <div class="row">
                 <div class="col-12 col-md-9">
                     <div class="card border-primary">
                         <div class="card-header">AGREGAR ARTÍCULO</div>
                         <div class="card-body">
-                            {{ Form::open(['route' => 'articulo.store', 'method' => 'POST']) }}
+                            
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <label class="small">CLAVE INT.</label>
-                                    <input name="Clave" class="form-control form-control-sm" type="text" placeholder="CLAVE">
+                                    <input name="ClaveInterna" class="form-control form-control-sm" type="text" placeholder="CLAVE">
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label class="small">DESCRIPCION</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="DESCRIPCION" name="Nombre">
+                                    <input class="form-control form-control-sm" type="text" placeholder="DESCRIPCION" name="descripcion">
                                     <div class="w-100"></div>
                                     @if($errors)
-                                    <span class="text-danger"> {{$errors->first('Nombre')}}</span>
+                                    <span class="text-danger"> {{$errors->first('descripcion')}}</span>
                                     @endif
                                 </div>
                             </div>                            
@@ -59,7 +60,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <label class="small">COLOR</label>
-                                    <select name="colores" class="custom-select">
+                                    <select name="IdColor" class="custom-select">
                                         @foreach ($colores as $color)
                                             <option value="{{  $color->id }}"> {{ $color->Descripcion }} </option>
                                         @endforeach
@@ -67,9 +68,9 @@
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">FAMILIA</label>
-                                    <select name="familia" class="custom-select">
+                                    <select name="IdFamilia" class="custom-select">
                                         @foreach ($familias as $familia)
-                                            <option value="{{  $familia->id }}"> {{ $familia->Descripcion }} </option>
+                                            <option value="{{  $familia->Id }}"> {{ $familia->Descripcion }} </option>
                                         @endforeach
                                     </select> 
                                 </div>
@@ -85,19 +86,35 @@
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <label class="small">PRECIO VTA. 1</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="PRECIO VTA. 1" name="Precio1">
+                                    <input class="form-control form-control-sm" data-behaviour="decimal" type="text" placeholder="PRECIO VTA. 1" name="Precio1">
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">PRECI VTA. 2</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="PRECIO VTA. 2" name="Precio2">
+                                    <input class="form-control form-control-sm" data-behaviour="decimal" type="text" placeholder="PRECIO VTA. 2" name="Precio2">
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">PRECIO VTA. 3</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="PRECIO VTA. 3" name="Precio3">
+                                    <input class="form-control form-control-sm" data-behaviour="decimal" type="text" placeholder="PRECIO VTA. 3" name="Precio3">
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">PRECIO COSTO</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="PRECIO COSTO" name="PrecioCosto">
+                                    <input class="form-control form-control-sm" data-behaviour="decimal" type="text" placeholder="PRECIO COSTO" name="PrecioCosto">
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <label class="small">UNIDAD COMPRA</label>
+                                    <select name="IdUnidadCompra" class="form-control">
+                                        @foreach ($unidades as $unidad)
+                                            <option value="{{ $unidad->Id }}">{{ $unidad->Descripcion }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <label class="small">UNIDAD VENTA</label>
+                                    <select name="IdUnidadVenta" class="form-control">
+                                        @foreach ($unidades as $unidad)
+                                            <option value="{{ $unidad->Id }}">{{ $unidad->Descripcion }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -122,7 +139,7 @@
                                     <button class="btn btn-primary">ACEPTAR</button>
                                 </div>
                             </div>
-                            {{ Form::close() }}
+                            
                         </div>
                     </div>
                 </div>
@@ -132,12 +149,12 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <img src="imagen-no-disponible.png" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ asset('img/imagen-no-disponible.png') }}" id="output1" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="col-12">
                                     <label class="small">IMAGEN</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                        <input type="file" name="imagen" onchange="loadFile(event, 'output1')" class="custom-file-input" id="inputGroupFile01">
                                         <label class="custom-file-label" for="inputGroupFile01">imagen</label>
                                     </div>
                                 </div>
@@ -146,6 +163,7 @@
                     </div>
                 </div>
             </div>
+            {{ Form::close() }}
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
