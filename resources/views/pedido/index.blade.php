@@ -32,7 +32,7 @@
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                                        <thead>
+                                        <thead class="theade-danger">
                                             <tr>
                                                 <th>No.PEDIDO</th>
                                                 <th>NOMBRE CLIENTE</th>
