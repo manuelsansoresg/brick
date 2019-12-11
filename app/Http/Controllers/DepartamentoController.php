@@ -16,7 +16,7 @@ class DepartamentoController extends Controller
     public function index()
     {
         $departamentos = Departamento::getAll();
-        return view('departamento.index', compact('departamento'));
+        return view('departamento.index', compact('departamentos'));
     }
 
     /**
@@ -62,7 +62,7 @@ class DepartamentoController extends Controller
      */
     public function edit(Departamento $departamento)
     {
-        return view('departamento.edit', compact('departamento'));
+        return view('departamento.edit', compact('departamentos'));
     }
 
     /**

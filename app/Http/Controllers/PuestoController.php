@@ -16,7 +16,7 @@ class PuestoController extends Controller
     public function index()
     {
         $puestos = Puesto::getAll();
-        return view('puesto.index', compact('puesto'));
+        return view('puesto.index', compact('puestos'));
     }
 
     /**
