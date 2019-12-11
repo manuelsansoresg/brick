@@ -7,22 +7,22 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Color</h1>
+                    <h1 class="m-0 text-dark">Departamento</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/color">COLOR</a> </li>
-                        <li class="breadcrumb-item active"> Nuevo </li>
+                        <li class="breadcrumb-item"> <a href="/admin/puesto">PUESTO</a> </li>
+                        <li class="breadcrumb-item active"> Nuevo</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">REGISTRAR COLORES</div>
+                        <div class="card-header">REGISTRAR PUESTO</div>
                         <div class="card-body">
-                            {{ Form::open(['route' => 'color.store', 'method' => 'POST']) }}                            
+                            {{ Form::open(['route' => 'puesto.store', 'method' => 'POST']) }}                            
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">
@@ -35,20 +35,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-md-12">
-                                    <div class="form-group mb-2">
-                                        <label class="small">ABREVIATURA </label>
-                                        <div class="w-100"></div>
-                                        <input type="text" name="Abreviatura" class="form-control form-control-sm">
-                                        <div class="w-100"></div>
-                                        @if($errors)
-                                        <span class="text-danger"> {{$errors->first('Abreviatura')}}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                            
                             <div class="row mt-3">
                                 <div class="col-12 col-md-4">
                                     <div class="form-group mb-2">
