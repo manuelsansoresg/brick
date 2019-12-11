@@ -1,6 +1,6 @@
 @extends('layouts.default')
-@section('content')
 
+@section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -10,47 +10,44 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/modelo">MODELO</a> </li>
-                        <li class="breadcrumb-item active">EDITAR</li>
+                        <li class="breadcrumb-item"> <a href="/admin/puesto">PUESTO</a> </li>
+                        <li class="breadcrumb-item active"> Nuevo</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header">EDITAR MODELO</div>
+                        <div class="card-header">REGISTRAR PUESTO</div>
                         <div class="card-body">
-                            {{ Form::open(['route' => ['modelo.update', $modelo->Id], 'method' => 'PUT']) }}
+                            {{ Form::open(['route' => 'puesto.store', 'method' => 'POST']) }}                            
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">
-                                        <label class="small">DESCRIPCIÓN</label>
+                                        <label class="small">DESCRIPCION </label>
                                         <div class="w-100"></div>
-                                        <input type="text" name="Descripcion" class="form-control form-control-sm" value="{{ $familia->Descripcion }}">
+                                        <input type="text" name="Descripcion" class="form-control form-control-sm">
                                         <div class="w-100"></div>
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Descripcion')}}</span>
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="row mt-3">
-                                <div class="col-12 col-md-12">
+                                <div class="col-12 col-md-4">
                                     <div class="form-group mb-2">
                                         <label class="small">ESTATUS</label>
                                         <div class="w-100"></div>
                                         <div class="bootstrap-switch-container" style="width: 129px; margin-left: 0px;">
-                                            @if($modelo->Estatus == 1)
                                             <input type="checkbox" name="Estatus" checked="" value="1" data-bootstrap-switch="">
-                                            @else
-                                            <input type="checkbox" name="Estatus" value="1" data-bootstrap-switch="">
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-12 text-right pb-4">
+                            <div class="row mt-3">                                
+                                <div class="col-12 text-right pb-4">                                                                        
+                                    <!--<a href="/admin/color" id="cancel" name="cancel" class="btn btn-danger">CANCELAR</a>-->
                                     <button class="btn btn-primary">ACEPTAR</button>
                                 </div>
                             </div>
