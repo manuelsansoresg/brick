@@ -16,7 +16,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $articulos = Articulo::getAll();
+        $empleados = Empleado::getAll();
         
         return view('empleado.index', compact('empleados'));
     }
@@ -50,10 +50,10 @@ class EmpleadoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Articulo  $articulo
+     * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function show(Articulo $articulo)
+    public function show(Empleado $empleado)
     {
         
     }
@@ -61,43 +61,42 @@ class EmpleadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Articulo  $articulo
+     * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        $proveedores = Proveedor::getAll();
-        $colores     = Color::getAll();
-        $familias    = Familia::getAll();
+    {        
+        $puestos     = Puesto::getAll();
+        $departamentos    = Departamento::getAll();
         
-        $articulo = Articulo::getById($id);
-        return view('articulo.edit', compact('articulo', 'colores', 'proveedores', 'familias'));
+        $empleado = Empleado::getById($id);
+        return view('empleado.edit', compact('empleado', 'puestos', 'departamentos'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Articulo  $articulo
+     * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticuloRequest $request, $id)
+    public function update(EmpleadoRequest $request, $id)
     {
-        Articulo::createUpdate($request, $id);
+        Empleado::createUpdate($request, $id);
         flash('Elemento guardado');
-        return redirect('/admin/articulo');
+        return redirect('/admin/empleado');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Articulo  $articulo
+     * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Articulo::drop($id);
+        Empleado::drop($id);
         flash('Elemento borrado');
-        return redirect('/admin/articulo');
+        return redirect('/admin/empleado');
     }
 }

@@ -32,10 +32,11 @@
                                             <tr>
                                                 <th>NOMBRE</th>
                                                 <th>NSS</th>
+                                                <th>EMAIL</th>
                                                 <th>PUESTO</th>
                                                 <th>DEPTO</th>
                                                 <th>TELEFONO</th>
-                                                <th>CELULAR</th>
+                                                <th>OBSERVACIONES</th>
                                                 <th>ESTATUS</th>
                                                 <th></th>
                                             </tr>
@@ -45,10 +46,11 @@
                                             <tr>
                                                 <td>{{ $empleado->Nombre }}</td>
                                                 <td>{{ $empleado->NSS }}</td>
-                                                <td>{{ $empleado->Puesto }}</td>
-                                                <td>{{ $empleado->Depto }}</td>
-                                                <td>{{ $empleado->Telefono1 }}</td>
-                                                <td>{{ $empleado->Celular }}</td>                                                
+                                                <td>{{ $empleado->Email }}</td>
+                                                <td>{{ $empleado->puesto }}</td>
+                                                <td>{{ $empleado->departamento }}</td>
+                                                <td>{{ $empleado->Telefono }}</td>
+                                                <td>{{ $empleado->Observaciones }}</td>                                                
                                                 <td>
                                                     @if($empleado->Estatus == 1)
                                                     <i class="fas fa-ban text-success"></i> ACTIVO
