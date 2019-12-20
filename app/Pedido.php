@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Pedido extends Model
 {
@@ -24,7 +25,7 @@ class Pedido extends Model
         $Estatus = isset($request->Estatus)? 1 : 0;
 
         if($id == null){
-            $pedido = new Pedido($request->except('_token'));
+            $pedido = new Pedido($request->except('_token', 'articulo_cantidad', 'articulo_precio', 'articulo_desc', 'articulo_importe'));
             $pedido->Estatus = $Estatus;
             $pedido->save();
         }else{
@@ -33,6 +34,12 @@ class Pedido extends Model
             $pedido->Estatus = $Estatus;
             $pedido->update();
         }
+    }
+    
+    static function getFolio()
+    {
+        $producto = Pedido::select(DB::raw('max(IdPedido) as total'))->first()->total+1;
+        return $producto;
     }
 
 }

@@ -24,7 +24,7 @@ class PedidoRequest extends FormRequest
     public function rules()
     {
         return [
-            'Observaciones' => 'required'
+            'FechaEntrega' => 'required'
         ];
     }
 }

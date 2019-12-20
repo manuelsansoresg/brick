@@ -24,7 +24,7 @@ class ModeloRequest extends FormRequest
     public function rules()
     {
         return [
-            'Descripcion' => 'required',
+            'descripcion' => 'required',
         ];
     }
 }

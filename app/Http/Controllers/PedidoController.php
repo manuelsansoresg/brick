@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cliente;
 use App\Http\Requests\PedidoRequest;
 use App\Pedido;
 use App\Proveedor;
@@ -17,7 +18,9 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::getAll();
+        $pedidos  = Pedido::getAll();
+       
+
         return view('pedido.index', compact('pedidos'));
     }
 
@@ -30,8 +33,10 @@ class PedidoController extends Controller
     {
         $proveedores = Proveedor::getAll();
         $modelos     = TipoModelo::getAll();
+        $folio       = Pedido::getFolio();
+        $clientes    = Cliente::getAll();
 
-        return view('pedido.create', compact('proveedores', 'modelos'));
+        return view('pedido.create', compact('proveedores', 'modelos', 'folio', 'clientes'));
     }
 
     /**

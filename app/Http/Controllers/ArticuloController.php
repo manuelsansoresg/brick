@@ -71,6 +71,12 @@ class ArticuloController extends Controller
         
     }
 
+    public function getAll()
+    {
+        $articulos = Articulo::getAllDatatable();
+        return response()->json($articulos);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

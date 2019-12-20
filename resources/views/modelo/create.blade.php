@@ -21,16 +21,16 @@
                         <div class="card-header">REGISTRAR MODELO</div>
                         <div class="card-body">
 
-                            {{ Form::open(['route' => 'modelo.store', 'method' => 'POST']) }}                            
+                            {{ Form::open(['route' => 'modelo.store', 'method' => 'POST']) }}
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">
                                         <label class="small">DESCRIPCIÓN </label>
                                         <div class="w-100"></div>
-                                        <input type="text" name="Descripcion" class="form-control form-control-sm">
+                                        <input type="text" name="descripcion" class="form-control form-control-sm">
                                         <div class="w-100"></div>
                                         @if($errors)
-                                        <span class="text-danger"> {{$errors->first('Descripcion')}}</span>
+                                        <span class="text-danger"> {{$errors->first('descripcion')}}</span>
                                         @endif
                                     </div>
                                 </div>

@@ -4,9 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-/* require('./bootstrap'); */
-require('./components/datatable.js');
-require('./components/articulo.js');
+//require('./bootstrap');
+
 
 /* window.Vue = require('vue'); */
 

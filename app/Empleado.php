@@ -18,7 +18,6 @@ class Empleado extends Model
                                 )
                             ->join('puesto', 'puesto.Id', '=', 'empleado.IdPuesto')
                             ->join('departamento', 'departamento.Id', '=', 'empleado.IdDepartamento')                           
-                            ->where('empleado.Estatus', 1)
                             ->first();
         
         return $empleado;
@@ -30,7 +29,7 @@ class Empleado extends Model
                     'puesto.Descripcion as puesto', 'empleado.Observaciones','empleado.Estatus','empleado.Telefono1 as Telefono')
                     ->join('puesto', 'puesto.Id', '=', 'empleado.IdPuesto')
                     ->join('departamento', 'departamento.Id', '=', 'empleado.IdDepartamento')  
-                            ->where('empleado.Estatus', 1)->get();
+                    ->get();
         return $empleado;
     }
 

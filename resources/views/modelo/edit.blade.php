@@ -20,16 +20,16 @@
                     <div class="card">
                         <div class="card-header">EDITAR MODELO</div>
                         <div class="card-body">
-                            {{ Form::open(['route' => ['modelo.update', $modelo->Id], 'method' => 'PUT']) }}
+                            {{ Form::open(['route' => ['modelo.update', $modelo->id], 'method' => 'PUT']) }}
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">
                                         <label class="small">DESCRIPCIÓN</label>
                                         <div class="w-100"></div>
-                                        <input type="text" name="Descripcion" class="form-control form-control-sm" value="{{ $familia->Descripcion }}">
+                                        <input type="text" name="descripcion" class="form-control form-control-sm" value="{{ $modelo->descripcion }}">
                                         <div class="w-100"></div>
                                         @if($errors)
-                                        <span class="text-danger"> {{$errors->first('Descripcion')}}</span>
+                                        <span class="text-danger"> {{$errors->first('descripcion')}}</span>
                                         @endif
                                     </div>
                                 </div>

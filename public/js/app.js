@@ -91,18 +91,15 @@
   !*** ./resources/js/app.js ***!
   \*****************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+//require('./bootstrap');
 
-/* require('./bootstrap'); */
-__webpack_require__(/*! ./components/datatable.js */ "./resources/js/components/datatable.js");
-
-__webpack_require__(/*! ./components/articulo.js */ "./resources/js/components/articulo.js");
 /* window.Vue = require('vue'); */
 
 /**
@@ -126,81 +123,6 @@ __webpack_require__(/*! ./components/articulo.js */ "./resources/js/components/a
 /* const app = new Vue({
     el: '#app',
 }); */
-
-/***/ }),
-
-/***/ "./resources/js/components/articulo.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/articulo.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-window.loadFile = function (event, output) {
-  var output = document.getElementById(output);
-  output.src = URL.createObjectURL(event.target.files[0]);
-};
-
-/***/ }),
-
-/***/ "./resources/js/components/datatable.js":
-/*!**********************************************!*\
-  !*** ./resources/js/components/datatable.js ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  $('.table-default').DataTable({
-    responsive: true,
-    language: {
-      "decimal": "",
-      "emptyTable": "No hay información",
-      "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-      "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-      "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-      "infoPostFix": "",
-      "thousands": ",",
-      "lengthMenu": "Mostrar _MENU_ Entradas",
-      "loadingRecords": "Cargando...",
-      "processing": "Procesando...",
-      "search": "BUSCAR:",
-      "zeroRecords": "Sin resultados encontrados",
-      "paginate": {
-        "first": "Primero",
-        "last": "Ultimo",
-        "next": "Siguiente",
-        "previous": "Anterior"
-      }
-    }
-  });
-});
-$(function () {
-  $('.table-no-search').DataTable({
-    responsive: true,
-    searching: false,
-    language: {
-      "decimal": "",
-      "emptyTable": "No hay información",
-      "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-      "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-      "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-      "infoPostFix": "",
-      "thousands": ",",
-      "lengthMenu": "Mostrar _MENU_ Entradas",
-      "loadingRecords": "Cargando...",
-      "processing": "Procesando...",
-      "search": "BUSCAR:",
-      "zeroRecords": "Sin resultados encontrados",
-      "paginate": {
-        "first": "Primero",
-        "last": "Ultimo",
-        "next": "Siguiente",
-        "previous": "Anterior"
-      }
-    }
-  });
-});
 
 /***/ }),
 

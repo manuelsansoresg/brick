@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor_assets/admin_lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    
+    
+    
+    
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('css')
@@ -421,7 +425,13 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('vendor_assets/admin_lte/js/demo.js') }}"></script>
     <script src="{{ asset('vendor_assets/sark-decimal/sark-decimal.js') }}"></script>
+    
+    
+    
+    
+
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     @yield('js')
 </body>
 
