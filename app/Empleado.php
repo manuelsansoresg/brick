@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     protected $table      = 'empleado';
-    protected $fillable   = ['Id', 'Nombre', 'NSS', 'Email', 'puesto', 'departamento','Telefono', 'Observaciones','Estatus'];
+    protected $fillable   = ['id', 'Nombre', 'NSS', 'Email', 'puesto', 'departamento','Telefono', 'Observaciones','Estatus'];
 
     static function getById($id)
     {

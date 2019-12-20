@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Puesto;
 use App\Departamento;
+use App\Empleado;
 use App\Http\Requests\EmpleadoRequest;
 use Illuminate\Http\Request;
 
