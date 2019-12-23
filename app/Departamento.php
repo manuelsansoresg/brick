@@ -7,7 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Departamento extends Model
 {
     protected $table      = 'departamento';
+    protected $primaryKey = 'Id';
     protected $fillable   = ['Descripcion', 'Estatus'];
+
+
+    static function getById($id)
+    {
+        $departamento = Departamento::where('Id', $id)
+                        ->first();
+        return $departamento;
+    }
 
     static function getAll()
     {
@@ -29,5 +38,13 @@ class Departamento extends Model
             $departamento->Estatus = $Estatus;
             $departamento->update();
         }
+
+        return $departamento;
+    }
+
+    static function drop($id)
+    {
+        $departamento = Departamento::where('Id', $id);
+        $departamento->delete();
     }
 }

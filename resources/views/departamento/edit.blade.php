@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-header">EDITAR DEPARTAMENTO</div>
                         <div class="card-body">
-                            {{ Form::open(['route' => ['departamento.update', $departamento->id], 'method' => 'PUT']) }}                            
+                            {{ Form::open(['route' => ['departamento.update', $departamento->Id], 'method' => 'PUT']) }}
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="form-group mb-2">
@@ -33,7 +33,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="row mt-3">
                                 <div class="col-12 col-md-4">
                                     <div class="form-group mb-2">

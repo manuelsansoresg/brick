@@ -44,7 +44,7 @@
                                             @foreach ($pedidos as $pedido)
                                             <tr>
                                                 <td>{{ $pedido->FechaEntrega }}</td>
-                                                <td>{{ $pedido->proveedor }}</td>
+                                                <td>{{ $pedido->cliente }}</td>
                                                 <td>{{ $pedido->modelo }}</td>
                                                 <td>
                                                     @if($pedido->Estatus == 1)

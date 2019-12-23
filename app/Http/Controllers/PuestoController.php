@@ -60,8 +60,9 @@ class PuestoController extends Controller
      * @param  \App\Color  $color
      * @return \Illuminate\Http\Response
      */
-    public function edit(Puesto $puesto)
+    public function edit($id)
     {
+        $puesto = Puesto::getById($id);
         return view('puesto.edit', compact('puesto'));
     }
 
@@ -72,9 +73,10 @@ class PuestoController extends Controller
      * @param  \App\Color  $color
      * @return \Illuminate\Http\Response
      */
-    public function update(PuestoRequest $request, Puesto $puesto)
+    public function update(PuestoRequest $request, $id)
     {
-        Puesto::createUpdate($request, $puesto->id);
+        $puesto = Puesto::getById($id);
+        Puesto::createUpdate($request, $puesto->Id);
         flash('Elemento guardado');
         return redirect('/admin/puesto');
     }
@@ -85,9 +87,9 @@ class PuestoController extends Controller
      * @param  \App\Color  $color
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Puesto $puesto)
+    public function destroy($id)
     {
-        $puesto->delete();
+        Puesto::drop($id);
         flash('Elemento borrado');
         return redirect('/admin/puesto');
     }

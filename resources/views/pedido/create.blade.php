@@ -26,7 +26,7 @@
                                     <small>Los campos marcados con * son obligatorios </small>
                                     <div class="w-100" id="pedido"></div>
                                     <label class="small">*CLIENTE</label>
-                                    <select name="IdCliente" class="form-control form-control-sm" required>
+                                    <select name="IdCliente" id="IdCliente" class="form-control form-control-sm" required>
                                         @foreach ($clientes as $cliente)
                                         <option value="{{ $cliente->Id }}"> {{ $cliente->Nombre }} </option>
                                         @endforeach
@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <label class="small">DOMICILIO</label>
-                                    <textarea name="domicilio" cols="10" rows="2" class="form-control form-control-sm" readonly>{{ $clientes[0]->Calle.' '.$clientes[0]->NumeroExterior.' '.$clientes[0]->NumeroInterior }}</textarea>
+                                    <textarea name="domicilio" id="domicilio" cols="10" rows="2" class="form-control form-control-sm" readonly>{{ 'Calle:'.$clientes[0]->Calle.' No° Ext:'.$clientes[0]->NumeroExterior.' No° Int'.$clientes[0]->NumeroInterior.' Colonia:'.$clientes[0]->Colonia }}</textarea>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">FECHA</label>
@@ -48,8 +48,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="Fecha"  value="{{ date('Y-m-d') }}" class="form-control form-control-sm" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" readonly>
-                                        
+                                        <input type="text" name="Fecha" value="{{ date('Y-m-d') }}" class="form-control form-control-sm" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" readonly>
+
                                     </div>
                                     <div class="w-100"></div>
                                     @if($errors)
@@ -74,12 +74,12 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="FechaEntrega"  id="FechaEntrega"  data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false"   class="form-control form-control-sm" required>
-                                         <div class="valid-feedback">
+                                        <input type="text" name="FechaEntrega" id="FechaEntrega" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" class="form-control form-control-sm" required>
+                                        <div class="valid-feedback">
                                             Looks good!
                                         </div>
                                         <div class="invalid-feedback">
-                                        La fecha es obligatoria
+                                            La fecha es obligatoria
                                         </div>
                                     </div>
                                     <div class="w-100"></div>
@@ -125,28 +125,32 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="form-group mb-2">
                                         <label class="small">SUBTOTAL</label>
-                                        <input type="text" name="Subtotal" id="subtotal" class="form-control form-control-sm" readonly placeholder="SUBTOTAL">
+                                        <input type="text" id="subtotal" class="form-control form-control-sm" readonly placeholder="SUBTOTAL">
+                                        <input type="hidden" name="Subtotal" id="hsubtotal" class="form-control form-control-sm" readonly placeholder="SUBTOTAL">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Subtotal')}}</span>
                                         @endif
                                     </div>
                                     <div class="form-group mb-2">
                                         <label class="small">DESCUENTO</label>
-                                        <input type="text" name="descuento" id="descuento" value="0.00" class="form-control form-control-sm" readonly placeholder="DESCUENTO">
+                                        <input type="text" id="descuento" value="0.00" class="form-control form-control-sm" readonly placeholder="DESCUENTO">
+                                        <input type="hidden" name="descuento" id="hdescuento" value="0.00" class="form-control form-control-sm" readonly placeholder="DESCUENTO">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('descuento')}}</span>
                                         @endif
                                     </div>
                                     <div class="form-group mb-2">
                                         <label class="small">IVA</label>
-                                        <input type="text" name="Iva" id="iva" class="form-control form-control-sm" readonly placeholder="IVA">
+                                        <input type="text" id="iva" class="form-control form-control-sm" readonly placeholder="IVA">
+                                        <input type="hidden" name="Iva" id="hiva" class="form-control form-control-sm" readonly placeholder="IVA">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Iva')}}</span>
                                         @endif
                                     </div>
                                     <div class="form-group mb-2">
                                         <label class="small">IMPORTE</label>
-                                        <input type="text" name="Importe" id="importe" class="form-control" readonly placeholder="IMPORTE">
+                                        <input type="text" id="importe" class="form-control" readonly placeholder="IMPORTE">
+                                        <input type="hidden" name="Importe" id="himporte" class="form-control" readonly placeholder="IMPORTE">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Importe')}}</span>
                                         @endif
@@ -155,7 +159,7 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
-                                    <button   class="btn btn-primary">Guardar</button>
+                                    <button class="btn btn-primary">Guardar</button>
                                 </div>
                             </div>
                             {{ Form::close() }}
@@ -170,8 +174,7 @@
 
 {{-- modal --}}
 <!-- Modal -->
-<div class="modal fade" id="modalArticulo" tabindex="-1" role="dialog" aria-labelledby="modalArticuloLabel"
-    aria-hidden="true">
+<div class="modal fade" id="modalArticulo" tabindex="-1" role="dialog" aria-labelledby="modalArticuloLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -192,7 +195,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    
+
                 </table>
             </div>
             <div class="modal-footer">

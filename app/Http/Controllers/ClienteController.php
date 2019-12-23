@@ -23,6 +23,12 @@ class ClienteController extends Controller
         return view('cliente.index', compact('clientes'));
     }
 
+    public function getAddress($client_id)
+    {
+        $cliente = Cliente::getById($client_id);
+        return response()->json($cliente);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

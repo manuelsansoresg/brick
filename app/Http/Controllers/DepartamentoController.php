@@ -60,9 +60,11 @@ class DepartamentoController extends Controller
      * @param  \App\Color  $color
      * @return \Illuminate\Http\Response
      */
-    public function edit(Departamento $departamento)
+    public function edit($id)
     {
-        return view('departamento.edit', compact('departamentos'));
+        $departamento = Departamento::getById($id);
+        
+        return view('departamento.edit', compact('departamento'));
     }
 
     /**
@@ -72,9 +74,11 @@ class DepartamentoController extends Controller
      * @param  \App\Color  $color
      * @return \Illuminate\Http\Response
      */
-    public function update(DepartamentoRequest $request, Departamento $departamento)
+    public function update(DepartamentoRequest $request, $id)
     {
-        Departamento::createUpdate($request, $departamento->id);
+        $departamento = Departamento::getById($id);
+        $dep = Departamento::createUpdate($request, $departamento->Id);
+        
         flash('Elemento guardado');
         return redirect('/admin/departamento');
     }
@@ -85,9 +89,9 @@ class DepartamentoController extends Controller
      * @param  \App\Color  $color
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Departamento $departamento)
+    public function destroy($id)
     {
-        $departamento->delete();
+        $departamento = Departamento::drop($id);
         flash('Elemento borrado');
         return redirect('/admin/departamento');
     }

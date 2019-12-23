@@ -19,8 +19,7 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos  = Pedido::getAll();
-       
-
+        
         return view('pedido.index', compact('pedidos'));
     }
 
@@ -69,11 +68,14 @@ class PedidoController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pedido $pedido)
+    public function edit($id)
     {
-        $proveedores = Proveedor::getAll();
-        $modelos     = TipoModelo::getAll();
-        return  view('pedido.edit', compact('pedido', 'proveedores', 'modelos'));
+        $pedido   = Pedido::getById($id);
+        $modelos  = TipoModelo::getAll();
+        $folio    = Pedido::getFolio();
+        $clientes = Cliente::getAll();
+        
+        return  view('pedido.edit', compact('clientes', 'modelos', 'folio', 'pedido'));
     }
 
     /**

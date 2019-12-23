@@ -5,8 +5,8 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">  
-                <div class="col-sm-6"></div>              
+            <div class="row mb-2">
+                <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">INICIO</a></li>
@@ -25,13 +25,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">                            
+                        <div class="card-body">
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                             <tr>
-                                                <th>DESCRIPCIÓN</th>                                                
+                                                <th>DESCRIPCIÓN</th>
                                                 <th>ESTATUS</th>
                                                 <th></th>
                                             </tr>
@@ -39,7 +39,7 @@
                                         <tbody>
                                             @foreach ($puestos as $puesto)
                                             <tr>
-                                                <td>{{ $puesto->Descripcion }}</td>                                                
+                                                <td>{{ $puesto->Descripcion }}</td>
                                                 <td>
                                                     @if($puesto->Estatus == 1)
                                                     <i class="fas fa-ban text-success"></i> ACTIVO
@@ -48,8 +48,8 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ Form::open(['route' => ['puesto.destroy', $puesto->id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
-                                                    <a href="{{route('puesto.edit', $puesto->id)}}" class="btn btn-sm btn-primary">
+                                                    {{ Form::open(['route' => ['puesto.destroy', $puesto->Id ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
+                                                    <a href="{{route('puesto.edit', $puesto->Id)}}" class="btn btn-sm btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
                                                     <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">

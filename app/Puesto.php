@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Puesto extends Model
 {
     protected $table      = 'puesto';
+    protected $primaryKey = 'Id';
     protected $fillable   = ['Descripcion', 'Estatus'];
+    
+    static function getById($id)
+    {
+        $puesto = Puesto::where('Id', $id)
+            ->first();
+        return $puesto;
+    }
 
     static function getAll()
     {
@@ -29,5 +37,11 @@ class Puesto extends Model
             $puesto->Estatus = $Estatus;
             $puesto->update();
         }
+    }
+
+    static function drop($id)
+    {
+        $puesto = Puesto::where('Id', $id);
+        $puesto->delete();
     }
 }

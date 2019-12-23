@@ -50,7 +50,7 @@ class Articulo extends Model
                     $articulo->proveedor,
                     $articulo->Abreviatura,
 
-                "<a onclick=\"agregarArticulo('$articulo->ClaveInterna', '$articulo->descripcion', '$articulo->Abreviatura', '$precio_format', '$precio')\" class=\"btn btn-primary\">
+                "<a onclick=\"agregarArticulo('$articulo->ClaveInterna', '$articulo->descripcion', '$articulo->Abreviatura', '$precio_format', '$precio', '$articulo->id')\" class=\"btn btn-primary\">
                     <i class=\"fas fa-plus-circle text-white\"></i>
                 </a>"
                 );

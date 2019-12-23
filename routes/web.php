@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/almacen', 'AlmacenController');
     Route::resource('/articulo', 'ArticuloController');
     Route::get('/tabla-articulo/list', 'ArticuloController@getAll');
+    Route::get('/cliente/direccion/{client_id}', 'ClienteController@getAddress');
     Route::resource('/cliente', 'ClienteController');
     Route::resource('/proveedor', 'ProveedorController');
     Route::resource('/puesto', 'PuestoController');
