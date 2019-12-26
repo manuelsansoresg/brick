@@ -10,6 +10,15 @@ class DetallePedido extends Model
     protected $primaryKey = 'IdPedido';
 
 
+    static function getById($IdPedido)
+    {
+        $detalle_pedido = DetallePedido::select('detallepedido.IdPedido', 'detallepedido.Idarticulo', 'articulo.ClaveInterna', 'articulo.descripcion', 'Abreviatura', 'cantidad', 'Precio1', 'Precio2', 'Precio3', 'descuento', 'importe')
+                                        ->join('articulo', 'articulo.id', '=' , 'detallepedido.Idarticulo')
+                                        ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra')
+                                        ->where('IdPedido', $IdPedido)->get();
+        return $detalle_pedido;
+    }
+
     static function createUpdate ($IdPedido, $Idarticulo, $cantidad, $descuento, $Precio, $importe, $id = null)
     {
         if ($id == null) {
@@ -24,6 +33,12 @@ class DetallePedido extends Model
         }else{
 
         }
+    }
+
+    static function drop($IdPedido)
+    {
+        $detalle_pedido = DetallePedido::find($IdPedido);
+        $detalle_pedido->delete();
     }
 
 }

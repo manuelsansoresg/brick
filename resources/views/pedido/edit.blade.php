@@ -21,6 +21,8 @@
                         <div class="card-header">DATOS GENERALES</div>
                         <div class="card-body">
                             {{ Form::open(['route' => ['pedido.update', $pedido->IdPedido], 'method' => 'PUT', 'id' =>  'frm-producto', 'class' => 'needs-validation', 'novalidate' ]) }}
+                            <input type="hidden" id="contador_inputs" value="{{ $total_detalle }}">
+                            <input type="hidden" id="type" value="1">
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <small>Los campos marcados con * son obligatorios </small>
@@ -28,19 +30,19 @@
                                     <label class="small">*CLIENTE</label>
                                     <select name="IdCliente" class="form-control form-control-sm" required>
                                         @foreach ($clientes as $cliente)
-                                        <option value="{{ $cliente->Id }}"> {{ $cliente->Nombre }} </option>
+                                        <option value="{{ $cliente->Id }}" {{ ($pedido->IdCliente == $cliente->Id )? 'selected' : '' }}> {{ $cliente->Nombre }} </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">FOLIO</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="FOLIO" readonly value="{{ $folio }}">
+                                    <input class="form-control form-control-sm" type="text" placeholder="FOLIO" readonly value="{{ $pedido->IdPedido }}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <label class="small">DOMICILIO</label>
-                                    <textarea name="domicilio" cols="10" rows="2" class="form-control form-control-sm" readonly>{{ $clientes[0]->Calle.' '.$clientes[0]->NumeroExterior.' '.$clientes[0]->NumeroInterior }}</textarea>
+                                    <textarea name="domicilio" cols="10" rows="2" class="form-control form-control-sm" readonly>{{ $domicilio }}</textarea>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">FECHA</label>
@@ -48,7 +50,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="Fecha" value="{{ date('Y-m-d') }}" class="form-control form-control-sm" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" readonly>
+                                        <input type="text" name="Fecha" value="{{ date('Y-m-d', strtotime($pedido->fecha)) }}" class="form-control form-control-sm" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" readonly>
 
                                     </div>
                                     <div class="w-100"></div>
@@ -63,7 +65,7 @@
                                         <label class="small">MODELO </label>
                                         <select name="TipoModelo" class="form-control form-control-sm">
                                             @foreach ($modelos as $modelo)
-                                            <option value="{{ $modelo->id }}"> {{ $modelo->descripcion }} </option>
+                                            <option value="{{ $modelo->id }}" {{ ($pedido->modelo == $modelo->id)? 'selected' : '' }}> {{ $modelo->descripcion }} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -74,7 +76,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="FechaEntrega" id="FechaEntrega" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" class="form-control form-control-sm" required>
+                                        <input type="text" name="FechaEntrega" id="FechaEntrega" value="{{ date('Y-m-d', strtotime($pedido->FechaEntrega)) }}" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" class="form-control form-control-sm" required>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>
@@ -107,7 +109,37 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tbody_articulo">
+                                            <?php $cont = -1; ?>
+                                            @foreach ($detalle_pedidos as $detalle_pedido)
+                                                    <?php $cont = $cont +1; ?>
+                                                <tr>
+                                                    <td><a onclick="eliminarColumna(this)" class="btn btn-danger text-white"><i class="fas fa-minus-circle"></i></a></td>
+                                                    <td>{{ $detalle_pedido->ClaveInterna }}</td>
+                                                    <td> {{ $detalle_pedido->descripcion }} </td>
+                                                    <td>{{ $detalle_pedido->Abreviatura }}</td>
+                                                    <td>
+                                                        
+                                                        <input type="number" onchange="calc_cantidad({{ $cont }})" id="articulo_cantidad-{{ $cont }}" name="articulo_cantidad[]" value="{{ (int)$detalle_pedido->cantidad }}"
+                                                            oninput="this.value=(parseInt(this.value)||0)" class="form-control">
+                                                    
+                                                    </td>
+                                                    <td>
+                                                        <?php  $precio = max($detalle_pedido->Precio1, $detalle_pedido->Precio2, $detalle_pedido->Precio3); ?>
+                                                        ${{ precio($precio)  }}MXN
+                                                        <input type="hidden" id="articulo_precio-{{ $cont }}" name="articulo_precio[]" value="{{ $precio }}">
 
+                                                    </td>
+                                                    <td>
+                                                        <input type="number" id="articulo_desc-{{ $cont }}" name="articulo_desc[]" onchange="total()" value="{{ precio($detalle_pedido->descuento) }}" class="form-control">
+
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" name="articulo_importe[]" id="articulo_importe-{{ $cont }}" value="{{ $detalle_pedido->importe }}" class="form-control">
+                                                        <input type="text" readonly="" id="input_importe-{{ $cont }}" value="{{ precio($detalle_pedido->importe) }}" class="form-control">
+                                                        <input type="hidden" name="articulo_id[]" value="{{ $detalle_pedido->Idarticulo }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -115,7 +147,7 @@
                                     <div class="form-group mb-2">
                                         <label class="small">OBSERVACIONES </label>
                                         <div class="w-100"></div>
-                                        <textarea name="Observaciones" id="Observaciones" cols="20" rows="13" class="form-control form-control-sm"></textarea>
+                                        <textarea name="Observaciones" id="Observaciones" cols="20" rows="13" class="form-control form-control-sm">{{ $pedido->Observaciones }}</textarea>
                                         <div class="w-100"></div>
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Observaciones')}}</span>

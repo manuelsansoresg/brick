@@ -5,7 +5,7 @@ window.loadFile = function (event, output) {
 
 if ($("#modalArticulo").length > 0) {
     var table;
-    var contador_inputs = -1;
+    var contador_inputs = parseInt($('#contador_inputs').val())-1;
 
     window.abrirArticulo = function(){
         table = $('#tabla_articulo').DataTable({
@@ -39,6 +39,8 @@ if ($("#modalArticulo").length > 0) {
     window.calc_cantidad = function(id_input){
         var precio   = parseFloat($('#articulo_precio-' + id_input).val()) ;
         var cantidad = parseInt($('#articulo_cantidad-' + id_input).val());
+        console.log('precio-' + precio);
+        console.log('cantidad-' + cantidad);
         var importe  = precio * cantidad;
         $('#input_importe-' + id_input).val(number_format(importe));
         $('#articulo_importe-' + id_input).val(importe);

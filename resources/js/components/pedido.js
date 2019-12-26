@@ -37,6 +37,11 @@ if ($("#pedido").length > 0) {
             .catch(function (error) {
 
                 var result = error.response.data;
+
+                /* $('.spinner-contacto').hide(); */ 
+
+
+   
             })
     });
     

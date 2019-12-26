@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\DetallePedido;
 use App\Http\Requests\PedidoRequest;
 use App\Pedido;
 use App\Proveedor;
@@ -70,12 +71,16 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        $pedido   = Pedido::getById($id);
-        $modelos  = TipoModelo::getAll();
-        $folio    = Pedido::getFolio();
-        $clientes = Cliente::getAll();
-        
-        return  view('pedido.edit', compact('clientes', 'modelos', 'folio', 'pedido'));
+        $pedido             = Pedido::getById($id);
+        $modelos            = TipoModelo::getAll();
+        $folio              = Pedido::getFolio();
+        $clientes           = Cliente::getAll();
+        $cliente            = Cliente::getById($pedido->IdCliente);
+        $domicilio          = ($cliente!= "") ? 'Calle:' . $cliente->Calle . ' No° Ext:' . $cliente->NumeroExterior . ' No° Int' . $cliente->NumeroInterior . ' Colonia:' . $cliente->Colonia : '';
+        $detalle_pedidos    = DetallePedido::getById($id);
+        $total_detalle      = count($detalle_pedidos);
+
+        return  view('pedido.edit', compact('clientes', 'modelos', 'folio', 'pedido', 'domicilio', 'detalle_pedidos', 'total_detalle'));
     }
 
     /**

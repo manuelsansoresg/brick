@@ -14,7 +14,7 @@ class Pedido extends Model
 
     static function getById($IdPedido)
     {
-        $pedido = Pedido::select('IdPedido', 'FechaEntrega', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Iva', 'descuento', 'Importe', 'pedido.Estatus')
+        $pedido = Pedido::select('IdPedido', 'FechaEntrega', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Iva', 'descuento', 'Importe', 'pedido.Estatus', 'Observaciones', 'pedido.created_at as fecha', 'FechaEntrega', 'IdCliente')
             ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente')
             ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo')
             ->where('pedido.IdPedido', $IdPedido)
@@ -50,15 +50,18 @@ class Pedido extends Model
             
         }
 
-        $pedido->IdUsuario = Auth::id();
-        
-
+       
+        if ($id != null) {
+            $pedido->IdUsuario = Auth::id();
+        }
         
 
         if ($id == null){
             $pedido->save();
         }else{
             $pedido->update();
+            DetallePedido::drop($pedido->IdPedido);
+
         }
 
         for ($i = 0; $i < $total_articulos; $i++) {
