@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     protected $table      = 'empleado';
+    protected $primaryKey = 'Id';
     protected $fillable   = ['id', 'Nombre', 'NSS', 'Email', 'puesto', 'departamento','Telefono', 'Observaciones','Estatus'];
 
     static function getById($id)
@@ -37,9 +38,7 @@ class Empleado extends Model
     {
         $Estatus = isset($request->Estatus) ? 1 : 0;
 
-
-        if ($id == null) {
-            
+        if ($id == null) {            
             $empleado = new Empleado($request->except('_token', 'imagen'));
             $empleado->Estatus = $Estatus;
            

@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
 {
+    protected $path_image;
+    
+    public function __construct()
+    {
+       $this->path_image = './img/empleado';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +49,7 @@ class EmpleadoController extends Controller
      */
     public function store(EmpleadoRequest $request)
     {
-        Empleado::createUpdate($request);
+        Empleado::createUpdate($request,$this->path_image);
         flash('Elemento guardado');
         return redirect('/admin/empleado');
     }
@@ -81,9 +87,10 @@ class EmpleadoController extends Controller
      * @param  \App\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(EmpleadoRequest $request, $id)
+    public function update(EmpleadoRequest $request, $id)    
     {
-        Empleado::createUpdate($request, $id);
+        $empleado = Empleado::getById($id);
+        $emp = Departamento::createUpdate($request, $empleado->Id);
         flash('Elemento guardado');
         return redirect('/admin/empleado');
     }

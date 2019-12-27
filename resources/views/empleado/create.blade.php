@@ -176,7 +176,7 @@
                                         <label class="small">DEPARTAMENTO</label>
                                         <select name="IdDepartamento" class="form-control form-control-sm">
                                             @foreach ($departamentos as $departamento)
-                                            <option value="{{ $departamento->id }}"> {{ $departamento->descripcion }} </option>
+                                            <option value="{{ $departamento->Id }}"> {{ $departamento->Descripcion }} </option>
                                             @endforeach
                                         </select>                                 
                                     </div>
@@ -184,7 +184,7 @@
                                         <label class="small">PUESTO</label>
                                         <select name="IdPuesto" class="form-control form-control-sm">
                                             @foreach ($puestos as $puesto)
-                                            <option value="{{ $puesto->id }}"> {{ $puesto->descripcion }} </option>
+                                            <option value="{{ $puesto->Id }}"> {{ $puesto->Descripcion }} </option>
                                             @endforeach
                                         </select>                                 
                                     </div>
