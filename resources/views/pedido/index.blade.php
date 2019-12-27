@@ -20,13 +20,13 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                              <h3 class="mr-auto">LISTA DE PEDIDOS</h3>
+                                <h3 class="mr-auto">LISTA DE PEDIDOS</h3>
                                 <div>
                                     <a href="/admin/pedido/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">                            
+                        <div class="card-body">
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -35,7 +35,7 @@
                                                 <th>No.PEDIDO</th>
                                                 <th>NOMBRE CLIENTE</th>
                                                 <th>FECHA</th>
-                                                <th>IMPORTE</th>                                                
+                                                <th>IMPORTE</th>
                                                 <th>ESTATUS</th>
                                                 <th></th>
                                             </tr>
@@ -43,25 +43,40 @@
                                         <tbody>
                                             @foreach ($pedidos as $pedido)
                                             <tr>
-                                                <td>{{ $pedido->FechaEntrega }}</td>
+                                                <td>{{ $pedido->IdPedido }}</td>
                                                 <td>{{ $pedido->cliente }}</td>
+                                                <td>{{ $pedido->Importe }}</td>
                                                 <td>{{ $pedido->modelo }}</td>
                                                 <td>
                                                     @if($pedido->Estatus == 1)
-                                                        <i class="fas fa-ban text-success"></i> Activo
-                                                        @else
-                                                        <i class="fas fa-ban text-danger"></i> Inactivo
+                                                    <i class="fas fa-ban text-success"></i> Activo
+                                                    @else
+                                                    <i class="fas fa-ban text-danger"></i> Inactivo
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{ Form::open(['route' => ['pedido.destroy', $pedido->IdPedido ],'class' => 'form-inline', 'method' => 'DELETE' ])}}
                                                     <a href="{{route('pedido.edit', $pedido->IdPedido)}}" class="btn btn-sm btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
-                                                    <button onclick="return confirm('¿Deseas eliminar el elemento?')" class="btn btn-danger btn-sm ml-1">
-                                                        <i class="far fa-trash-alt"></i>
-                                                    </button>
-                                                    {{ Form::close() }}
+                                                    <?php 
+                                                    $status_pedido = ($pedido->Estatus==0)?1:0;
+                                                    ?>
+                                                    
+                                                        @if ($pedido->Estatus == 1)
+                                                         <button
+                                                            onclick="if(confirm('¿Deseas eliminar el elemento?'))window.location.href='/admin/pedido/destroy/{{ $pedido->IdPedido }}/{{ $status_pedido }} '"
+                                                            class="btn btn-danger btn-sm ml-1">
+                                                                <i class="far fa-trash-alt"></i>
+                                                            </button>   
+                                                        @else
+                                                            <button
+                                                                onclick="if(confirm('¿Deseas eliminar el elemento?'))window.location.href='/admin/pedido/destroy/{{ $pedido->IdPedido }}/{{ $status_pedido }} '"
+                                                                class="btn btn-success btn-sm ml-1">
+                                                                     <i class="fas fa-check-circle"></i>
+                                                            </button>
+                                                        @endif
+
+                                                    
                                                 </td>
                                             </tr>
                                             @endforeach

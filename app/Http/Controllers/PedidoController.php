@@ -104,9 +104,9 @@ class PedidoController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido)
+    public function destroy($IdPedido, $Estatus)
     {
-        $pedido->delete();
+        Pedido::drop($IdPedido, $Estatus);
         flash('Elemento borrado');
         return redirect('/admin/pedido');
     }
