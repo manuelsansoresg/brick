@@ -23,6 +23,7 @@
                             {{ Form::open(['route' => 'pedido.store', 'method' => 'POST', 'id' =>  'frm-producto', 'class' => 'needs-validation', 'novalidate' ]) }}
                             <input type="hidden" id="contador_inputs" value="0">
                             <input type="hidden" id="type" value="0">
+                            <input type="hidden" name="Estatus" value="1">
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <small>Los campos marcados con * son obligatorios </small>

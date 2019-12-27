@@ -82,4 +82,11 @@ class Pedido extends Model
         return $producto;
     }
 
+    static function drop($IdPedido, $status)
+    {
+        $pedido = Pedido::find($IdPedido);
+        $pedido->Estatus = $status;
+        $pedido->update();
+    }
+
 }

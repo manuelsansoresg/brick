@@ -23,6 +23,7 @@
                             {{ Form::open(['route' => ['pedido.update', $pedido->IdPedido], 'method' => 'PUT', 'id' =>  'frm-producto', 'class' => 'needs-validation', 'novalidate' ]) }}
                             <input type="hidden" id="contador_inputs" value="{{ $total_detalle }}">
                             <input type="hidden" id="type" value="1">
+                            <input type="hidden" name="Estatus" value="{{ $pedido->Estatus }}">
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <small>Los campos marcados con * son obligatorios </small>
@@ -111,34 +112,33 @@
                                         <tbody id="tbody_articulo">
                                             <?php $cont = -1; ?>
                                             @foreach ($detalle_pedidos as $detalle_pedido)
-                                                    <?php $cont = $cont +1; ?>
-                                                <tr>
-                                                    <td><a onclick="eliminarColumna(this)" class="btn btn-danger text-white"><i class="fas fa-minus-circle"></i></a></td>
-                                                    <td>{{ $detalle_pedido->ClaveInterna }}</td>
-                                                    <td> {{ $detalle_pedido->descripcion }} </td>
-                                                    <td>{{ $detalle_pedido->Abreviatura }}</td>
-                                                    <td>
-                                                        
-                                                        <input type="number" onchange="calc_cantidad({{ $cont }})" id="articulo_cantidad-{{ $cont }}" name="articulo_cantidad[]" value="{{ (int)$detalle_pedido->cantidad }}"
-                                                            oninput="this.value=(parseInt(this.value)||0)" class="form-control">
-                                                    
-                                                    </td>
-                                                    <td>
-                                                        <?php  $precio = max($detalle_pedido->Precio1, $detalle_pedido->Precio2, $detalle_pedido->Precio3); ?>
-                                                        ${{ precio($precio)  }}MXN
-                                                        <input type="hidden" id="articulo_precio-{{ $cont }}" name="articulo_precio[]" value="{{ $precio }}">
+                                            <?php $cont = $cont + 1; ?>
+                                            <tr>
+                                                <td><a onclick="eliminarColumna(this)" class="btn btn-danger text-white"><i class="fas fa-minus-circle"></i></a></td>
+                                                <td>{{ $detalle_pedido->ClaveInterna }}</td>
+                                                <td> {{ $detalle_pedido->descripcion }} </td>
+                                                <td>{{ $detalle_pedido->Abreviatura }}</td>
+                                                <td>
 
-                                                    </td>
-                                                    <td>
-                                                        <input type="number" id="articulo_desc-{{ $cont }}" name="articulo_desc[]" onchange="total()" value="{{ precio($detalle_pedido->descuento) }}" class="form-control">
+                                                    <input type="number" onchange="calc_cantidad({{ $cont }})" id="articulo_cantidad-{{ $cont }}" name="articulo_cantidad[]" value="{{ (int)$detalle_pedido->cantidad }}" oninput="this.value=(parseInt(this.value)||0)" class="form-control">
 
-                                                    </td>
-                                                    <td>
-                                                        <input type="hidden" name="articulo_importe[]" id="articulo_importe-{{ $cont }}" value="{{ $detalle_pedido->importe }}" class="form-control">
-                                                        <input type="text" readonly="" id="input_importe-{{ $cont }}" value="{{ precio($detalle_pedido->importe) }}" class="form-control">
-                                                        <input type="hidden" name="articulo_id[]" value="{{ $detalle_pedido->Idarticulo }}">
-                                                    </td>
-                                                </tr>
+                                                </td>
+                                                <td>
+                                                    <?php $precio = max($detalle_pedido->Precio1, $detalle_pedido->Precio2, $detalle_pedido->Precio3); ?>
+                                                    ${{ precio($precio)  }}MXN
+                                                    <input type="hidden" id="articulo_precio-{{ $cont }}" name="articulo_precio[]" value="{{ $precio }}">
+
+                                                </td>
+                                                <td>
+                                                    <input type="number" id="articulo_desc-{{ $cont }}" name="articulo_desc[]" onchange="total()" value="{{ precio($detalle_pedido->descuento) }}" class="form-control">
+
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="articulo_importe[]" id="articulo_importe-{{ $cont }}" value="{{ $detalle_pedido->importe }}" class="form-control">
+                                                    <input type="text" readonly="" id="input_importe-{{ $cont }}" value="{{ precio($detalle_pedido->importe) }}" class="form-control">
+                                                    <input type="hidden" name="articulo_id[]" value="{{ $detalle_pedido->Idarticulo }}">
+                                                </td>
+                                            </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
