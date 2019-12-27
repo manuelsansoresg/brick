@@ -8,14 +8,16 @@ class Empleado extends Model
 {
     protected $table      = 'empleado';
     protected $primaryKey = 'Id';
-    protected $fillable   = ['id', 'Nombre', 'NSS', 'Email', 'puesto', 'departamento','Telefono', 'Observaciones','Estatus'];
+    protected $fillable   = ['Id', 'Nombre','FechaNacimiento', 'NSS', 'Email', 'puesto', 'departamento','Telefono1', 'Observaciones','Estatus',
+                            'Pais','Estado','Ciudad','Calle','NoInt','NoExt','Cp','Telefono2','telefono3','Fax','Celular','IdPuesto','IdDepartamento',
+                            'IdPeriodo','IdTurno'];
 
     static function getById($id)
     {
-        $empleado = Empleado::select('empleado.id', 'empleado.Nombre', 'departamento.Descripcion as departamento', 'puesto.Descripcion as puesto', 'Email',
-                                        'FechaNacimiento','NSS','Pais','Estado','IdPeriodo','IdTurno',
-                                        'Ciudad', 'Calle','NoInt','NoExt'. 'empleado.Estatus','empleado.Imagen',
-                                        'Cp', 'Telefono1','Telefono2','Telefono3','Fax','Celular','empleado.Observaciones'
+        $empleado = Empleado::select('empleado.Id', 'empleado.Nombre','empleado.FechaNacimiento','empleado.NSS','empleado.Email','departamento.Descripcion as departamento', 'puesto.Descripcion as puesto',
+                                    'empleado.Pais','empleado.Estado','empleado.Ciudad','empleado.Calle','empleado.NoInt','empleado.NoExt','empleado.Cp',
+                                    'empleado.Telefono1','empleado.Telefono2','empleado.telefono3','empleado.Fax','empleado.Celular','empleado.IdPuesto',
+                                    'empleado.IdDepartamento','empleado.IdPeriodo','empleado.IdTurno','empleado.Estatus','empleado.Imagen','empleado.Observaciones'
                                 )
                             ->join('puesto', 'puesto.Id', '=', 'empleado.IdPuesto')
                             ->join('departamento', 'departamento.Id', '=', 'empleado.IdDepartamento')                           
@@ -26,8 +28,10 @@ class Empleado extends Model
 
     static function getAll()
     {
-        $empleado = Empleado::select('empleado.id','empleado.Nombre','empleado.NSS','empleado.Email', 'departamento.id', 'departamento.Descripcion as departamento',
-                    'puesto.Descripcion as puesto', 'empleado.Observaciones','empleado.Estatus','empleado.Telefono1 as Telefono')
+        $empleado = Empleado::select('empleado.Id', 'empleado.Nombre','empleado.FechaNacimiento','empleado.NSS','empleado.Email','departamento.Descripcion as departamento', 'puesto.Descripcion as puesto',
+                        'empleado.Pais','empleado.Estado','empleado.Ciudad','empleado.Calle','empleado.NoInt','empleado.NoExt','empleado.Cp',
+                        'empleado.Telefono1','empleado.Telefono2','empleado.telefono3','empleado.Fax','empleado.Celular','empleado.IdPuesto',
+                        'empleado.IdDepartamento','empleado.IdPeriodo','empleado.IdTurno','empleado.Estatus','empleado.Imagen','empleado.Observaciones')
                     ->join('puesto', 'puesto.Id', '=', 'empleado.IdPuesto')
                     ->join('departamento', 'departamento.Id', '=', 'empleado.IdDepartamento')  
                     ->get();
