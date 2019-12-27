@@ -20,8 +20,17 @@ class PedidoController extends Controller
     public function index()
     {
         $pedidos  = Pedido::getAll();
-        
+
         return view('pedido.index', compact('pedidos'));
+    }
+
+    public function createPdf($IdPedido)
+    {
+        $data_pedido = Pedido::pdfPedido($IdPedido);
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('reportes.pedido', $data_pedido);
+
+        return $pdf->stream('mi-archivo.pdf');
     }
 
     /**

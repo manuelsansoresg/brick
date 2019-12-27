@@ -82,6 +82,23 @@ class Pedido extends Model
         return $producto;
     }
 
+    static function pdfPedido($IdPedido)
+    {
+        $pedido = Pedido::select('Nombre', 'Calle', 'NumeroExterior', 'NumeroExterior', 'Colonia', 'RFC',
+                                'FechaEntrega', 'Subtotal', 'Iva', 'descuento', 'Importe'
+                                )
+                        ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente')
+                        ->where('IdPedido', $IdPedido)
+                        ->first();
+
+        $articulos = DetallePedido::select('Idarticulo', 'articulo.ClaveInterna', 'descripcion','cantidad', 'descuento', 'Precio', 'importe')
+                        ->join('articulo', 'articulo.id', '=', 'detallepedido.Idarticulo')
+                        ->where('IdPedido', $IdPedido)
+                        ->get();
+
+        return array('pedido' => $pedido, 'articulos' => $articulos);
+    }
+
     static function drop($IdPedido, $status)
     {
         $pedido = Pedido::find($IdPedido);

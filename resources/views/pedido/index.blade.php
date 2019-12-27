@@ -55,13 +55,14 @@
                                                     @endif
                                                 </td>
                                                 <td>
+                                                    <a href="/admin/pedido/pdf/create/{{ $pedido->IdPedido }}" class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf"></i></a>
                                                     <a href="{{route('pedido.edit', $pedido->IdPedido)}}" class="btn btn-sm btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>
                                                     <?php 
                                                     $status_pedido = ($pedido->Estatus==0)?1:0;
                                                     ?>
-                                                    
+                                                       
                                                         @if ($pedido->Estatus == 1)
                                                          <button
                                                             onclick="if(confirm('¿Deseas eliminar el elemento?'))window.location.href='/admin/pedido/destroy/{{ $pedido->IdPedido }}/{{ $status_pedido }} '"
