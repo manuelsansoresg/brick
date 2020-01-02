@@ -9,10 +9,40 @@ if ($("#modalArticulo").length > 0) {
 
     window.abrirArticulo = function(){
         table = $('#tabla_articulo').DataTable({
-            "ajax": '/admin/tabla-articulo/list'
+            "destroy": true,
+            "bProcessing": true,
+            "bServerSide": false,
+            "paging": true,
+            "sAjaxSource": '/admin/tabla-articulo/list',
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "BUSCAR:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            },
         });
-        table.destroy(); 
+       
+        
+        /* table.destroy();  */
+        
+         
+
         $('#modalArticulo').modal('show');
+        
         
     }
     
@@ -39,8 +69,6 @@ if ($("#modalArticulo").length > 0) {
     window.calc_cantidad = function(id_input){
         var precio   = parseFloat($('#articulo_precio-' + id_input).val()) ;
         var cantidad = parseInt($('#articulo_cantidad-' + id_input).val());
-        console.log('precio-' + precio);
-        console.log('cantidad-' + cantidad);
         var importe  = precio * cantidad;
         $('#input_importe-' + id_input).val(number_format(importe));
         $('#articulo_importe-' + id_input).val(importe);
@@ -65,9 +93,6 @@ if ($("#modalArticulo").length > 0) {
             var precio = parseFloat($('#articulo_precio-'+index).val());
             var articulo_desc = parseFloat($('#articulo_desc-'+index).val());
             descuento += parseFloat((cantidad + precio) * articulo_desc/100);
-            
-           
-            
         }
         
         $('input[name^="articulo_importe"]').each(function () {

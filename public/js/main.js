@@ -5099,9 +5099,34 @@ if ($("#modalArticulo").length > 0) {
 
   window.abrirArticulo = function () {
     table = $('#tabla_articulo').DataTable({
-      "ajax": '/admin/tabla-articulo/list'
+      "destroy": true,
+      "bProcessing": true,
+      "bServerSide": false,
+      "paging": true,
+      "sAjaxSource": '/admin/tabla-articulo/list',
+      language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "BUSCAR:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+          "first": "Primero",
+          "last": "Ultimo",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        }
+      }
     });
-    table.destroy();
+    /* table.destroy();  */
+
     $('#modalArticulo').modal('show');
   };
 
@@ -5123,8 +5148,6 @@ if ($("#modalArticulo").length > 0) {
   window.calc_cantidad = function (id_input) {
     var precio = parseFloat($('#articulo_precio-' + id_input).val());
     var cantidad = parseInt($('#articulo_cantidad-' + id_input).val());
-    console.log('precio-' + precio);
-    console.log('cantidad-' + cantidad);
     var importe = precio * cantidad;
     $('#input_importe-' + id_input).val(number_format(importe));
     $('#articulo_importe-' + id_input).val(importe);
@@ -5250,26 +5273,6 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 if ($("#pedido").length > 0) {
   //bootstrapValidate({'#FechaEntrega', 'min:20'});
-  (function () {
-    'use strict';
-
-    window.addEventListener('load', function () {
-      //Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation'); //Loop over them and prevent submission
-
-      var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
-
   $("#IdCliente").change(function () {
     var IdCliente = $('#IdCliente').val();
     axios.get('/admin/cliente/direccion/' + IdCliente).then(function (response) {
@@ -5312,6 +5315,26 @@ __webpack_require__(/*! ./components/datatable.js */ "./resources/js/components/
 __webpack_require__(/*! ./components/articulo.js */ "./resources/js/components/articulo.js");
 
 __webpack_require__(/*! ./components/pedido.js */ "./resources/js/components/pedido.js");
+
+(function () {
+  'use strict';
+
+  window.addEventListener('load', function () {
+    //Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation'); //Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 /***/ }),
 

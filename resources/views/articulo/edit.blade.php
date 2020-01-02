@@ -18,7 +18,7 @@
                 </div><!-- /.col -->
             </div><!-- /.row -->
 
-            {{ Form::open(['route' => ['articulo.update', $articulo->id], 'method' => 'PUT', 'files' => true]) }}
+            {{ Form::open(['route' => ['articulo.update', $articulo->id], 'method' => 'PUT', 'files' => true, 'class' => 'needs-validation', 'novalidate']) }}
             <div class="row">
                 <div class="col-12 col-md-9">
                     <div class="card border-primary">
@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <label class="small">CLAVE INT.</label>
-                                    <input name="ClaveInterna" value="{{ $articulo->ClaveInterna }}" class="form-control form-control-sm" type="text" placeholder="CLAVE">
+                                    <input name="ClaveInterna" value="{{ $articulo->ClaveInterna }}" class="form-control form-control-sm" type="text" placeholder="CLAVE" required>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label class="small">DESCRIPCION</label>
@@ -71,7 +71,7 @@
                                     <label class="small">FAMILIA</label>
                                     <select name="IdFamilia" class="custom-select">
                                         @foreach ($familias as $familia)
-                                        <option value="{{  $familia->Id }}" {{ ($articulo->IdColor == $familia->Id) ? 'selected' : '' }} > {{ $familia->Descripcion }} </option>
+                                        <option value="{{  $familia->Id }}" {{ ($articulo->IdColor == $familia->Id) ? 'selected' : '' }}> {{ $familia->Descripcion }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -131,7 +131,7 @@
                                 <div class="col-12 col-md-3">
                                     <label class="small">ESTATUS</label>
                                     <div class="bootstrap-switch-container" style="width: 129px; margin-left: 0px;">
-                                        
+
                                         @if($articulo->Estatus == 1)
                                         <input type="checkbox" name="Estatus" checked="" value="1" data-bootstrap-switch="">
                                         @else
@@ -156,10 +156,10 @@
                             <div class="row">
                                 <div class="col-12 text-center">
                                     @if ($articulo->imagen == '')
-                                        <img src="{{ asset('img/imagen-no-disponible.png') }}" id="output1" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ asset('img/imagen-no-disponible.png') }}" id="output1" class="img-fluid" alt="Responsive image">
                                     @else
-                                        <img id="output1" class="img-fluid" src="{{ asset('img/articulo/thumb_'.$articulo->imagen) }}" alt="">
-                                    
+                                    <img id="output1" class="img-fluid" src="{{ asset('img/articulo/thumb_'.$articulo->imagen) }}" alt="">
+
                                     @endif
                                 </div>
                                 <div class="col-12">

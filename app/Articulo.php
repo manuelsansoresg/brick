@@ -41,7 +41,7 @@ class Articulo extends Model
 
         foreach ($articulos as $articulo) {
                 $precio_format = precio(max($articulo->Precio1, $articulo->Precio2, $articulo->Precio3));
-                $precio = max($articulo->Precio1, $articulo->Precio2, $articulo->Precio3);
+                $precio = max(($articulo->Precio1!= '')? $articulo->Precio1: 0, ($articulo->Precio2!= '')? $articulo->Precio2 : 0, ($articulo->Precio3!=null)? $articulo->Precio3 : 0);
 
                 $table[] = array(
                     $articulo->ClaveInterna,
