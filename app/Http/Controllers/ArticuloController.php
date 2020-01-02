@@ -103,6 +103,7 @@ class ArticuloController extends Controller
      */
     public function update(ArticuloRequest $request, $id)
     {
+        
         Articulo::createUpdate($request, $this->path_image, $id);
         flash('Elemento guardado');
         return redirect('/admin/articulo');

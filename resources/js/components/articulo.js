@@ -80,32 +80,75 @@ if ($("#modalArticulo").length > 0) {
     window.total = function() {
         
         var suma_precio    = 0;
-        var suma_cantidad  = 0;
-        var suma_descuento = 0;
-        var suma_importe   = 0;
         var cont           = 0; 
         var descuento      = 0;
+
+        var articulo_cantidad = [];
+        var articulo_desc = [];
+        var articulo_precio = [];
 
         var total_elementos = $('input[name^="articulo_precio"]').length;
         
         for (let index = 0; index < total_elementos; index++) {
-            var cantidad      = parseInt($('#articulo_cantidad-' + index).val());
-            var precio = parseFloat($('#articulo_precio-'+index).val());
+            /* var cantidad      = parseInt($('#articulo_cantidad-' + index).val());
+            var precio        = parseFloat($('#articulo_precio-'+index).val());
             var articulo_desc = parseFloat($('#articulo_desc-'+index).val());
-            descuento += parseFloat((cantidad + precio) * articulo_desc/100);
+            descuento         += parseFloat((cantidad + precio) * articulo_desc/100); */
+            
+            /* onsole.log('index' + index);
+            console.log('cantidad' + cantidad);
+            console.log('precio' + precio); */
+            
+        }
+
+        $('input[name^="articulo_cantidad"]').each(function () {
+            articulo_cantidad.push(parseFloat($(this).val()));
+
+        });
+        
+        $('input[name^="articulo_precio"]').each(function () {
+            articulo_precio.push(parseFloat($(this).val()));
+
+        });
+
+        $('input[name^="articulo_desc"]').each(function () {
+            articulo_desc.push(parseFloat($(this).val()));
+
+        });
+       /*  console.log(articulo_desc);
+        console.log('total'+articulo_desc.length); */
+        var total = articulo_desc.length;
+        for (let index = 0; index < total; index++) {
+            
+            var cantidad     = parseInt(articulo_cantidad[index]);
+            var precio       = parseFloat(articulo_precio[index]);
+            var desc         = parseFloat(articulo_desc[index]);
+            
+           /*  console.log('(cantidad' + cantidad + ')');
+            console.log('(precio' + precio + ')');
+            console.log('(desc' + desc + ')');
+ */
+            descuento += parseFloat((cantidad + precio) * desc / 100);
+            //console.log('(descuento' + descuento + ')' );
+            
         }
         
-        $('input[name^="articulo_importe"]').each(function () {
+        $('input[name^="articulo_importe"]').each(function () { 
             cont = cont + 1;
             suma_precio += parseFloat($(this).val()) || 0;
             
         });
+        
+        
 
         
         
         var subtotal = suma_precio;
         var iva = (subtotal - descuento) * 0.16;
         var importe = (subtotal - descuento) + iva;
+
+        /* console.log('subtotal' + subtotal);
+        console.log('descuento' + descuento); */
     
         
         

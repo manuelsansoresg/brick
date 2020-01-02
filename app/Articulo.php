@@ -19,6 +19,7 @@ class Articulo extends Model
                             ->join('familia', 'familia.Id', '=', 'articulo.IdFamilia')
                             ->join('proveedores', 'proveedores.Id', '=', 'articulo.IdProveedor')
                             ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra')
+                            ->where('articulo.id', $id)
                             ->first();
         
         return $articulo;

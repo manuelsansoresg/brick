@@ -38,7 +38,9 @@ class DetallePedido extends Model
     static function drop($IdPedido)
     {
         $detalle_pedido = DetallePedido::find($IdPedido);
-        $detalle_pedido->delete();
+        if($detalle_pedido){
+            $detalle_pedido->delete();
+        }
     }
 
 }
