@@ -19,6 +19,7 @@ class Articulo extends Model
                             ->join('familia', 'familia.Id', '=', 'articulo.IdFamilia')
                             ->join('proveedores', 'proveedores.Id', '=', 'articulo.IdProveedor')
                             ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra')
+                            ->where('articulo.id', $id)
                             ->first();
         
         return $articulo;
@@ -41,7 +42,7 @@ class Articulo extends Model
 
         foreach ($articulos as $articulo) {
                 $precio_format = precio(max($articulo->Precio1, $articulo->Precio2, $articulo->Precio3));
-                $precio = max($articulo->Precio1, $articulo->Precio2, $articulo->Precio3);
+                $precio = max(($articulo->Precio1!= '')? $articulo->Precio1: 0, ($articulo->Precio2!= '')? $articulo->Precio2 : 0, ($articulo->Precio3!=null)? $articulo->Precio3 : 0);
 
                 $table[] = array(
                     $articulo->ClaveInterna,

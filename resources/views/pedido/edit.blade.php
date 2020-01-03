@@ -126,7 +126,7 @@
                                                 <td>
                                                     <?php $precio = max($detalle_pedido->Precio1, $detalle_pedido->Precio2, $detalle_pedido->Precio3); ?>
                                                     ${{ precio($precio)  }}MXN
-                                                    <input type="hidden" id="articulo_precio-{{ $cont }}" name="articulo_precio[]" value="{{ $precio }}">
+                                                    <input type="hidden" id="articulo_precio-{{ $cont }}" name="articulo_precio[]" value="{{ ($precio != '')? $precio : 0 }}">
 
                                                 </td>
                                                 <td>

@@ -29,6 +29,7 @@ class PedidoController extends Controller
         $data_pedido = Pedido::pdfPedido($IdPedido);
         $pdf = app('dompdf.wrapper');
         $pdf->loadView('reportes.pedido', $data_pedido);
+        
 
         return $pdf->stream('mi-archivo.pdf');
     }

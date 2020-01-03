@@ -17,17 +17,17 @@
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
-            {{ Form::open(['route' => 'articulo.store', 'method' => 'POST', 'files' => true]) }}
+            {{ Form::open(['route' => 'articulo.store', 'method' => 'POST', 'files' => true, 'class' => 'needs-validation', 'novalidate']) }}
             <div class="row">
                 <div class="col-12 col-md-9">
                     <div class="card border-primary">
                         <div class="card-header">AGREGAR ARTÍCULO</div>
                         <div class="card-body">
-                            
+
                             <div class="row">
                                 <div class="col-12 col-md-3">
                                     <label class="small">CLAVE INT.</label>
-                                    <input name="ClaveInterna" class="form-control form-control-sm" type="text" placeholder="CLAVE">
+                                    <input name="ClaveInterna" class="form-control form-control-sm" type="text" placeholder="CLAVE" required>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label class="small">DESCRIPCION</label>
@@ -37,7 +37,7 @@
                                     <span class="text-danger"> {{$errors->first('descripcion')}}</span>
                                     @endif
                                 </div>
-                            </div>                            
+                            </div>
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <label class="small">PROVEEDORES</label>
@@ -47,7 +47,7 @@
                                         </div>-->
                                         <select name="IdProveedor" class="custom-select">
                                             @foreach ($proveedores as $proveedor)
-                                                <option value="{{ $proveedor->Id }}"> {{ $proveedor->Nombre }} </option>
+                                            <option value="{{ $proveedor->Id }}"> {{ $proveedor->Nombre }} </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -62,17 +62,17 @@
                                     <label class="small">COLOR</label>
                                     <select name="IdColor" class="custom-select">
                                         @foreach ($colores as $color)
-                                            <option value="{{  $color->id }}"> {{ $color->Descripcion }} </option>
+                                        <option value="{{  $color->id }}"> {{ $color->Descripcion }} </option>
                                         @endforeach
-                                    </select>                                    
+                                    </select>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">FAMILIA</label>
                                     <select name="IdFamilia" class="custom-select">
                                         @foreach ($familias as $familia)
-                                            <option value="{{  $familia->Id }}"> {{ $familia->Descripcion }} </option>
+                                        <option value="{{  $familia->Id }}"> {{ $familia->Descripcion }} </option>
                                         @endforeach
-                                    </select> 
+                                    </select>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <label class="small">STOCK MAX.</label>
@@ -104,7 +104,7 @@
                                     <label class="small">UNIDAD COMPRA</label>
                                     <select name="IdUnidadCompra" class="form-control">
                                         @foreach ($unidades as $unidad)
-                                            <option value="{{ $unidad->Id }}">{{ $unidad->Descripcion }}</option>
+                                        <option value="{{ $unidad->Id }}">{{ $unidad->Descripcion }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -112,19 +112,19 @@
                                     <label class="small">UNIDAD VENTA</label>
                                     <select name="IdUnidadVenta" class="form-control">
                                         @foreach ($unidades as $unidad)
-                                            <option value="{{ $unidad->Id }}">{{ $unidad->Descripcion }}</option>
+                                        <option value="{{ $unidad->Id }}">{{ $unidad->Descripcion }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-9">                                
+                                <div class="col-9">
                                     <label class="small">OBSERVACIONES </label>
                                     <div class="w-100"></div>
-                                        <textarea name="Observaciones" cols="10" rows="2" class="form-control form-control-sm"></textarea>
+                                    <textarea name="Observaciones" cols="10" rows="2" class="form-control form-control-sm"></textarea>
                                     <div class="w-100"></div>
                                     @if($errors)
-                                        <span class="text-danger"> {{$errors->first('Observaciones')}}</span>
+                                    <span class="text-danger"> {{$errors->first('Observaciones')}}</span>
                                     @endif
                                 </div>
                                 <div class="col-12 col-md-3">
@@ -139,7 +139,7 @@
                                     <button class="btn btn-primary">ACEPTAR</button>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

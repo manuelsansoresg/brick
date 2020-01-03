@@ -5099,9 +5099,34 @@ if ($("#modalArticulo").length > 0) {
 
   window.abrirArticulo = function () {
     table = $('#tabla_articulo').DataTable({
-      "ajax": '/admin/tabla-articulo/list'
+      "destroy": true,
+      "bProcessing": true,
+      "bServerSide": false,
+      "paging": true,
+      "sAjaxSource": '/admin/tabla-articulo/list',
+      language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "BUSCAR:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+          "first": "Primero",
+          "last": "Ultimo",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        }
+      }
     });
-    table.destroy();
+    /* table.destroy();  */
+
     $('#modalArticulo').modal('show');
   };
 
@@ -5123,8 +5148,6 @@ if ($("#modalArticulo").length > 0) {
   window.calc_cantidad = function (id_input) {
     var precio = parseFloat($('#articulo_precio-' + id_input).val());
     var cantidad = parseInt($('#articulo_cantidad-' + id_input).val());
-    console.log('precio-' + precio);
-    console.log('cantidad-' + cantidad);
     var importe = precio * cantidad;
     $('#input_importe-' + id_input).val(number_format(importe));
     $('#articulo_importe-' + id_input).val(importe);
@@ -5133,18 +5156,48 @@ if ($("#modalArticulo").length > 0) {
 
   window.total = function () {
     var suma_precio = 0;
-    var suma_cantidad = 0;
-    var suma_descuento = 0;
-    var suma_importe = 0;
     var cont = 0;
     var descuento = 0;
+    var articulo_cantidad = [];
+    var articulo_desc = [];
+    var articulo_precio = [];
     var total_elementos = $('input[name^="articulo_precio"]').length;
 
     for (var index = 0; index < total_elementos; index++) {
-      var cantidad = parseInt($('#articulo_cantidad-' + index).val());
-      var precio = parseFloat($('#articulo_precio-' + index).val());
-      var articulo_desc = parseFloat($('#articulo_desc-' + index).val());
-      descuento += parseFloat((cantidad + precio) * articulo_desc / 100);
+      /* var cantidad      = parseInt($('#articulo_cantidad-' + index).val());
+      var precio        = parseFloat($('#articulo_precio-'+index).val());
+      var articulo_desc = parseFloat($('#articulo_desc-'+index).val());
+      descuento         += parseFloat((cantidad + precio) * articulo_desc/100); */
+
+      /* onsole.log('index' + index);
+      console.log('cantidad' + cantidad);
+      console.log('precio' + precio); */
+    }
+
+    $('input[name^="articulo_cantidad"]').each(function () {
+      articulo_cantidad.push(parseFloat($(this).val()));
+    });
+    $('input[name^="articulo_precio"]').each(function () {
+      articulo_precio.push(parseFloat($(this).val()));
+    });
+    $('input[name^="articulo_desc"]').each(function () {
+      articulo_desc.push(parseFloat($(this).val()));
+    });
+    /*  console.log(articulo_desc);
+     console.log('total'+articulo_desc.length); */
+
+    var total = articulo_desc.length;
+
+    for (var _index = 0; _index < total; _index++) {
+      var cantidad = parseInt(articulo_cantidad[_index]);
+      var precio = parseFloat(articulo_precio[_index]);
+      var desc = parseFloat(articulo_desc[_index]);
+      /*  console.log('(cantidad' + cantidad + ')');
+       console.log('(precio' + precio + ')');
+       console.log('(desc' + desc + ')');
+      */
+
+      descuento += parseFloat((cantidad + precio) * desc / 100); //console.log('(descuento' + descuento + ')' );
     }
 
     $('input[name^="articulo_importe"]').each(function () {
@@ -5154,6 +5207,8 @@ if ($("#modalArticulo").length > 0) {
     var subtotal = suma_precio;
     var iva = (subtotal - descuento) * 0.16;
     var importe = subtotal - descuento + iva;
+    /* console.log('subtotal' + subtotal);
+    console.log('descuento' + descuento); */
 
     if (cont > 0) {
       $('#subtotal').val(number_format(subtotal, 2));
@@ -5250,26 +5305,6 @@ var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 if ($("#pedido").length > 0) {
   //bootstrapValidate({'#FechaEntrega', 'min:20'});
-  (function () {
-    'use strict';
-
-    window.addEventListener('load', function () {
-      //Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation'); //Loop over them and prevent submission
-
-      var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
-
   $("#IdCliente").change(function () {
     var IdCliente = $('#IdCliente').val();
     axios.get('/admin/cliente/direccion/' + IdCliente).then(function (response) {
@@ -5312,6 +5347,26 @@ __webpack_require__(/*! ./components/datatable.js */ "./resources/js/components/
 __webpack_require__(/*! ./components/articulo.js */ "./resources/js/components/articulo.js");
 
 __webpack_require__(/*! ./components/pedido.js */ "./resources/js/components/pedido.js");
+
+(function () {
+  'use strict';
+
+  window.addEventListener('load', function () {
+    //Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation'); //Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 /***/ }),
 
