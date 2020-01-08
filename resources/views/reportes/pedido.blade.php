@@ -203,8 +203,8 @@
 <body>
     <table class="table" style="width: 100%; text-align:center">
         <thead>
-            <tr>
-                <td><img src="{{ public_path('img/logoMDZ.jpg') }}" alt=""></td>
+            <tr rowspan="4">
+                <th><img src="{{ public_path('img/logoMDZ.jpg') }}" alt=""></th>
             </tr>
             <tr>
                 <td>
@@ -222,15 +222,15 @@
 
     <table class="table" style="width: 100%">
         <tr>
-            <td class="text-bold">Cliente:</td>
+            <td class="text-bold">CLIENTE</td>
             <td>{{ $pedido->Nombre }}</td>
             <td class="text-bold">RFC</td>
             <td>{{ $pedido->RFC }}</td>
         </tr>
         <tr>
-            <td class="text-bold">Dirección</td>
+            <td class="text-bold">DIRECCIÓN</td>
             <td>{{ $pedido->Calle.' '.$pedido->NumeroExterior.' '.$pedido->NumeroExterior.' '.$pedido->Colonia }}</td>
-            <td class="text-bold">Teléfono</td>
+            <td class="text-bold">TEL.</td>
             <td></td>
         </tr>
     </table>
@@ -238,12 +238,12 @@
     <table class="table mt-2 table-bordered">
         <thead>
             <tr class="bg-yellow c-white">
-                <th>Clave</th>
-                <th>Descripcion</th>
-                <th>Cantidad</th>
-                <th>Descuento</th>
-                <th>Precio</th>
-                <th>Importe</th>
+                <th>CLAVE</th>
+                <th>DESCRIPCION</th>
+                <th>CANT.</th>
+                <th>DESCUENTO</th>
+                <th>PRECIO</th>
+                <th>IMPORTE</th>
             </tr>
         </thead>
         <tbody>
@@ -264,11 +264,10 @@
         <tr>
             <td style="">
                 <p>
-                    *No se aceptan cambios ni devoluciones
+                    * NO SE ACEPTAN CAMBIOS NI DEVOLUCIONES.
                     <br>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, doloribus.
-                    <br>
-                    Lorem ipsum dolor sit amet.
+                    {{ $pedido->Observaciones }}
+                    <br>                    
                 </p>
 
             </td>
