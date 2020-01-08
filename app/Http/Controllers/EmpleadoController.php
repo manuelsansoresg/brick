@@ -90,7 +90,8 @@ class EmpleadoController extends Controller
     public function update(EmpleadoRequest $request, $id)    
     {
         $empleado = Empleado::getById($id);
-        $emp = Departamento::createUpdate($request, $empleado->Id);
+        
+        $emp = Empleado::createUpdate($request, $this->path_image, $empleado->Id);
         flash('Elemento guardado');
         return redirect('/admin/empleado');
     }
