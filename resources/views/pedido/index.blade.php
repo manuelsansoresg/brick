@@ -55,7 +55,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="/admin/pedido/pdf/create/{{ $pedido->IdPedido }}" class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf"></i></a>
+                                                    <a href="/admin/pedido/pdf/create/{{ $pedido->IdPedido }}" target="_blank" class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf"></i></a>
                                                     <a href="{{route('pedido.edit', $pedido->IdPedido)}}" class="btn btn-sm btn-primary">
                                                         <i class="far fa-edit"></i>
                                                     </a>

@@ -201,12 +201,21 @@
 </head>
 
 <body>
-    <table class="table">
+    <table class="table" style="width: 100%; text-align:center">
         <thead>
             <tr>
-                <td><img src="{{ url('img/AdminLTELogo.png') }}" alt=""></td>
-                <td>Lorem ipsum dolor sit.</td>
-                <td>1</td>
+                <td><img src="{{ public_path('img/logoMDZ.jpg') }}" alt=""></td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        Carretera Mérida - Dzununcan Km 2.5 CP 97315 Mérida, Yucatán, México
+                        <br>
+                        ventas@mosaicosdzununcan.com, ventas2@mosaicosdzununcan.com
+                        <br>
+                        +52 (999) 286-6163, +52 (999) 431-0099
+                    </p>
+                </td>
             </tr>
         </thead>
     </table>
