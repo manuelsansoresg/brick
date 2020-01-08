@@ -74,39 +74,39 @@
                                 <div class="col-12 col-md-4">
                                     <label class="small">ESTADOS</label>
                                     <select name="Estado" class="form-control form-control-sm" data-live-search="true">                                       
-                                        <option value="no">SELECCIONE ELEMENTO</option>
-                                        <option value="Aguascalientes">Aguascalientes</option>
-                                        <option value="Baja California">Baja California</option>
-                                        <option value="Baja California Sur">Baja California Sur</option>
-                                        <option value="Campeche">Campeche</option>
-                                        <option value="Chiapas">Chiapas</option>
-                                        <option value="Chihuahua">Chihuahua</option>
-                                        <option value="Coahuila">Coahuila</option>
-                                        <option value="Colima">Colima</option>
-                                        <option value="Distrito Federal">Distrito Federal</option>
-                                        <option value="Durango">Durango</option>
-                                        <option value="Estado de México">Estado de México</option>
-                                        <option value="Guanajuato">Guanajuato</option>
-                                        <option value="Guerrero">Guerrero</option>
-                                        <option value="Hidalgo">Hidalgo</option>
-                                        <option value="Jalisco">Jalisco</option>
-                                        <option value="Michoacán">Michoacán</option>
-                                        <option value="Morelos">Morelos</option>
-                                        <option value="Nayarit">Nayarit</option>
-                                        <option value="Nuevo León">Nuevo León</option>
-                                        <option value="Oaxaca">Oaxaca</option>
-                                        <option value="Puebla">Puebla</option>
-                                        <option value="Querétaro">Querétaro</option>
-                                        <option value="Quintana Roo">Quintana Roo</option>
-                                        <option value="San Luis Potosí">San Luis Potosí</option>
-                                        <option value="Sinaloa">Sinaloa</option>
-                                        <option value="Sonora">Sonora</option>
-                                        <option value="Tabasco">Tabasco</option>
-                                        <option value="Tamaulipas">Tamaulipas</option>
-                                        <option value="Tlaxcala">Tlaxcala</option>
-                                        <option value="Veracruz">Veracruz</option>
-                                        <option value="Yucatán">Yucatán</option>
-                                        <option value="Zacatecas">Zacatecas</option>                                    
+                                        <option value="no" {{ ($empleado->Estado == 'no' ) ? 'selected' : '' }} >SELECCIONE ELEMENTO</option>
+                                        <option value="Aguascalientes" {{ ($empleado->Estado == 'Aguascalientes' ) ? 'selected' : '' }} >Aguascalientes</option>
+                                        <option value="Baja California" {{ ($empleado->Estado == 'Baja California' ) ? 'selected' : '' }} >Baja California</option>
+                                        <option value="Baja California Sur" {{ ($empleado->Estado == 'Baja California Sur' ) ? 'selected' : '' }} >Baja California Sur</option>
+                                        <option value="Campeche" {{ ($empleado->Estado == 'Campeche' ) ? 'selected' : '' }} >Campeche</option>
+                                        <option value="Chiapas" {{ ($empleado->Estado == 'Chiapas' ) ? 'selected' : '' }} >Chiapas</option>
+                                        <option value="Chihuahua" {{ ($empleado->Estado == 'Chihuahua' ) ? 'selected' : '' }} >Chihuahua</option>
+                                        <option value="Coahuila" {{ ($empleado->Estado == 'Coahuila' ) ? 'selected' : '' }} >Coahuila</option>
+                                        <option value="Colima" {{ ($empleado->Estado == 'Colima' ) ? 'selected' : '' }} >Colima</option>
+                                        <option value="Distrito Federal" {{ ($empleado->Estado == '' ) ? 'selected' : '' }} >Distrito Federal</option>
+                                        <option value="Durango" {{ ($empleado->Estado == 'Distrito Federal' ) ? 'selected' : '' }} >Durango</option>
+                                        <option value="Estado de México" {{ ($empleado->Estado == 'Estado de México' ) ? 'selected' : '' }} >Estado de México</option>
+                                        <option value="Guanajuato" {{ ($empleado->Estado == 'Guanajuato' ) ? 'selected' : '' }} >Guanajuato</option>
+                                        <option value="Guerrero" {{ ($empleado->Estado == 'Guerrero' ) ? 'selected' : '' }} >Guerrero</option>
+                                        <option value="Hidalgo" {{ ($empleado->Estado == 'Hidalgo' ) ? 'selected' : '' }} >Hidalgo</option>
+                                        <option value="Jalisco" {{ ($empleado->Estado == 'Jalisco' ) ? 'selected' : '' }}>Jalisco</option>
+                                        <option value="Michoacán" {{ ($empleado->Estado == 'Michoacán' ) ? 'selected' : '' }} >Michoacán</option>
+                                        <option value="Morelos" {{ ($empleado->Estado == 'Morelos' ) ? 'selected' : '' }} >Morelos</option>
+                                        <option value="Nayarit" {{ ($empleado->Estado == 'Nayarit' ) ? 'selected' : '' }} >Nayarit</option>
+                                        <option value="Nuevo León" {{ ($empleado->Estado == 'Nuevo León' ) ? 'selected' : '' }} >Nuevo León</option>
+                                        <option value="Oaxaca" {{ ($empleado->Estado == 'Oaxaca' ) ? 'selected' : '' }} >Oaxaca</option>
+                                        <option value="Puebla" {{ ($empleado->Estado == 'Puebla' ) ? 'selected' : '' }} >Puebla</option>
+                                        <option value="Querétaro" {{ ($empleado->Estado == 'Querétaro' ) ? 'selected' : '' }} >Querétaro</option>
+                                        <option value="Quintana Roo" {{ ($empleado->Estado == 'Quintana Roo' ) ? 'selected' : '' }} >Quintana Roo</option>
+                                        <option value="San Luis Potosí" {{ ($empleado->Estado == 'San Luis Potosí' ) ? 'selected' : '' }} >San Luis Potosí</option>
+                                        <option value="Sinaloa" {{ ($empleado->Estado == 'Sinaloa' ) ? 'selected' : '' }} >Sinaloa</option>
+                                        <option value="Sonora" {{ ($empleado->Estado == 'Sonora' ) ? 'selected' : '' }} >Sonora</option>
+                                        <option value="Tabasco" {{ ($empleado->Estado == 'Tabasco' ) ? 'selected' : '' }} >Tabasco</option>
+                                        <option value="Tamaulipas" {{ ($empleado->Estado == 'Tamaulipas' ) ? 'selected' : '' }} >Tamaulipas</option>
+                                        <option value="Tlaxcala" {{ ($empleado->Estado == 'Tlaxcala' ) ? 'selected' : '' }} >Tlaxcala</option>
+                                        <option value="Veracruz" {{ ($empleado->Estado == 'Veracruz' ) ? 'selected' : '' }} >Veracruz</option>
+                                        <option value="Yucatán" {{ ($empleado->Estado == 'Yucatán' ) ? 'selected' : '' }} >Yucatán</option>
+                                        <option value="Zacatecas" {{ ($empleado->Estado == 'Zacatecas' ) ? 'selected' : '' }} >Zacatecas</option>                                    
                                     </select> 
                                 </div>
                                 <div class="col-12 col-md-4">
@@ -174,7 +174,7 @@
                                         <label class="small">DEPARTAMENTO</label>
                                         <select name="IdDepartamento" class="form-control form-control-sm">
                                             @foreach ($departamentos as $departamento)
-                                            <option value="{{ $departamento->Id }}"> {{ $departamento->Descripcion }} </option>
+                                            <option value="{{ $departamento->Id }}" {{ ($empleado->IdDepartamento == $departamento->Id ) ? 'selected' : '' }}  > {{ $departamento->Descripcion }} </option>
                                             @endforeach
                                         </select>                                 
                                     </div>
@@ -182,23 +182,23 @@
                                         <label class="small">PUESTO</label>
                                         <select name="IdPuesto" class="form-control form-control-sm">
                                             @foreach ($puestos as $puesto)
-                                            <option value="{{ $puesto->Id }}"> {{ $puesto->Descripcion }} </option>
+                                            <option value="{{ $puesto->Id }}" {{ ($empleado->IdPuesto == $puesto->Id ) ? 'selected' : '' }} > {{ $puesto->Descripcion }} </option>
                                             @endforeach
                                         </select>                                 
                                     </div>
                                     <div class="col-12 col-md-12">
                                         <label class="small">PERIODO</label>
                                         <select name="IdPeriodo" class="form-control form-control-sm">
-                                            <option value="1">SEMANAL</option>
-                                            <option value="2">QUINCENAL</option>                                            
+                                            <option value="1" {{ ($empleado->IdPeriodo == 1 ) ? 'selected' : '' }}>SEMANAL</option>
+                                            <option value="2" {{ ($empleado->IdPeriodo == 2 ) ? 'selected' : '' }}>QUINCENAL</option>                                            
                                         </select>                                    
                                     </div>
                                     <div class="col-12 col-md-12">
                                         <label class="small">TURNO</label>
                                         <select name="IdTurno" class="form-control form-control-sm">
-                                            <option value="1">MATUTINO</option>
-                                            <option value="2">VESPERTINO</option>                                            
-                                            <option value="3">DIURNO</option>                                            
+                                            <option value="1" {{ ($empleado->IdTurno == 1 ) ? 'selected' : '' }} >MATUTINO</option>
+                                            <option value="2" {{ ($empleado->IdTurno == 2 ) ? 'selected' : '' }} >VESPERTINO</option>                                            
+                                            <option value="3" {{ ($empleado->IdTurno == 3 ) ? 'selected' : '' }} >DIURNO</option>                                            
                                         </select>                                    
                                     </div>
                                     <div class="w-100"></div>
