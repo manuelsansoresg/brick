@@ -20,7 +20,8 @@ class Empleado extends Model
                                     'empleado.IdDepartamento','empleado.IdPeriodo','empleado.IdTurno','empleado.Estatus','empleado.Imagen','empleado.Observaciones'
                                 )
                             ->join('puesto', 'puesto.Id', '=', 'empleado.IdPuesto')
-                            ->join('departamento', 'departamento.Id', '=', 'empleado.IdDepartamento')                           
+                            ->join('departamento', 'departamento.Id', '=', 'empleado.IdDepartamento')   
+                            ->where('empleado.Id', $id)                        
                             ->first();
         
         return $empleado;

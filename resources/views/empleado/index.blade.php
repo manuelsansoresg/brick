@@ -18,13 +18,13 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                              <h3 class="mr-auto">LISTADO DE EMPLEADOS</h3>
+                                <h3 class="mr-auto">LISTADO DE EMPLEADOS</h3>
                                 <div>
                                     <a href="/admin/empleado/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">                            
+                        <div class="card-body">
                             <div class="row mt-3">
                                 <div class="col-12">
                                     <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -50,7 +50,7 @@
                                                 <td>{{ $empleado->puesto }}</td>
                                                 <td>{{ $empleado->departamento }}</td>
                                                 <td>{{ $empleado->Telefono }}</td>
-                                                <td>{{ $empleado->Observaciones }}</td>                                                
+                                                <td>{{ $empleado->Observaciones }}</td>
                                                 <td>
                                                     @if($empleado->Estatus == 1)
                                                     <i class="fas fa-ban text-success"></i> ACTIVO
