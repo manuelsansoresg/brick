@@ -84,8 +84,8 @@ class Pedido extends Model
 
     static function pdfPedido($IdPedido)
     {
-        $pedido = Pedido::select('Nombre', 'Calle', 'NumeroExterior', 'NumeroExterior', 'Colonia', 'RFC',
-                                'FechaEntrega', 'Subtotal', 'Iva', 'descuento', 'Importe'
+        $pedido = Pedido::select('IdPedido','Nombre', 'Calle', 'NumeroExterior', 'NumeroExterior', 'Colonia', 'RFC','Fecha',
+                                'FechaEntrega', 'Subtotal', 'Iva', 'descuento', 'Importe','Observaciones','Telefono'
                                 )
                         ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente')
                         ->where('IdPedido', $IdPedido)
