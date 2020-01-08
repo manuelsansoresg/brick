@@ -49,7 +49,7 @@
                                                 <td>{{ $empleado->Email }}</td>
                                                 <td>{{ $empleado->puesto }}</td>
                                                 <td>{{ $empleado->departamento }}</td>
-                                                <td>{{ $empleado->Telefono }}</td>
+                                                <td>{{ $empleado->Telefono1 }}</td>
                                                 <td>{{ $empleado->Observaciones }}</td>
                                                 <td>
                                                     @if($empleado->Estatus == 1)
