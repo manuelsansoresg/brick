@@ -168,7 +168,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <header>                        
-                        <img src="{{ public_path('img/logoMDZ.jpg') }}" class="img-responsive">
+                        <img src="{{ url('img/logoMDZ.jpg') }}" class="img-responsive">
                         <address>
                             <p>Carretera Mérida - Dzununcan Km 2.5 CP 97315 Mérida, Yucatán, México</p>
                             <p>ventas@mosaicosdzununcan.com, ventas2@mosaicosdzununcan.com</p>

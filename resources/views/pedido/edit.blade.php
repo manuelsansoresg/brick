@@ -105,7 +105,7 @@
                                                 <th>UNI</th>
                                                 <th>CANT</th>
                                                 <th>PRECIO</th>
-                                                <th>DESC</th>
+                                                <th class="d-none">DESC</th>
                                                 <th>IMPORTE</th>
                                             </tr>
                                         </thead>
@@ -129,7 +129,7 @@
                                                     <input type="hidden" id="articulo_precio-{{ $cont }}" name="articulo_precio[]" value="{{ ($precio != '')? $precio : 0 }}">
 
                                                 </td>
-                                                <td>
+                                                <td class="d-none">
                                                     <input type="number" id="articulo_desc-{{ $cont }}" name="articulo_desc[]" onchange="total()" value="{{ precio($detalle_pedido->descuento) }}" class="form-control">
 
                                                 </td>
@@ -156,14 +156,14 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                     <div class="form-group mb-2">
-                                        <label class="small">SUBTOTAL</label>
+                                        <label class="small">IMPORTE TOTAL</label>
                                         <input type="text" id="subtotal" class="form-control form-control-sm" value="{{ precio($pedido->Subtotal) }}" readonly placeholder="SUBTOTAL">
-                                        <input type="hidden" name="Subtotal" id="hsubtotal" value="{{ $pedido->Subtotal }}" class="form-control form-control-sm" readonly placeholder="SUBTOTAL">
+                                        <input type="hidden" name="Subtotal" id="hsubtotal" value="{{ $pedido->Subtotal }}" class="form-control form-control-sm" readonly placeholder="IMPORTE TOTAL">
                                         @if($errors)
                                         <span class="text-danger"> {{$errors->first('Subtotal')}}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="form-group mb-2 d-none">
                                         <label class="small">DESCUENTO</label>
                                         <input type="text" id="descuento" value="{{ precio($pedido->descuento) }}" class="form-control form-control-sm" readonly placeholder="DESCUENTO">
                                         <input type="hidden" name="descuento" id="hdescuento" value="{{ $pedido->descuento }}" class="form-control form-control-sm" readonly placeholder="DESCUENTO">
@@ -171,7 +171,7 @@
                                         <span class="text-danger"> {{$errors->first('descuento')}}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="form-group mb-2 d-none">
                                         <label class="small">IVA</label>
                                         <input type="text" id="iva" class="form-control form-control-sm" value="{{ $pedido->Iva }}" readonly placeholder="IVA">
                                         <input type="hidden" name="Iva" id="hiva" class="form-control form-control-sm" value="{{ $pedido->Iva }}" readonly placeholder="IVA">
@@ -179,7 +179,7 @@
                                         <span class="text-danger"> {{$errors->first('Iva')}}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group mb-2">
+                                    <div class="form-group mb-2 d-none">
                                         <label class="small">IMPORTE</label>
                                         <input type="text" value="{{ precio($pedido->Importe) }}" id="importe" class="form-control" readonly placeholder="IMPORTE">
                                         <input type="hidden" value="{{ $pedido->Importe }}" name="Importe" id="himporte" class="form-control" readonly placeholder="IMPORTE">
