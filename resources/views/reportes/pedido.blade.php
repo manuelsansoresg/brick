@@ -101,8 +101,7 @@
         table.inventory td:nth-child(2) { width: 38%; }
         table.inventory td:nth-child(3) { text-align: right; width: 12%; }
         table.inventory td:nth-child(4) { text-align: right; width: 12%; }
-        table.inventory td:nth-child(5) { text-align: right; width: 12%; }
-        table.inventory td:nth-child(6) { text-align: right; width: 12%; }
+        table.inventory td:nth-child(5) { text-align: right; width: 12%; }        
 
         /* table balance */
 
@@ -115,6 +114,12 @@
         aside h1 { border-color: #999; border-bottom-style: solid; }
         aside p { margin: 0 0 0.25em; }
         aside span { display: block; float: right; }
+
+        /* footer*/
+        footer { position:fixed;left:0px;bottom:0px; height:80px; width:100%;}
+        footer address { float: left; font-size: 75%; font-style: normal; line-height: 1.25; margin: 0 1em 1em 0; }
+        footer address p { margin: 0 0 0.25em; }            
+      
 
         /* javascript */
 
@@ -151,6 +156,8 @@
         .cut { -webkit-transition: opacity 100ms ease-in; }
 
         tr:hover .cut { opacity: 1; }
+
+        
 
     </style>
 
@@ -197,8 +204,7 @@
                             <tr>
                                 <th><span>CLAVE</span></th>
                                 <th><span>DESCRIPCION</span></th>
-                                <th><span>CANT.</span></th>
-                                <th><span>DESC.</span></th>                               
+                                <th><span>CANT.</span></th>                                
                                 <th><span>PRECIO</span></th>
                                 <th><span>IMPORTE</span></th>
                             </tr>
@@ -208,8 +214,7 @@
                                 <tr>                                    
                                     <td><span>{{ $articulo->ClaveInterna }}</span></td>
                                     <td><span>{{ $articulo->descripcion }}</span></td>
-                                    <td><span>{{ precio($articulo->cantidad) }}</span></td> 
-                                    <td>{{ precio($articulo->descuento) }}</td>                                  
+                                    <td><span>{{ precio($articulo->cantidad) }}</span></td>                                     
                                     <td><span>{{ precio($articulo->Precio) }}</span></td>
                                     <td><span>{{ precio($articulo->importe) }}</span></td>
                                 </tr>
@@ -221,18 +226,10 @@
                             <tr>
                                 <th><span>SUBTOTAL</span></th>
                                 <td><span data-prefix></span><span>{{ precio($pedido->Subtotal) }}</span></td>
-                            </tr>
-                            <tr>
-                                <th><span>DESC.</span></th>
-                                <td><span data-prefix></span><span>{{ precio($pedido->descuento) }}</span></td>
-                            </tr>
-                            <tr>
-                                <th><span>IVA</span></th>
-                                <td><span data-prefix></span><span>{{ precio($pedido->Iva) }}</span></td>
-                            </tr>
+                            </tr>                            
                             <tr>
                                 <th><span>TOTAL</span></th>
-                                <td><span data-prefix></span><span>{{ precio($pedido->Importe) }}</span></td>
+                                <td><span data-prefix></span><span>{{ precio($pedido->Subtotal) }}</span></td>
                             </tr>
                         </table>
                     </article>
@@ -244,6 +241,16 @@
                             <p> {{ $pedido->Observaciones }}</p>
                         </div>
                     </aside>
+                    <footer>
+                        <address>
+                            <p><span>El tiempo de entrega será a partir del recibo de su anticipo. Estos precios no incluyen flete. El mosaicose surte sin pulir</span></p>
+                            <p>ni brillar ya que este trabajo se hace despues de colocado el mosaico, y corre a cuenta del cliente. En caso que desee</p>
+                            <p>ordenar su pedido puede hacer un depósito en <strong>BANAMEX</strong> a la cuenta a nombre de <strong>Mosaicos Detimononicos S de RL de CV</strong> </p>
+                            <p>con el <strong>No. 7009-2928-746 SUC. Santa Rosa 7448</strong> y para transferencia bancarias con la <strong>CLABE No. 00 2910 7009 2928 7460.</strong></p>                            
+                            <p>Quedo al pendiente de sus estimables ordenes. Gracias por contactarnos</p>
+                            <br><br>                            
+                        </address>                         
+                    </footer>                    
                 </div>
             </div>
         </div>
