@@ -45,8 +45,8 @@
                                             <tr>
                                                 <td>{{ $pedido->IdPedido }}</td>
                                                 <td>{{ $pedido->cliente }}</td>
-                                                <td>{{ $pedido->Importe }}</td>
-                                                <td>{{ $pedido->modelo }}</td>
+                                                <td>{{ $pedido->Fecha }}</td>
+                                                <td>{{ $pedido->Subtotal }}</td>
                                                 <td>
                                                     @if($pedido->Estatus == 1)
                                                     <i class="fas fa-ban text-success"></i> Activo
