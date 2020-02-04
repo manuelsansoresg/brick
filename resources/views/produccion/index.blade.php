@@ -29,58 +29,67 @@
                         <div class="card-body">
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-                                        <thead class="theade-danger">
-                                            <tr>
-                                                <th>No.PRODUCCION</th>
-                                                <th>FECHA</th>
-                                                <th>No.PEDIDO</th>
-                                                <th>OBSERVACIONES</th>
-                                                <th>ESTATUS</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($producciones as $produccion)
-                                            <tr>
-                                                <td>{{ $produccion->Id }}</td>
-                                                <td>{{ $produccion->Fecha }}</td>
-                                                <td>{{ $produccion->IdPedido }}</td>
-                                                <td>{{ $produccion->Observaciones }}</td>
-                                                <td>
-                                                    @if($pedido->Estatus == 1)
-                                                    <i class="fas fa-ban text-success"></i> Activo
-                                                    @else
-                                                    <i class="fas fa-ban text-danger"></i> Inactivo
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <a href="/admin/produccion/pdf/create/{{ $produccion->Id }}" class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf"></i></a>
-                                                    <a href="{{route('produccion.edit', $produccion->Id)}}" class="btn btn-sm btn-primary">
-                                                        <i class="far fa-edit"></i>
-                                                    </a>
-                                                    <?php 
-                                                    $Estatus = ($produccion->Estatus==0)?1:0;
-                                                    ?>
-                                                       
-                                                        @if ($produccion->Estatus == 1)
-                                                         <button
-                                                            onclick="if(confirm('¿Deseas eliminar el elemento?'))window.location.href='/admin/produccion/destroy/{{ $produccion->Id }}/{{ $Estatus }} '"
-                                                            class="btn btn-danger btn-sm ml-1">
-                                                                <i class="far fa-trash-alt"></i>
-                                                            </button>   
-                                                        @else
-                                                            <button
-                                                                onclick="if(confirm('¿Deseas eliminar el elemento?'))window.location.href='/admin/produccion/destroy/{{ $produccion->Id }}/{{ $Estatus }} '"
-                                                                class="btn btn-success btn-sm ml-1">
-                                                                     <i class="fas fa-check-circle"></i>
-                                                            </button>
-                                                        @endif                                                    
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="pills-pendiente-tab" data-toggle="pill" href="#pills-pendiente" role="tab" aria-controls="pills-pendiente" aria-selected="true">PENDIENTE</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pills-proceso-tab" data-toggle="pill" href="#pills-proceso" role="tab" aria-controls="pills-proceso" aria-selected="false">EN PROCESO</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pills-terminado-tab" data-toggle="pill" href="#pills-terminado" role="tab" aria-controls="pills-terminado" aria-selected="false">TERMINADO</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-pendiente" role="tabpanel" aria-labelledby="pills-pendiente-tab">
+                                            <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                                <thead class="theade-danger">
+                                                    <tr>
+                                                        <th>No.PEDIDO</th>
+                                                        <th>NOMBRE CLIENTE</th>
+                                                        <th>FECHA</th>
+                                                        <th>FECHA DE ENTREGA</th>                                                
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-proceso" role="tabpanel" aria-labelledby="pills-proceso-tab">
+                                            <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                                <thead class="theade-danger">
+                                                    <tr>
+                                                        <th>No.PEDIDO</th>
+                                                        <th>NOMBRE CLIENTE</th>
+                                                        <th>FECHA</th>
+                                                        <th>FECHA DE ENTREGA</th>                                                
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-terminado" role="tabpanel" aria-labelledby="pills-terminado-tab">
+                                            <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                                <thead class="theade-danger">
+                                                    <tr>
+                                                        <th>No.PEDIDO</th>
+                                                        <th>NOMBRE CLIENTE</th>
+                                                        <th>FECHA</th>
+                                                        <th>FECHA DE ENTREGA</th>                                                
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
