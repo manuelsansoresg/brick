@@ -243,10 +243,10 @@
                     </aside>
                     <footer>
                         <address>
-                            <p><span>El tiempo de entrega será a partir del recibo de su anticipo. Estos precios no incluyen flete. El mosaicose surte sin pulir</span></p>
-                            <p>ni brillar ya que este trabajo se hace despues de colocado el mosaico, y corre a cuenta del cliente. En caso que desee</p>
+                            <p><span>El tiempo de entrega será a partir del recibo de su anticipo. Estos precios no incluyen flete. El mosaico se surte sin pulir</span></p>
+                            <p>ni brillar, ya que este trabajo se hace despues de colocado el mosaico y corre a cuenta del cliente. En caso que desee</p>
                             <p>ordenar su pedido puede hacer un depósito en <strong>BANAMEX</strong> a la cuenta a nombre de <strong>Mosaicos Detimononicos S de RL de CV</strong> </p>
-                            <p>con el <strong>No. 7009-2928-746 SUC. Santa Rosa 7448</strong> y para transferencia bancarias con la <strong>CLABE No. 00 2910 7009 2928 7460.</strong></p>                            
+                            <p>con el <strong>No. 7009-2928-746 Suc. Santa Rosa 7448</strong> y para transferencia bancaria con la <strong>CLABE No. 00 2910 7009 2928 7460.</strong></p>                            
                             <p>Quedo al pendiente de sus estimables ordenes. Gracias por contactarnos</p>
                             <br><br>                            
                         </address>                         
