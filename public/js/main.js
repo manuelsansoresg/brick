@@ -5335,6 +5335,17 @@ if ($("#pedido").length > 0) {
 
 /***/ }),
 
+/***/ "./resources/js/components/produccion.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/produccion.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.autorizar_pedido = function () {};
+
+/***/ }),
+
 /***/ "./resources/js/main.js":
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
@@ -5347,6 +5358,8 @@ __webpack_require__(/*! ./components/datatable.js */ "./resources/js/components/
 __webpack_require__(/*! ./components/articulo.js */ "./resources/js/components/articulo.js");
 
 __webpack_require__(/*! ./components/pedido.js */ "./resources/js/components/pedido.js");
+
+__webpack_require__(/*! ./components/produccion.js */ "./resources/js/components/produccion.js");
 
 (function () {
   'use strict';
@@ -5377,7 +5390,7 @@ __webpack_require__(/*! ./components/pedido.js */ "./resources/js/components/ped
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\laragon\www\brick\resources\js\main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\brick\resources\js\main.js */"./resources/js/main.js");
 
 
 /***/ })

@@ -1,16 +1,16 @@
 var Swal = require('sweetalert2');
-const axios = require('axios')
+const axios = require('axios');
 
-if ($("#pedido").length > 0) { 
-    
+if ($("#pedido").length > 0) {
+
     //bootstrapValidate({'#FechaEntrega', 'min:20'});
-    
 
-    
+
+
     $("#IdCliente").change(function () {
-        
+
         var IdCliente = $('#IdCliente').val();
-        
+
         axios.get
             ('/admin/cliente/direccion/' + IdCliente )
             .then(function (response) {
@@ -22,16 +22,16 @@ if ($("#pedido").length > 0) {
 
                 var result = error.response.data;
 
-                /* $('.spinner-contacto').hide(); */ 
+                /* $('.spinner-contacto').hide(); */
 
 
-   
+
             })
     });
-    
-    $("#frm-producto").submit(function (event) { 
-        
-        
+
+    $("#frm-producto").submit(function (event) {
+
+
 
         var total_elementos = $('input[name="articulo_cantidad[]"]').length;
         if (total_elementos == 0) {
@@ -45,7 +45,7 @@ if ($("#pedido").length > 0) {
         }
 
         event.preventDefault();
-        
+
     });
-   
+
 }

@@ -29,7 +29,7 @@ class PedidoController extends Controller
         $data_pedido = Pedido::pdfPedido($IdPedido);
         $pdf = app('dompdf.wrapper');
         $pdf->loadView('reportes.pedido', $data_pedido);
-        
+
 
         return $pdf->stream('mi-archivo.pdf');
     }
@@ -89,8 +89,9 @@ class PedidoController extends Controller
         $domicilio          = ($cliente!= "") ? 'Calle:' . $cliente->Calle . ' No° Ext:' . $cliente->NumeroExterior . ' No° Int' . $cliente->NumeroInterior . ' Colonia:' . $cliente->Colonia : '';
         $detalle_pedidos    = DetallePedido::getById($id);
         $total_detalle      = count($detalle_pedidos);
+        $is_autorizar       = false;
 
-        return  view('pedido.edit', compact('clientes', 'modelos', 'folio', 'pedido', 'domicilio', 'detalle_pedidos', 'total_detalle'));
+        return  view('pedido.edit', compact('clientes', 'is_autorizar', 'modelos', 'folio', 'pedido', 'domicilio', 'detalle_pedidos', 'total_detalle'));
     }
 
     /**

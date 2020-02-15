@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class DetallePedido extends Model
 {
     protected $table      = 'detallepedido';
-    protected $primaryKey = 'IdPedido';
+    protected $primaryKey = 'id';
+
 
 
     static function getById($IdPedido)
     {
-        $detalle_pedido = DetallePedido::select('detallepedido.IdPedido', 'detallepedido.Idarticulo', 'articulo.ClaveInterna', 'articulo.descripcion', 'Abreviatura', 'cantidad', 'Precio1', 'Precio2', 'Precio3', 'descuento', 'importe')
+        $detalle_pedido = DetallePedido::select('detallepedido.id', 'detallepedido.IdPedido', 'detallepedido.Idarticulo', 'articulo.ClaveInterna', 'articulo.descripcion', 'Abreviatura', 'cantidad', 'Precio1', 'Precio2', 'Precio3', 'descuento', 'importe',
+                                                'detallepedido.estatus')
                                         ->join('articulo', 'articulo.id', '=' , 'detallepedido.Idarticulo')
                                         ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra')
                                         ->where('IdPedido', $IdPedido)->get();

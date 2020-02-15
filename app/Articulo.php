@@ -16,21 +16,21 @@ class Articulo extends Model
                                         'IdUnidadCompra', 'IdUnidadVenta','articulo.Observaciones', 'articulo.Estatus','imagen',
                                         'stockmaximo', 'stockMinimo'
                                 )
-                            ->join('familia', 'familia.Id', '=', 'articulo.IdFamilia')
-                            ->join('proveedores', 'proveedores.Id', '=', 'articulo.IdProveedor')
-                            ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra')
+                            ->join('familia', 'familia.Id', '=', 'articulo.IdFamilia', 'left')
+                            ->join('proveedores', 'proveedores.Id', '=', 'articulo.IdProveedor', 'left')
+                            ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra', 'left')
                             ->where('articulo.id', $id)
                             ->first();
-        
+
         return $articulo;
     }
 
     static function getAll()
     {
         $articulo = Articulo::select('ClaveInterna','articulo.id', 'articulo.descripcion', 'familia.Descripcion as familia', 'proveedores.Nombre as proveedor', 'unidad.Abreviatura', 'Precio1', 'Precio2', 'Precio3')
-                            ->join('familia', 'familia.Id', '=', 'articulo.IdFamilia')
-                            ->join('proveedores', 'proveedores.Id', '=', 'articulo.IdProveedor')
-                            ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra')
+                            ->join('familia', 'familia.Id', '=', 'articulo.IdFamilia', 'left')
+                            ->join('proveedores', 'proveedores.Id', '=', 'articulo.IdProveedor', 'left')
+                            ->join('unidad', 'unidad.Id', '=', 'articulo.IdUnidadCompra', 'left')
                             ->get();
         return $articulo;
     }
@@ -66,16 +66,16 @@ class Articulo extends Model
 
 
         if ($id == null) {
-            
+
             $articulo = new Articulo($request->except('_token', 'imagen'));
             $articulo->Estatus = $Estatus;
-           
+
         } else {
-            
+
             $articulo = Articulo::find($id);
             $articulo->fill($request->except('_token', 'imagen'));
             $articulo->Estatus = $Estatus;
-            
+
         }
 
         if ($request->hasFile('imagen') != false) {
@@ -85,7 +85,7 @@ class Articulo extends Model
                 @unlink($path . '/' . $articulo->imagen);
                 @unlink($path . '/thumb_' . $articulo->imagen);
             }
-            
+
             $image_cover      = $request->file('imagen');
             $imagen           = uploadImage($_FILES['imagen'], $image_cover, $path, true);
             $articulo->imagen = $imagen;

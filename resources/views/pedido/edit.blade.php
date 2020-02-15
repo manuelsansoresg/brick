@@ -9,9 +9,14 @@
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/pedido">PEDIDOS</a> </li>
-                        <li class="breadcrumb-item active">NUEVO</li>
+                        @if($is_autorizar == false)
+                            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                            <li class="breadcrumb-item"> <a href="/admin/pedido">PEDIDOS</a> </li>
+                            <li class="breadcrumb-item active">NUEVO</li>
+                            @else
+                            <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                            <li class="breadcrumb-item"> <a href="/admin/produccion">PRODUCCIÓN</a> </li>
+                        @endif
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,13 +28,14 @@
                             {{ Form::open(['route' => ['pedido.update', $pedido->IdPedido], 'method' => 'PUT', 'id' =>  'frm-producto', 'class' => 'needs-validation', 'novalidate' ]) }}
                             <input type="hidden" id="contador_inputs" value="{{ $total_detalle }}">
                             <input type="hidden" id="type" value="1">
+
                             <input type="hidden" name="Estatus" value="{{ $pedido->Estatus }}">
                             <div class="row">
                                 <div class="col-12 col-md-9">
                                     <small>Los campos marcados con * son obligatorios </small>
                                     <div class="w-100" id="pedido"></div>
                                     <label class="small">*CLIENTE</label>
-                                    <select name="IdCliente" class="form-control form-control-sm" required>
+                                    <select name="IdCliente" class="form-control form-control-sm" required {{ ($is_autorizar == false)? '' : 'disabled' }} >
                                         @foreach ($clientes as $cliente)
                                         <option value="{{ $cliente->Id }}" {{ ($pedido->IdCliente == $cliente->Id )? 'selected' : '' }}> {{ $cliente->Nombre }} </option>
                                         @endforeach
@@ -64,7 +70,7 @@
                                 <div class="col-12 col-md-9">
                                     <div class="form-group mb-2">
                                         <label class="small">MODELO </label>
-                                        <select name="TipoModelo" class="form-control form-control-sm">
+                                        <select name="TipoModelo" class="form-control form-control-sm" {{ ($is_autorizar == false)? '' : 'disabled' }} >
                                             @foreach ($modelos as $modelo)
                                             <option value="{{ $modelo->id }}" {{ ($pedido->modelo == $modelo->id)? 'selected' : '' }}> {{ $modelo->descripcion }} </option>
                                             @endforeach
@@ -77,7 +83,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                         </div>
-                                        <input type="text" name="FechaEntrega" id="FechaEntrega" value="{{ date('Y-m-d', strtotime($pedido->FechaEntrega)) }}" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" class="form-control form-control-sm" required>
+                                        <input type="text" name="FechaEntrega" {{ ($is_autorizar == false)? '' : 'readonly' }} id="FechaEntrega" value="{{ date('Y-m-d', strtotime($pedido->FechaEntrega)) }}" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy-mm-dd" data-mask="" im-insert="false" class="form-control form-control-sm" required>
                                         <div class="valid-feedback">
                                             Looks good!
                                         </div>
@@ -94,7 +100,9 @@
                             <div class="row ">
                                 <div class="col-12 col-md-12">
                                     <div class="col-12 text-right pb-4" style="padding-bottom:20px;">
-                                        <button class="btn btn-success" type="button" onclick="abrirArticulo()" id="addArticulo" data-toggle="tooltip" data-placement="left" title="AGREGAR PRODUCTO"> <i class="glyphicon glyphicon-plus-sign"></i> *AGREGAR PRODUCTO </button>
+                                        @if($is_autorizar == false)
+                                            <button class="btn btn-success" type="button" onclick="abrirArticulo()" id="addArticulo" data-toggle="tooltip" data-placement="left" title="AGREGAR PRODUCTO"> <i class="glyphicon glyphicon-plus-sign"></i> *AGREGAR PRODUCTO </button>
+                                        @endif
                                     </div> <!-- /div-action -->
                                     <table id="tblpedido" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
@@ -114,13 +122,17 @@
                                             @foreach ($detalle_pedidos as $detalle_pedido)
                                             <?php $cont = $cont + 1; ?>
                                             <tr>
-                                                <td><a onclick="eliminarColumna(this)" class="btn btn-danger text-white"><i class="fas fa-minus-circle"></i></a></td>
+                                                <td>
+                                                    @if($is_autorizar == false)
+                                                        <a onclick="eliminarColumna(this)" class="btn btn-danger text-white"><i class="fas fa-minus-circle"></i></a>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $detalle_pedido->ClaveInterna }}</td>
                                                 <td> {{ $detalle_pedido->descripcion }} </td>
                                                 <td>{{ $detalle_pedido->Abreviatura }}</td>
                                                 <td>
 
-                                                    <input type="number" onchange="calc_cantidad({{ $cont }})" id="articulo_cantidad-{{ $cont }}" name="articulo_cantidad[]" value="{{ (int)$detalle_pedido->cantidad }}" oninput="this.value=(parseInt(this.value)||0)" class="form-control">
+                                                    <input type="number" onchange="calc_cantidad({{ $cont }})" id="articulo_cantidad-{{ $cont }}" name="articulo_cantidad[]" value="{{ (int)$detalle_pedido->cantidad }}" oninput="this.value=(parseInt(this.value)||0)" class="form-control" {{ ($is_autorizar == false)? '' : 'disabled' }} >
 
                                                 </td>
                                                 <td>
@@ -191,7 +203,11 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
-                                    <button class="btn btn-primary">Guardar</button>
+                                    @if($is_autorizar == false)
+                                        <button class="btn btn-primary">Guardar</button>
+                                        @else
+                                        <a class="btn btn-primary" href="/admin/produccion/{{ $pedido->IdPedido }}/autorizar/1">Autorizar</a>
+                                    @endif
                                 </div>
                             </div>
                             {{ Form::close() }}

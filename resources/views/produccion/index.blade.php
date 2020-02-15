@@ -40,6 +40,9 @@
                                             <a class="nav-link" id="pills-terminado-tab" data-toggle="pill" href="#pills-terminado" role="tab" aria-controls="pills-terminado" aria-selected="false">TERMINADO</a>
                                         </li>
                                     </ul>
+                                    <div class="col-12">
+                                        @include('flash::message')
+                                    </div>
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="pills-pendiente" role="tabpanel" aria-labelledby="pills-pendiente-tab">
                                             <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
@@ -48,28 +51,53 @@
                                                         <th>No.PEDIDO</th>
                                                         <th>NOMBRE CLIENTE</th>
                                                         <th>FECHA</th>
-                                                        <th>FECHA DE ENTREGA</th>                                                
+                                                        <th>FECHA DE ENTREGA</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
+                                                    @foreach($pedidos as $pedido)
+                                                        <tr>
+                                                            <td>{{ $pedido->IdPedido }}</td>
+                                                            <td>{{ $pedido->Nombre }}</td>
+                                                            <td>{{ date('Y-m-d', strtotime($pedido->created_at)) }}</td>
+                                                            <td>{{ date('Y-m-d', strtotime($pedido->FechaEntrega)) }}</td>
+                                                            <td>
+                                                                <a class="btn btn-primary" href="/admin/produccion/{{ $pedido->IdPedido }}/form_autorizar" data-toggle="tooltip" data-placement="top" title="Autorizar"><i class="fas fa-check-circle"></i></a>
+                                                                <a class="btn btn-success" href="/admin/produccion/{{ $pedido->IdPedido }}/autorizar/2" data-toggle="tooltip" data-placement="top" title="Cancelar"><i class="fas fa-ban"></i></a>
+                                                            </td>
+
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="tab-pane fade" id="pills-proceso" role="tabpanel" aria-labelledby="pills-proceso-tab">
-                                            <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                            <table class="table-default table table-bordered table-hover dataTable" style="width: 100%" role="grid" aria-describedby="example2_info">
                                                 <thead class="theade-danger">
                                                     <tr>
                                                         <th>No.PEDIDO</th>
                                                         <th>NOMBRE CLIENTE</th>
                                                         <th>FECHA</th>
-                                                        <th>FECHA DE ENTREGA</th>                                                
+                                                        <th>FECHA DE ENTREGA</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
+                                                    @foreach($pedido_procesados as $pedido_procesado)
+                                                        <tr>
+                                                            <td>{{ $pedido_procesado->IdPedido }}</td>
+                                                            <td>{{ $pedido_procesado->Nombre }}</td>
+                                                            <td>{{ date('Y-m-d', strtotime($pedido_procesado->created_at)) }}</td>
+                                                            <td>{{ date('Y-m-d', strtotime($pedido_procesado->FechaEntrega)) }}</td>
+                                                            <td>
+                                                                <a class="btn btn-success" href="/admin/produccion/{{ $pedido_procesado->IdPedido }}/detalle" data-toggle="tooltip" data-placement="top" title="Detalle">
+                                                                    <i class="fas fa-bars"></i>
+                                                                </a>
+
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -80,12 +108,12 @@
                                                         <th>No.PEDIDO</th>
                                                         <th>NOMBRE CLIENTE</th>
                                                         <th>FECHA</th>
-                                                        <th>FECHA DE ENTREGA</th>                                                
+                                                        <th>FECHA DE ENTREGA</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
