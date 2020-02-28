@@ -14,9 +14,10 @@ class Pedido extends Model
 
     static function getById($IdPedido)
     {
-        $pedido = Pedido::select('IdPedido', 'FechaEntrega', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Iva', 'descuento', 'Importe', 'pedido.Estatus', 'Observaciones', 'pedido.created_at as fecha', 'FechaEntrega', 'IdCliente')
-            ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente')
-            ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo')
+        $pedido = Pedido::select('pedido.IdPedido', 'FechaEntrega', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Iva', 'descuento', 'Importe', 'pedido.Estatus', 'IdEmpleadoSupervisor', 'pedido.Observaciones', 'pedido.created_at as fecha', 'FechaEntrega', 'IdCliente')
+            ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente', 'left')
+            ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo', 'left')
+            ->join('produccion', 'produccion.IdPedido', '=', 'pedido.IdPedido', 'left')
             ->where('pedido.IdPedido', $IdPedido)
             ->first();
         return $pedido;
@@ -24,44 +25,52 @@ class Pedido extends Model
 
     public static function getDetalleById($IdPedido, $IdProducion)
     {
-        $pedido             = self::getById($IdPedido);
-        $cliente            = Cliente::getById($pedido->IdCliente);
-        $domicilio          = ($cliente!= "") ? 'Calle:' . $cliente->Calle . ' No° Ext:' . $cliente->NumeroExterior . ' No° Int' . $cliente->NumeroInterior . ' Colonia:' . $cliente->Colonia : '';
-        $empleados          = Empleado::getAll();
-        $detalle_pedidos    = DetallePedido::getById($IdPedido);
-        $pedidos            = array();
-        $total_produccion   = 0;
-        foreach ($detalle_pedidos as $detalle_pedidos){
-            //'detallepedido.id', 'detallepedido.IdPedido', 'detallepedido.Idarticulo', 'articulo.ClaveInterna', 'articulo.descripcion', 'Abreviatura', 'cantidad', 'Precio1', 'Precio2', 'Precio3', 'descuento', 'importe',
-            //                                                'detallepedido.estatus'
+        $pedido              = self::getById($IdPedido);
+        $cliente             = Cliente::getById($pedido->IdCliente);
+        $domicilio           = ($cliente!= "") ? 'Calle:' . $cliente->Calle . ' No° Ext:' . $cliente->NumeroExterior . ' No° Int' . $cliente->NumeroInterior . ' Colonia:' . $cliente->Colonia : '';
+        $empleados           = Empleado::getAll();
+        $detalle_produccion  = DetalleProducion::select('Observaciones', 'Cantidad', 'clasificacion', 'IdProducion', 'IdProducto')
+                                ->where('IdProducion', $IdProducion)->get();
+        $pedidos             = array();
+        $total_produccion    = 0;
 
-            $produccion = DetalleProducionAvance::select('CantidadBueno', 'CantidadMalo', 'Cantidad')
-                                        ->where('IdProducion', $IdProducion)->where('detallepedido_id', $detalle_pedidos->id)->get();
+        foreach ($detalle_produccion as $detalle_prod){
+            $suma_cantidad       = 0;
+            $diferencia          = 0;
+            $get_avance = DetalleProducionAvance::where('IdProducion', $detalle_prod->IdProducion)->where('IdProducto', $detalle_prod->IdProducto)->get();
+            foreach ($get_avance as $avance){
 
-            $total_produccion = 0;
-            foreach ($produccion as $produccion){
-                $total_produccion+= $produccion->CantidadMalo + $produccion->CantidadBueno;
+                $Cantidad      = $avance->Cantidad;
+                $CantidadBueno = $avance->CantidadBueno;
+                $CantidadMalo  = $avance->CantidadMalo;
+
+                $suma_cantidad = $suma_cantidad +  $Cantidad;
+                $diferencia    = $suma_cantidad - $detalle_prod->Cantidad;
+
             }
-            $pedidos[] = array('id' => $detalle_pedidos->id, 'descripcion' =>$detalle_pedidos->descripcion, 'cantidad' => $detalle_pedidos->cantidad,
-                                'produccion_actual' =>$total_produccion, 'estatus' => $detalle_pedidos->estatus
-                                );
+
+            $pedidos[] = array('Observaciones' =>$detalle_prod->Observaciones, 'IdProducion' => $detalle_prod->IdProducion , 'IdProducto' => $detalle_prod->IdProducto , 'Cantidad' => $detalle_prod->Cantidad, 'clasificacion' => $detalle_prod->clasificacion, 'produccion_actual' => $suma_cantidad, 'diferencia' => $diferencia);
+
         }
 
 
-        $data = array('pedido' => $pedido, 'cliente' => $cliente, 'domicilio' => $domicilio, 'empleados' => $empleados, 'detalle_pedidos' => $pedidos);
+        $data = array('pedido' => $pedido,  'cliente' => $cliente, 'domicilio' => $domicilio, 'empleados' => $empleados, 'detalle_produccion' => $pedidos);
         return $data;
     }
 
     static function getAll($statusPedido = '')
     {
         /*DB::enableQueryLog();*/
-        $pedido = Pedido::select('IdPedido', 'FechaEntrega', 'pedido.created_at', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Nombre', 'Iva', 'descuento', 'Importe', 'pedido.Estatus')
+        $pedido = Pedido::select('pedido.IdPedido', 'FechaEntrega', 'pedido.created_at', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Nombre', 'Iva', 'descuento', 'Importe', 'pedido.Estatus')
                             ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente', 'left')
-                            ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo', 'left');
+                            ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo', 'left')
+                            ->join('produccion', 'produccion.Id', '=', 'pedido.IdPedido', 'left');
 
         if($statusPedido !== ''){
             $pedido = $pedido->where('statusPedido', $statusPedido);
         }
+
+
         $pedido = $pedido->get();
         /*dd(DB::getQueryLog());*/
         return $pedido;
@@ -112,6 +121,8 @@ class Pedido extends Model
 
         }
 
+
+
         for ($i = 0; $i < $total_articulos; $i++) {
             $Idarticulo = $request->articulo_id[$i];
             $cantidad   = $request->articulo_cantidad[$i];
@@ -123,6 +134,8 @@ class Pedido extends Model
         }
 
     }
+
+
 
     static function getFolio()
     {

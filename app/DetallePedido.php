@@ -23,6 +23,8 @@ class DetallePedido extends Model
 
     static function createUpdate ($IdPedido, $Idarticulo, $cantidad, $descuento, $Precio, $importe, $id = null)
     {
+
+
         if ($id == null) {
             $detalle_pedido             = new DetallePedido();
             $detalle_pedido->IdPedido   = $IdPedido;
@@ -39,7 +41,7 @@ class DetallePedido extends Model
 
     static function drop($IdPedido)
     {
-        $detalle_pedido = DetallePedido::find($IdPedido);
+        $detalle_pedido = DetallePedido::where('IdPedido',$IdPedido);
         if($detalle_pedido){
             $detalle_pedido->delete();
         }

@@ -1,7 +1,7 @@
 require('./components/datatable.js');
 require('./components/articulo.js');
 require('./components/pedido.js');
-require('./components/produccion.js');
+/*require('./components/produccion.js');*/
 
 (function () {
     'use strict';

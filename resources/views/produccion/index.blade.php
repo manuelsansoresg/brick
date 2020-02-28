@@ -31,20 +31,20 @@
                                 <div class="col-12">
                                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="pills-pendiente-tab" data-toggle="pill" href="#pills-pendiente" role="tab" aria-controls="pills-pendiente" aria-selected="true">PENDIENTE</a>
+                                            <a class="nav-link {{ (!isset($_GET['step']))? 'active' :  '' }}" id="pills-pendiente-tab" data-toggle="pill" href="#pills-pendiente" role="tab" aria-controls="pills-pendiente"  >PENDIENTE</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="pills-proceso-tab" data-toggle="pill" href="#pills-proceso" role="tab" aria-controls="pills-proceso" aria-selected="false">EN PROCESO</a>
+                                            <a class="nav-link {{ (isset($_GET['step']) && $_GET['step'] == 'process' )? 'active' :  '' }}" id="pills-proceso-tab" data-toggle="pill" href="#pills-proceso" role="tab" aria-controls="pills-proceso" aria-selected="true" >EN PROCESO</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="pills-terminado-tab" data-toggle="pill" href="#pills-terminado" role="tab" aria-controls="pills-terminado" aria-selected="false">TERMINADO</a>
+                                            <a class="nav-link {{ (isset($_GET['step']) && $_GET['step'] == 'finish' )? 'active' :  '' }}" id="pills-terminado-tab" data-toggle="pill" href="#pills-terminado" role="tab" aria-controls="pills-terminado" >TERMINADO</a>
                                         </li>
                                     </ul>
                                     <div class="col-12">
                                         @include('flash::message')
                                     </div>
                                     <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="pills-pendiente" role="tabpanel" aria-labelledby="pills-pendiente-tab">
+                                        <div class="tab-pane fade {{ (!isset($_GET['step']))? 'show active' :  '' }}" id="pills-pendiente" role="tabpanel" aria-labelledby="pills-pendiente-tab">
                                             <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                                 <thead class="theade-danger">
                                                     <tr>
@@ -72,7 +72,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="tab-pane fade" id="pills-proceso" role="tabpanel" aria-labelledby="pills-proceso-tab">
+                                        <div class="tab-pane fade  {{ (isset($_GET['step']) && $_GET['step'] == 'process' )? 'show active' :  '' }}" id="pills-proceso" role="tabpanel" aria-labelledby="pills-proceso-tab">
                                             <table class="table-default table table-bordered table-hover dataTable" style="width: 100%" role="grid" aria-describedby="example2_info">
                                                 <thead class="theade-danger">
                                                     <tr>
@@ -101,7 +101,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="tab-pane fade" id="pills-terminado" role="tabpanel" aria-labelledby="pills-terminado-tab">
+                                        <div class="tab-pane fade {{ (isset($_GET['step']) && $_GET['step'] == 'finish' )? 'show active' :  '' }}" id="pills-terminado" role="tabpanel" aria-labelledby="pills-terminado-tab">
                                             <table class="table-default table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                                 <thead class="theade-danger">
                                                     <tr>
@@ -113,7 +113,18 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach($pedido_terminados as $pedido_terminado)
+                                                    <tr>
+                                                        <td>{{ $pedido_terminado->IdPedido }}</td>
+                                                        <td>{{ $pedido_terminado->Nombre }}</td>
+                                                        <td>{{ date('Y-m-d', strtotime($pedido_terminado->created_at)) }}</td>
+                                                        <td>{{ date('Y-m-d', strtotime($pedido_terminado->FechaEntrega)) }}</td>
+                                                        <td>
 
+
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>

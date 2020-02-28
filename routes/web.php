@@ -26,15 +26,25 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/produccion/{pedido_id}/autorizar/{status}', 'ProduccionController@autorizar');
     Route::get('/produccion/{pedido_id}/{IdProducion}/getDetalle', 'ProduccionController@getDetalle');
     Route::get('/produccion/{pedido_id}/detalle', 'ProduccionController@show');
-    Route::post('/produccion/{detallepedido_id}/{IdProducion}/saveProduction', 'ProduccionController@saveProduction');
+    Route::post('/produccion/{IdProducion}/{IdProducto}/saveProduction', 'ProduccionController@saveProduction');
 
     Route::get('/produccion/{detallepedido_id}/{IdProducion}/produccion_actual', 'ProduccionController@produccion_actual');
-    Route::post('/produccion/{detallepedido_id}/{IdProducion}/saveSecado', 'ProduccionController@saveSecado');
+    Route::post('/produccion/{IdProducion}/{IdProducto}/saveSecado', 'ProduccionController@saveSecado');
+    Route::get('/produccion/{detallepedido_id}/reset_secado', 'ProduccionController@reset_secado');
+    Route::get('/produccion/{detallepedido_id}/{IdProducion}/get_secado', 'ProduccionController@get_secado');
+    Route::get('/produccion/{IdEmpleadoSupervisor}/{IdProducion}/edit', 'ProduccionController@edit');
 
+    Route::get('/produccion/{IdProducion}/{IdProducto}/detalle-produccion', 'ProduccionController@detalle_produccion');
+    Route::post('/produccion/{IdProducion}/{IdProducto}/detalle-produccion', 'ProduccionController@detalle_produccion');
+
+    Route::get('/produccion/{IdProducion}/{IdProducto}/avance-secado', 'ProduccionController@avace_secado');
+    Route::post('/produccion/{IdProducion}/{IdProducto}/avance-secado', 'ProduccionController@avace_secado');
 
 
     Route::get('/produccion/{pedido_id}/setProduccion', 'ProduccionController@setProduccion');
-    Route::get('/produccion/{detallepedido_id}/{IdProducion}/getTableDetail', 'ProduccionController@getTableDetail');
+    Route::get('/produccion/{IdProducion}/getTableDetail', 'ProduccionController@getTableDetail');
+    Route::get('/produccion/{IdProducion}/getProduccionDetalle', 'ProduccionController@getProduccionDetalle');
+    Route::get('/produccion/{IdProducion}/finish', 'ProduccionController@finish');
 
     Route::get('/pedido/destroy/{IdPedido}/{Estatus}', 'PedidoController@destroy');
     Route::get('/pedido/pdf/create/{IdPedido}', 'PedidoController@createPdf');

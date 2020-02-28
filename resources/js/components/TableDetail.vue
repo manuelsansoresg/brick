@@ -9,7 +9,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                                <li class="breadcrumb-item"> <a href="/admin//produccion">PRODUCCIÓN </a> </li>
+                                <li class="breadcrumb-item"> <a href="/admin/produccion?step=process">PRODUCCIÓN </a> </li>
                                 <li class="breadcrumb-item active">NUEVO</li>
                             </ol>
                         </div><!-- /.col -->
@@ -53,8 +53,8 @@
                                         <div class="col-12 col-md-9">
                                             <div class="form-group mb-2">
                                                 <label class="small">SUPERVISOR</label>
-                                                <select name="IdEmpleadoSupervisor" class="form-control form-control-sm">
-                                                    <option value="" v-for="empleados in empleados"> {{ empleados.Nombre }} </option>
+                                                <select name="IdEmpleadoSupervisor" v-model="pedido.IdEmpleadoSupervisor" class="form-control form-control-sm">
+                                                    <option  v-for="empleados in empleados" :value="empleados.Id"> {{ empleados.Nombre }} </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -76,17 +76,27 @@
                                                     <th></th>
                                                 </tr>
                                                 </thead>
-                                                <tbody v-for="detalle_pedido in detalle_pedidos">
+                                                <tbody >
                                                 <tr>
-                                                    <td>{{ detalle_pedido.descripcion }}</td>
-                                                    <td> {{ setInt(detalle_pedido.cantidad) }} </td>
-                                                    <td> <span>{{detalle_pedido.produccion_actual }}</span>  </td>
-                                                    <td> <span>{{ detalle_pedido.diferencia }}</span>  </td>
+                                                    <td colspan="5">
+                                                        <div class="col-12 text-center" v-if="isSpinner">
+                                                            <i class="fas fa-spinner fa-spin fa-2x"></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr v-for="detalle_produccion in detalle_produccion">
+                                                    <td>{{ detalle_produccion.Observaciones }}</td>
+                                                    <td> {{ setInt(detalle_produccion.Cantidad) }} </td>
+                                                    <td> {{ detalle_produccion.produccion_actual }}  </td>
+                                                    <td> {{ detalle_produccion.diferencia }}  </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-success btn-sm"  v-if="detalle_pedido.estatus == 1" disabled >Detalle</a>
-                                                        <a href="#" class="btn btn-success btn-sm"  v-else :disabled="isPrepare" @click="viewDetail(setInt(detalle_pedido.cantidad), detalle_pedido.id)">Detalle</a>
-                                                        <a href="#" class="btn btn-primary btn-sm" v-if="detalle_pedido.estatus == 1" :disabled="isPrepare" @click="viewSecado(setInt(detalle_pedido.cantidad), detalle_pedido.id)">Avance secado</a>
-                                                        <a href="#" class="btn btn-primary btn-sm" v-else disabled >Avance secado</a>
+                                                        <!--<a href="#" class="btn btn-secondary btn-sm"  v-if="detalle_produccion.estatus == 1" disabled >Detalle</a>-->
+                                                        <a href="#" class="btn btn-success btn-sm" v-if="detalle_produccion.clasificacion == 'd' "   :disabled="isPrepare" @click="viewDetail(detalle_produccion)">DETALLE</a>
+                                                        <a href="#" class="btn btn-secondary btn-sm" v-else   :disabled="isPrepare" >DETALLE</a>
+
+                                                        <a href="#" class="btn btn-primary btn-sm" v-if="detalle_produccion.clasificacion == 'a' " :disabled="isPrepare" @click="viewSecado(detalle_produccion)">AVANCE SECADO</a>
+                                                        <a href="#" class="btn btn-secondary btn-sm" v-else :disabled="isPrepare">AVANCE SECADO</a>
+                                                        <!--<a href="#" class="btn btn-secondary btn-sm" v-else disabled >Avance secado</a>-->
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -96,7 +106,8 @@
                                     <div class="row mt-3">
                                         <div class="col-12 text-right pb-4">
                                             <a href="#" class="btn btn-danger">Cancelar</a>
-                                            <a href="#" class="btn btn-success">Aceptar</a>
+                                            <a href="#" class="btn btn-success" @click="editProduccion()">Aceptar</a>
+
 
                                         </div>
                                     </div>
@@ -151,19 +162,30 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <tr v-if="isSpinnerTable">
+                                                <td colspan="4" >
+                                                    <div class="col-12 text-center" >
+                                                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
                                             <tr v-for="(detalle, index) in contenido_detalle">
                                                 <td v-if="detalle.fecha == ''">{{ my_date  }}</td>
                                                 <td v-if="detalle.fecha!= '' ">{{ detalle.fecha | fmtruncate(10) }}</td>
                                                 <td>
-                                                    <select name="empleado[]" class="form-control" v-model="detalle.operario">
+                                                    <input type="hidden" name="cantidad_detalle" :value="cantidad_detalle">
+                                                    <select name="empleado[]" class="form-control" v-model="detalle.operario" :disabled="detalle.readonly == true">
                                                         <option  v-for="empleado in empleados" :value="empleado.Id"> {{ empleado.Nombre}} </option>
                                                     </select>
+
                                                 </td>
                                                 <td>
-                                                    <input name="Cantidad[]"  @change="changeCantidad(index)" type="number" v-model="detalle.cantidad" min="0" :max="cantidad_detalle" class="form-control">
+                                                    <input type="hidden" name="producionavanceid[]"  v-model="detalle.id">
+                                                    <input name="Cantidad[]"  @change="changeCantidad(index)" :disabled="detalle.readonly == true" type="number" v-model="detalle.cantidad" min="0" :max="cantidad_detalle" class="form-control">
                                                 </td>
                                                 <td>
-                                                    <textarea  name="observaciones[]" v-model="detalle.observaciones" id="" cols="30" rows="3" class="form-control"></textarea>
+                                                    <textarea  name="observaciones[]" v-model="detalle.observaciones" :disabled="detalle.readonly == true" id="" cols="30" rows="3" class="form-control"></textarea>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -205,7 +227,7 @@
                                 <div class="row">
                                     <div class="col-12 text-center">
                                         Total de articulos  <span class="text-success"> {{ cantidad_detalle}} </span>
-
+                                        <p v-if="!isModalSave" class="text-danger"> Ha exedido el número de articulos a agregar </p>
                                     </div>
 
                                 </div>
@@ -223,26 +245,34 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="(detalle, index) in contenido_detalle">
-                                                <td v-if="detalle.fecha == ''">
-                                                    {{ my_date  }}
-
+                                            <tr>
+                                                <td colspan="5">
+                                                    <div class="col-12 text-center" v-if="isSpinnerTable">
+                                                        <i class="fas fa-spinner fa-spin fa-2x"></i>
+                                                    </div>
                                                 </td>
+                                            </tr>
+                                            <tr v-for="(detalle, index) in contenido_detalle" v-if="detalle.status == 0">
+                                                <td v-if="detalle.fecha == ''">{{ my_date  }}</td>
                                                 <td v-if="detalle.fecha!= '' ">{{ detalle.fecha | fmtruncate(10) }}</td>
+
+
                                                 <td>
                                                     <span>{{ detalle.operario }}</span>
                                                 </td>
                                                 <td>{{ detalle.cantidad  }}</td>
 
                                                 <td>
-                                                    <input type="hidden" name="producionavanceid[]"  v-model="detalle.id">
-                                                    <input name="CantidadBueno[]"  @change="changeSecado(index)" type="number" v-model="detalle.cantidad_bueno" min="0" :max="cantidad_detalle" class="form-control">
-                                                    <p v-if="detalle.restante == 0" class="text-danger"> Ha exedido el número de articulos a agregar </p>
+                                                    <input type="hidden" name="created_at[]" :value="detalle.created_at">
+                                                    <input type="hidden" name="status[]" :value="detalle.status">
+                                                    <input name="CantidadBueno[]"  :disabled="detalle.status==1"  @change="changeSecado(index)" type="number" v-model="detalle.cantidad_bueno" min="0" :max="cantidad_detalle" class="form-control">
+
                                                 </td>
                                                 <td>
-                                                    <input name="CantidadMalo[]"  @change="changeSecado(index)" type="number" v-model="detalle.cantidadmalo" min="0" :max="cantidad_detalle" class="form-control">
+                                                    <input name="CantidadMalo[]"  :disabled="detalle.status==1"  @change="changeSecado(index)" type="number" v-model="detalle.cantidadmalo" min="0" :max="cantidad_detalle" class="form-control">
                                                 </td>
                                             </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -256,6 +286,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"  data-dismiss="modal">CANCELAR</button>
                             <button type="button" class="btn btn-primary" v-if="isModalSave" @click="saveSecado()" >ACEPTAR</button>
+                            <button type="button" class="btn btn-primary" v-if="terminarSecado" @click="terminar()" >TERMINAR</button>
                         </div>
                     </div>
                 </form>
@@ -282,6 +313,7 @@
                 cliente           : [],
                 pedido            : [],
                 detalle_pedidos   : [],
+                detalle_produccion : [],
                 produccion_actual : 0,
                 diferencia        : 0,
                 cantidad_detalle  : 0,
@@ -292,7 +324,11 @@
                 IdProducion       : 0,
                 detallepedido_id  : 0,
                 isModalSave       : true,
-                isSpinner         : false
+                isSpinner         : false,
+                isSpinnerTable    : false,
+                terminarSecado    : false,
+                clasificacion     : 'd',
+                detalleProduccionActual: []
 
             }
         },
@@ -300,9 +336,6 @@
 
         created: function () {
             this.setProduction();
-
-
-
         },
         filters: {
             fmtruncate: function(value, length) {
@@ -320,12 +353,16 @@
                 $("input[name^='Cantidad']").each(function() {
 
                     if($(this).val() != ''){
+                        var isDisabled = $(this).is(':disabled');
                         total += parseInt($(this).val());
+                        if(!isDisabled){
+
+                        }
+
                     }
                 });
 
                 var resta = this.cantidad_detalle - total;
-
                 if( resta<0 ){
                     this.isModalSave = false;
                     this.total_detalle = 0;
@@ -334,36 +371,32 @@
                     this.total_detalle = this.cantidad_detalle - total;
                 }
 
-
             },
             changeSecado : function(position){
-                var total_bueno = parseInt(this.contenido_detalle[position].cantidad_bueno);
-                var total_malo  = parseInt(this.contenido_detalle[position].cantidadmalo);
-                var cantidad    = parseInt(this.contenido_detalle[position].cantidad);
 
-                var resta_bueno = total_bueno - cantidad;
-                var resta_malo  = total_malo - cantidad;
+                var total_bueno = 0;
 
-                var resta       = cantidad - total_bueno - total_malo;
-                this.contenido_detalle[position].restante = 1;
+                var cantidad    = parseInt(this.detalleProduccionActual.Cantidad);
+
+
+
+                $("input[name^='CantidadBueno']").each(function() {
+
+                    if(parseInt($(this).val()) > 0){
+                        total_bueno += parseInt($(this).val());
+                    }
+                });
+
+                var resta       = cantidad - total_bueno ;
+                console.log('resta'+resta);
+                console.log('cantidad'+cantidad);
+
                 this.isModalSave = true;
 
-
-                if( resta<0 ){
-                   /*resta = 0;*/
-                    this.contenido_detalle[position].restante = 0;
+                if( resta < 0    ){
                     this.isModalSave = false;
                 }
 
-              /*  $('input[name^="CantidadBueno"]').each(function() {
-                    total_bueno += parseInt($(this).val());
-                });
-
-                $('input[name^="CantidadMalo"]').each(function() {
-                    total_malo += parseInt($(this).val());
-                });
-                total += total_bueno - total_malo;*/
-                console.log('resta-'+ resta);
             },
             saveDetail : function(){
 
@@ -372,7 +405,8 @@
                 this.isSpinner = true;
                 var vthis = this;
 
-                axios.post('/admin/produccion/'+this.detallepedido_id+'/'+this.IdProducion+'/saveProduction', formData)
+
+                axios.post('/admin/produccion/'+vthis.detalleProduccionActual.IdProducion+'/'+vthis.detalleProduccionActual.IdProducto+'/saveProduction', formData)
                     .then(function (response) {
                         var result  = response.data;
                         Swal.fire({
@@ -393,10 +427,11 @@
                 let formData  = new FormData(myForm);
                 this.isSpinner = true;
                 var vthis = this;
-
-                axios.post('/admin/produccion/'+this.detallepedido_id+'/'+this.IdProducion+'/saveSecado', formData)
+                //axios.post('/admin/produccion/'+vthis.detalleProduccionActual.IdProducion+'/'+vthis.detalleProduccionActual.IdProducto+'/saveProduction', formData)
+                axios.post('/admin/produccion/'+vthis.detalleProduccionActual.IdProducion+'/'+vthis.detalleProduccionActual.IdProducto+'/saveSecado', formData)
                     .then(function (response) {
                         var result  = response.data;
+                        console.log(result);
                         Swal.fire({
                             icon: 'success',
                             text: 'Artículo agregado',
@@ -411,69 +446,128 @@
                     })
             },
             moreDetail : function(){
-                this.contenido_detalle.push({fecha: '', 'operario': '', 'cantidad': 0, 'observaciones': ''});
+                this.contenido_detalle.push({'fecha': '', 'operario': '', 'cantidad': 0, 'observaciones': '', 'id': null});
                 this.changeCantidad();
                 this.isModalSave   = true;
             },
-            viewDetail : function(max, detallepedido_id ){
-                this.cantidad_detalle  = max;
+            viewDetail : function(detalle_produccion){
+
+                this.detalleProduccionActual = detalle_produccion;
                 this.contenido_detalle = [];
-                this.total_detalle     = max;
-                this.detallepedido_id  = detallepedido_id;
 
-                this.getTableDetail(detallepedido_id);
+                this.getProduccionDetalle(detalle_produccion);
 
-
-               /* $('#detalleModal').modal({
-                    backdrop: false,
-                    show: true
-                });*/
                 $('#detalleModal').modal('show');
             },
-            viewSecado: function(max, detallepedido_id){
-                this.cantidad_detalle  = max;
-                this.contenido_detalle = [];
-                this.total_detalle     = max;
-                this.detallepedido_id  = detallepedido_id;
+            viewSecado: function(detalle_produccion){
 
-                this.getTableDetail(detallepedido_id);
+                this.detalleProduccionActual = detalle_produccion;
+                this.contenido_detalle = [];
+                this.getProduccionDetalle(detalle_produccion);
 
                 $('#avances_secadoModal').modal('show');
 
             },
-            getTableDetail: function(detallepedido_id){ //saber si tiene productos agregados
-                var vthis = this;
+            getTableDetail: function(){
+
+            },
+            getProduccionDetalle: function(detalle_produccion){ //saber si tiene productos agregados
+                var vthis               = this;
+                vthis.isSpinnerTable    = true;
+
                 axios.get
-                ('/admin/produccion/'+detallepedido_id+'/'+vthis.IdProducion+'/getTableDetail')
+                ('/admin/produccion/'+vthis.IdProducion+'/getProduccionDetalle',{
+                    params : detalle_produccion
+                })
                     .then(function (response) {
-                        var result  = response.data;
-                        var detalle = result.detalle;
-                        let total   = result.total;
+                        var result           = response.data;
+                        var produccion       = result.produccion;
+                        var total_produccion = result.total;
 
-                        if(total == 0){
+                        if(detalle_produccion.clasificacion == 'd'){
 
-                            vthis.contenido_detalle.push({fecha: '', 'operario': '', 'cantidad': 0, 'observaciones': ''});
-                        }else{
-                            let total_cantidad = 0;
-                            for (let i = 0; i < detalle.length; i++) {
-                                total_cantidad += parseInt(detalle[i].Cantidad);
-                                if(detalle[i].estatus == 1){
-                                    vthis.contenido_detalle.push({id: detalle[i].id,  fecha: detalle[i].Fecha, 'operario':  detalle[i].Nombre, 'cantidad':  detalle[i].Cantidad, 'cantidad_bueno': detalle[i].CantidadBueno, 'cantidadmalo': detalle[i].CantidadMalo, 'restante': detalle[i].Cantidad });
+                            if(total_produccion == 0){
+                                vthis.cantidad_detalle = parseInt(detalle_produccion.Cantidad);
+                                vthis.total_detalle =  parseInt(detalle_produccion.Cantidad);
+                                vthis.contenido_detalle.push({'fecha': '', 'operario': '', 'cantidad': 0, 'observaciones': '', 'id': null, 'readonly': false});
+                            }else{
+
+
+                                var produccion = result.produccion;
+                                vthis.cantidad_detalle = parseInt(detalle_produccion.Cantidad);
+
+                                var totalDetalleCantidad = 0;
+                                var cantidad =  parseInt(detalle_produccion.Cantidad);
+                                var cantidadBueno = 0;
+
+
+                                for (let i = 0; i < produccion.length; i++) {
+                                    totalDetalleCantidad+= parseInt( produccion[i].Cantidad);
+                                    cantidadBueno+= parseInt(produccion[i].CantidadBueno);
+                                    vthis.contenido_detalle.push({'fecha':  produccion[i].Fecha, 'operario': produccion[i].IdEmpleado, 'cantidad': produccion[i].Cantidad, 'observaciones':  produccion[i].observaciones, 'id': null, 'readonly': true});
+
+                                }
+                                var resultado = cantidad - cantidadBueno;
+
+
+                                if(resultado != 0){
+
+                                    vthis.contenido_detalle.push({'fecha':  vthis.my_date, 'operario': '', 'cantidad': 0, 'observaciones': '', 'id': null, 'readonly': false});
+                                    vthis.total_detalle = parseInt(resultado);
+                                    vthis.cantidad_detalle = parseInt(resultado);
                                 }else{
-                                    vthis.contenido_detalle.push({fecha: detalle[i].Fecha, 'operario':  detalle[i].IdEmpleado, 'cantidad': detalle[i].Cantidad, 'observaciones': detalle[i].observaciones});
+
+                                    vthis.total_detalle = resultado;
                                 }
 
-                                /*$('#cantidad-'+i).val(detalle[i].Cantidad);*/
-
                             }
-
-                            vthis.total_detalle = vthis.total_detalle - total_cantidad;
-
+                        }else{ //secado
+                            vthis.cantidad_detalle = parseInt(detalle_produccion.Cantidad);
+                            for (let i = 0; i < produccion.length; i++) {
+                                totalDetalleCantidad+= parseInt( produccion[i].Cantidad);
+                                vthis.contenido_detalle.push({'fecha':  produccion[i].Fecha, 'created_at' :  produccion[i].created_at, 'cantidad_bueno': produccion[i].CantidadBueno, 'cantidad_malo': produccion[i].CantidadMalo,  'operario': produccion[i].IdEmpleado, 'cantidad': produccion[i].Cantidad, 'observaciones':  produccion[i].observaciones, 'id': null,  'status': produccion[i].status});
+                            }
                         }
 
 
+
+                        vthis.isSpinnerTable = false;
+
                     })
 
+                    .catch(function (error) {
+
+                    })
+
+            },
+            getSecado: function(detallepedido_id, IdProducion){
+                var vthis = this;
+                vthis.contenido_secado = [];
+
+                axios.get
+                ('/admin/produccion/'+detallepedido_id+'/'+IdProducion+'/get_secado')
+                    .then(function (response) {
+                        var result           = response.data;
+                        var detalle          = result.detalle;
+                        let total            = result.total;
+                        let detalle_pedido   = result.detalle_pedido;
+                        for (let i = 0; i < detalle.length; i++) {
+
+                            vthis.contenido_secado.push({'id': detalle[i].id,  'observaciones': detalle[i].observaciones,  'fecha': detalle[i].Fecha, 'operario':  detalle[i].Nombre, 'cantidad':  detalle[i].Cantidad, 'cantidad_bueno': detalle[i].CantidadBueno, 'cantidadmalo': detalle[i].CantidadMalo, 'restante': detalle[i].Cantidad, 'status' : detalle[i].Cantidad  });
+                        }
+
+                    })
+                    .catch(function (error) {
+
+                    })
+            },
+            resetSecado: function(detallepedido_id){
+                var vthis = this;
+                axios.get
+                ('/admin/produccion/'+detallepedido_id+'/reset_secado')
+                    .then(function (response) {
+
+                    })
                     .catch(function (error) {
 
                     })
@@ -491,6 +585,24 @@
                     })
                     .catch(function (error) {
 
+                    })
+            },
+
+            terminar: function(){
+                var vthis = this;
+                vthis.isSpinner = true;
+                axios.get
+                ('/admin/produccion/'+this.IdProducion+'/finish')
+                    .then(function (response) {
+                        var result  = response.data;
+                        vthis.isSpinner = false;
+                        window.location = '/admin/produccion?step=finish';
+
+                    })
+                    .catch(function (error) {
+                        /*ins.isSpiner = false;
+                        ins.btnBlock = true;*/
+                        console.log(error);
                     })
             },
 
@@ -512,6 +624,7 @@
 
             getTable: function (pedidoId, id_produccion) {
                 var vthis = this;
+                this.isSpinner = true;
                 axios.get
                 ('/admin/produccion/'+pedidoId+'/'+id_produccion+'/getDetalle')
                     .then(function (response) {
@@ -520,11 +633,24 @@
                         vthis.empleados         = result.empleados;
                         vthis.cliente           = result.cliente;
                         vthis.pedido            = result.pedido;
-                        vthis.detalle_pedidos   = result.detalle_pedidos;
+                        vthis.detalle_produccion   = result.detalle_produccion;
+                        vthis.isSpinner         = false;
                     })
                     .catch(function (error) {
-                        /*ins.isSpiner = false;
-                        ins.btnBlock = true;*/
+
+                        console.log(error);
+                    })
+            },
+            editProduccion: function () {
+                var vthis = this;
+                this.isSpinner = true;
+                axios.get
+                ('/admin/produccion/'+this.pedido.IdEmpleadoSupervisor+'/'+this.IdProducion+'/edit')
+                    .then(function (response) {
+                        vthis.isSpinner = false;
+                    })
+                    .catch(function (error) {
+
                         console.log(error);
                     })
             }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\BitacoraProduccion;
 use App\Cliente;
 use App\DetallePedido;
+use App\DetalleProducion;
 use App\DetalleProducionAvance;
 use App\Empleado;
 use App\Http\Requests\PedidoRequest;
@@ -12,6 +14,7 @@ use App\Produccion;
 use App\Proveedor;
 use App\TipoModelo;
 use Illuminate\Http\Request;
+use Laracasts\Flash\Flash;
 
 class ProduccionController extends Controller
 {
@@ -24,33 +27,22 @@ class ProduccionController extends Controller
     {
         $pedidos            = Pedido::getAll(0);
         $pedido_procesados  = Pedido::getAll(1);
+        $pedido_terminados  = Pedido::getAll(3);
 
         //return view('pedido.index', compact('pedidos'));
-        return view('produccion.index', compact('pedidos', 'pedido_procesados'));
+        return view('produccion.index', compact('pedidos', 'pedido_procesados', 'pedido_terminados'));
     }
 
-    public function getTableDetail($detallepedido_id , $IdProducion)
+    public function edit($IdEmpleadoSupervisor, $IdProducion)
     {
-        $detalleProduccion = DetalleProducionAvance::getById($IdProducion, $detallepedido_id);
-        return response()->json($detalleProduccion);
+        Produccion::edit($IdEmpleadoSupervisor, $IdProducion);
     }
 
-    public function getDetalle($pedido_id , $IdProducion)
+    public function finish($IdProducion)
     {
-        $pedido = Pedido::getDetalleById($pedido_id, $IdProducion);
-        return response()->json($pedido);
-    }
-
-    public function produccion_actual($detallepedido_id, $IdProducion)
-    {
-        $detalle = DetalleProducionAvance::produccion_actual_diferencia($detallepedido_id, $IdProducion);
-        return response()->json($detalle);
-    }
-
-    public function setProduccion($pedido_id)
-    {
-        $produccion = Produccion::setProduccion($pedido_id);
-        return response()->json($produccion);
+        Produccion::finishSecado($IdProducion);
+        flash('Producto terminado');
+        return response()->json('200');
     }
 
     public function form_autorizar($pedido_id)
@@ -68,17 +60,6 @@ class ProduccionController extends Controller
         return  view('pedido.edit', compact('clientes', 'is_autorizar', 'modelos', 'folio', 'pedido', 'domicilio', 'detalle_pedidos', 'total_detalle'));
     }
 
-    public function saveProduction(Request $request, $detallepedido_id, $IdProducion)
-    {
-        $detalle = DetalleProducionAvance::saveProduction($detallepedido_id, $IdProducion, $request);
-        return response()->json($detalle);
-    }
-
-    public function saveSecado(Request $request, $detallepedido_id, $IdProducion)
-    {
-        $detalle = DetalleProducionAvance::saveSecado($detallepedido_id, $IdProducion, $request);
-        return response()->json($detalle);
-    }
 
     public function autorizar($pedido_id, $status)
     {
@@ -108,27 +89,51 @@ class ProduccionController extends Controller
      * @param  \App\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function show($pedido_id)
+    public function show($pedido_id) // vista de /admin/produccion/{pedido_id}/detalle
     {
-        $pedido     = Pedido::getById($pedido_id);
-        $clientes   = Cliente::getAll();
-        $empleados  = Empleado::getAll();
+        $produccion = Produccion::setProduccion($pedido_id);  //si no existe produccion guarda en la tabla produccion
+
+        $pedido            = Pedido::getById($pedido_id);
+        $clientes           = Cliente::getAll();
+        $empleados          = Empleado::getAll();
         $cliente            = Cliente::getById($pedido->IdCliente);
         $domicilio          = ($cliente!= "") ? 'Calle:' . $cliente->Calle . ' No° Ext:' . $cliente->NumeroExterior . ' No° Int' . $cliente->NumeroInterior . ' Colonia:' . $cliente->Colonia : '';
-        $detalle_pedidos    = DetallePedido::getById($pedido_id);
+        $detalle_produccion = DetalleProducion::getByProduccion($produccion->Id);
 
-        return view('produccion.detalle', compact('pedido', 'clientes', 'empleados', 'domicilio', 'detalle_pedidos'));
+        return view('produccion.detalle', compact('pedido', 'clientes', 'empleados', 'domicilio', 'detalle_produccion', 'produccion'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Pedido  $pedido
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function detalle_produccion(Request $request, $IdProducion, $IdProducto)
     {
-            }
+        $detalle_produccion        = DetalleProducion::getByIds($IdProducion, $IdProducto);
+        $produccion                = Produccion::getById($IdProducion);
+        $detalle_produccion_avance = DetalleProducionAvance::getById($IdProducion,$IdProducto);
+        $total_detalle             = DetalleProducionAvance::getTotalDetalle($detalle_produccion_avance, $detalle_produccion);
+        $empleados                 = Empleado::all();
+
+        if($_POST){
+            dd('aqui');
+        }
+
+        return view('produccion.detalle_produccion', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
+    }
+
+    public function avace_secado(Request $request, $IdProducion, $IdProducto)
+    {
+        $detalle_produccion        = DetalleProducion::getByIds($IdProducion, $IdProducto);
+        $produccion                = Produccion::getById($IdProducion);
+        $detalle_produccion_avance = DetalleProducionAvance::getById($IdProducion,$IdProducto);
+        $total_detalle             = DetalleProducionAvance::getTotalDetalle($detalle_produccion_avance, $detalle_produccion);
+        $empleados                 = Empleado::all();
+
+        if($_POST){
+
+        }
+
+        return view('produccion.detalle_secado', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
+    }
+
+
 
     /**
      * Update the specified resource in storage.
