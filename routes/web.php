@@ -62,4 +62,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('/puesto', 'PuestoController');
     Route::resource('/departamento', 'DepartamentoController');
     Route::resource('/empleado', 'EmpleadoController');
+
+    Route::resource('/entrada', 'EntradaController');
+    Route::resource('/salida', 'SalidaController');
+
 });
