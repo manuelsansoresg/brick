@@ -20,10 +20,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
-                                    <h3 class="mr-auto">ENTRADAS</h3>
-                                    <div class="d-none">
-                                        <a href="/admin/pedido/create" class="btn btn-block btn-primary btn-sm"><i class="far fa-file"></i> AGREGAR</a>
-                                    </div>
+                                    <h3 class="mr-auto">ENTRADAS</h3>                                    
                                 </div>
                             </div>
                             <div class="card-body">

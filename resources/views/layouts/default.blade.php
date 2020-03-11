@@ -293,13 +293,13 @@
                                 <li class="nav-item">
                                     <a href="/admin/entrada" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>ENTRADA A ALMACEN</p>
+                                        <p>ENTRADAS</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="/admin/salida" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>SALIDA A ALMACEN</p>
+                                        <p>SALIDAS\REMISION</p>
                                     </a>
                                 </li>
                             </ul>
