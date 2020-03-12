@@ -43,7 +43,7 @@ class DetalleProducionAvance extends Model
 
     static function createUpdate($request, $IdProducion, $IdProducto, $detalle_produccion, $id = null)
     {
-        if ($id == null) {
+        if ($id == null) { 
             
             $cliente = new DetalleProducionAvance($request->except('_token'));
             $cliente->IdProducto = $IdProducto;

@@ -93,7 +93,7 @@ class ProduccionController extends Controller
     {
         $produccion = Produccion::setProduccion($pedido_id);  //si no existe produccion guarda en la tabla produccion
 
-        $pedido            = Pedido::getById($pedido_id);
+        $pedido            = Pedido::getById($pedido_id); 
         $clientes           = Cliente::getAll();
         $empleados          = Empleado::getAll();
         $cliente            = Cliente::getById($pedido->IdCliente);
