@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class DetalleProducionAvance extends Model
 {
     protected $table= 'detalleproducionavance';
+    protected $fillable = ['IdProducto', 'IdProducion', 'Fecha', 'IdEmpleado', 'Cantidad', 'observaciones', 'CantidadBueno', 'CantidadMalo', 'status'];
 
 
     public static function getByProduccion($IdProducto, $IdProducion)
@@ -39,4 +40,29 @@ class DetalleProducionAvance extends Model
 
         return $maximo - $total;
     }
+
+    static function createUpdate($request, $IdProducion, $IdProducto, $detalle_produccion, $id = null)
+    {
+        if ($id == null) {
+            
+            $cliente = new DetalleProducionAvance($request->except('_token'));
+            $cliente->IdProducto = $IdProducto;
+            $cliente->IdProducion = $IdProducion;
+            $cliente->save();
+
+            $cantidad = $cliente->Cantidad;
+            $cantidad_produccion = $detalle_produccion->Cantidad;
+
+            $datalle_produccion = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->first();
+            $datalle_produccion->clasificacion = '';
+            $datalle_produccion->update();
+
+        } else {
+            $cliente = Cliente::find($id);
+            $cliente->fill($request->except('_token'));
+            $cliente->update();
+        }
+        return $cliente;
+    }
+
 }

@@ -112,7 +112,9 @@ class ProduccionController extends Controller
         $empleados                 = Empleado::all();
 
         if($_POST){
-            dd('aqui');
+            $datelle = DetalleProducionAvance::createUpdate($request, $IdProducion, $IdProducto, $detalle_produccion);
+            return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/detalle-produccion');
+            
         }
 
         return view('produccion.detalle_produccion', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
@@ -129,10 +131,11 @@ class ProduccionController extends Controller
         if($_POST){
 
         }
-
+        
         return view('produccion.detalle_secado', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
     }
 
+   
 
 
     /**
