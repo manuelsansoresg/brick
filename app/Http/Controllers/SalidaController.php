@@ -13,7 +13,8 @@ class SalidaController extends Controller
      */
     public function index()
     {
-        //
+        $entradas = Salida::getAll();
+        return view('salida.index', compact('salidas'));
     }
 
     /**

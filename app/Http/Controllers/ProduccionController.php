@@ -129,7 +129,9 @@ class ProduccionController extends Controller
         $empleados                 = Empleado::all();
 
         if($_POST){
-
+           // $detalleavance = new DetalleProducionAvance($request->except('_token', 'IdProducto', 'IdProducion', 'Fecha', 'IdEmpleado','Cantidad','observaciones','CantidadBueno','CantidadMalo','status'));
+            //$detalleavance->save();
+            $detalle_produccion_avance->save();
         }
         
         return view('produccion.detalle_secado', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
