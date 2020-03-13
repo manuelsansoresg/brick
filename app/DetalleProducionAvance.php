@@ -97,14 +97,13 @@ class DetalleProducionAvance extends Model
             $CantidadBueno = $request->CantidadBueno;  
             $CantidadMalo  = $request->CantidadMalo;
             $IdEmpleado    = $request->IdEmpleado;
-            //dd($addmore);
-            
-            foreach($CantidadBueno as $result=>$key)
+            $cont = -1;
+            foreach($CantidadBueno as $result)
             {
-                $cont = $key-1;
-                if($key != 0){
-                    $oExecutar = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont],'CantidadMalo'=> $CantidadMalo[$cont]]);                                
-                }
+                $cont = $cont +1;
+                
+                $oExecutar = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont],'CantidadMalo'=> $CantidadMalo[$cont]]);                                
+                
             }
 
          /*   $detalle = new DetalleProducionAvance($request->except('_token'));
