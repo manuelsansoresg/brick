@@ -54,7 +54,9 @@
                                                 </tr>
                                                 @elseif ($detalle_produccion_avance->status == 0)
                                                 <tr>
-                                                    <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}<input type="hidden" name="addmore[{{$cont}}][Id]" value="{{$cont }}"></td>
+                                                    <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}
+                                                        <input type="hidden" name="Id[]" value="{{$detalle_produccion_avance->id }}">
+                                                    </td>
                                                     <td>{{ $detalle_produccion_avance->Nombre }}<input type="hidden" name="IdEmpleado[]" value="{{$detalle_produccion_avance->IdEmpleado }}"></td>
                                                     <td>{{ (int)$detalle_produccion_avance->Cantidad }} </td>
                                                     <!--<td><input class="form-control" name="CantidadBueno" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->

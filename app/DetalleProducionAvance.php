@@ -92,19 +92,22 @@ class DetalleProducionAvance extends Model
         return $detalle;
     }
     static function CreateUpdateAvance($request, $IdProducion, $IdProducto, $detalle_produccion,$id = null){
+
+        $CantidadBueno = $request->CantidadBueno;
+        $CantidadMalo  = $request->CantidadMalo;
+        $IdEmpleado    = $request->IdEmpleado;
+        $Id            = $request->Id;
+
+        $cont = -1;
+        foreach ($CantidadBueno as $result) {
+            $cont = $cont + 1;
+
+            $oExecutar = DetalleProducionAvance::where('id', $Id[$cont])->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont], 'CantidadMalo' => $CantidadMalo[$cont]]);
+        }
+        
         if ($id == null) 
         {
-            $CantidadBueno = $request->CantidadBueno;  
-            $CantidadMalo  = $request->CantidadMalo;
-            $IdEmpleado    = $request->IdEmpleado;
-            $cont = -1;
-            foreach($CantidadBueno as $result)
-            {
-                $cont = $cont +1;
-                
-                $oExecutar = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont],'CantidadMalo'=> $CantidadMalo[$cont]]);                                
-                
-            }
+            
 
          /*   $detalle = new DetalleProducionAvance($request->except('_token'));
             $detalle->IdProducto = $IdProducto;
