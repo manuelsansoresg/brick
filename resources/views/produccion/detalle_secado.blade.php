@@ -42,20 +42,35 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                {{ $cont = 0}}    
                                                 @foreach($detalle_produccion_avance as $detalle_produccion_avance)
-                                                    <tr>
-                                                        <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}</td>
-                                                        <td>{{ $detalle_produccion_avance->Nombre }}</td>
-                                                        <td>{{ (int)$detalle_produccion_avance->Cantidad }}</td>
-                                                        <td>{{ (int)$detalle_produccion_avance->CantidadBueno }}</td>
-                                                        <td>{{ (int)$detalle_produccion_avance->CantidadMalo }}</td>
-                                                    </tr>
+                                                    @if ($detalle_produccion_avance->status == 1)
+                                                        <tr>
+                                                            <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}</td>
+                                                            <td>{{ $detalle_produccion_avance->Nombre }}</td>
+                                                            <td>{{ (int)$detalle_produccion_avance->Cantidad }}</td>
+                                                            <td>{{ (int)$detalle_produccion_avance->CantidadBueno }}</td>
+                                                            <td>{{ (int)$detalle_produccion_avance->CantidadMalo }}</td>
+                                                        </tr>
+                                                    @elseif ($detalle_produccion_avance->status == 0)
+                                                        <tr>
+                                                            <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}<input type="hidden" name="addmore[{{$cont}}][Id]" value="{{$cont }}" ></td>
+                                                            <td>{{ $detalle_produccion_avance->Nombre }}<input type="hidden" name="addmore[{{$cont}}][IdEmpleado]" value="{{$detalle_produccion_avance->Id }}" ></td>
+                                                            <td>{{ (int)$detalle_produccion_avance->Cantidad }} </td>
+                                                            <!--<td><input class="form-control" name="CantidadBueno" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->
+                                                            <!--<td><input class="form-control" name="CantidadMalo" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->
+                                                            <td><input class="form-control" type="number" name="addmore[{{$cont}}][CantidadBueno]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"/></td>
+                                                            <td><input class="form-control" type="number" name="addmore[{{$cont}}][CantidadMalo]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"/></td>
+                                                            
+                                                        </tr>
+                                                    @endif
+                                                    {{ $cont = $cont +1 }}
                                                 @endforeach
-                                                @if($total_detalle > 0)
+                                                <!--@if($total_detalle > 0)
                                                     <tr>
                                                         <td>{{ date('Y-m-d') }}</td>
                                                         <td>
-                                                            <select name="empleado" id="" class="form-control">
+                                                            <select name="IdEmpleado" id="" class="form-control">
                                                                 @foreach($empleados as $empleados)
                                                                     <option value="{{ $empleados->Id }}">{{ $empleados->Nombre }}</option>
                                                                 @endforeach
@@ -65,7 +80,7 @@
                                                         <td><input class="form-control" name="CantidadBueno" type="number" min="0" max="{{ $total_detalle }}" value="0"> </td>
                                                         <td><input class="form-control" name="CantidadMalo" type="number" min="0" max="{{ $total_detalle }}" value="0"> </td>
                                                     </tr>
-                                                @endif
+                                                @endif-->
                                                 </tbody>
                                             </table>
                                         </div>

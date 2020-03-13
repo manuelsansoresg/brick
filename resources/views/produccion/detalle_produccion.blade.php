@@ -1,6 +1,7 @@
 @extends('layouts.default')
 
-@section('content')
+@section('content') 
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -9,8 +10,8 @@
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                        <li class="breadcrumb-item"> <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle">Detalle </a> </li>
+                        <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
+                        <li class="breadcrumb-item"> <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle">DETALLE </a> </li>
                         <li class="breadcrumb-item active">DETALLE PRODUCCIÓN</li>
                     </ol>
                 </div><!-- /.col -->
@@ -28,7 +29,7 @@
                                         <div class="w-100" id="pedido"></div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <small>Total de articulos {{ (int)$detalle_produccion->Cantidad }} </small>
+                                        <small>TOTAL DE ARTÍCULOS {{ (int)$detalle_produccion->Cantidad }} </small>
                                     </div>
                                     <div class="col-12">
                                         <table class="table">
@@ -50,10 +51,10 @@
                                                     <td>{{ $detalle_produccion_avance->Observaciones }}</td>
                                                 </tr>
                                                 @endforeach
-                                                @if($detalle_produccion->Cantidad < $total_detalle)
+                                                @if (((int)$detalle_produccion->Cantidad) > ((int)$total_detalle))
                                                 <tr>
                                                     <td><input name="Fecha" type="date" value="{{ date('Y-m-d') }}" readonly></td>
-                                                    <td>
+                                                    <td>                                                        
                                                         <select name="IdEmpleado" id="" class="form-control">
                                                             @foreach($empleados as $empleados)
                                                             <option value="{{ $empleados->Id }}">{{ $empleados->Nombre }}</option>
@@ -62,17 +63,20 @@
                                                     </td>
                                                     <td><input class="form-control" type="number" name="Cantidad" min="1" value="1" max="{{ $total_detalle }}"></td>
                                                     <td><textarea name="observaciones" id="" cols="30" rows="3" class="form-control"></textarea></td>
-                                                </tr>
+                                                </tr>                                                                                            
                                                 @endif
                                             </tbody>
                                         </table> 
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-12 text-right pb-4">
-                                        
-                                        <a href="#" class="btn btn-danger">Cancelar</a>
-                                        <button class="btn btn-success">Aceptar</button>
+                                    <div class="col-12 text-right pb-4">                                         
+                                        @if (((int)$detalle_produccion->Cantidad) > ((int)$total_detalle))                                       
+                                            <a href="#" class="btn btn-danger">Cancelar</a>
+                                            <button class="btn btn-success">Aceptar</button>                                            
+                                        @else                                            
+                                            <a href="#" class="btn btn-danger">Cancelar</a>
+                                        @endif
                                     </div>
                                 </div>
 

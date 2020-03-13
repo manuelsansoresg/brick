@@ -113,10 +113,9 @@ class ProduccionController extends Controller
 
         if($_POST){
             $datelle = DetalleProducionAvance::createUpdate($request, $IdProducion, $IdProducto, $detalle_produccion);
-            return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/detalle-produccion');
-            
+            return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/detalle-produccion');                          
+            //dd($datelle);
         }
-
         return view('produccion.detalle_produccion', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
     }
 
@@ -129,9 +128,9 @@ class ProduccionController extends Controller
         $empleados                 = Empleado::all();
 
         if($_POST){
-           // $detalleavance = new DetalleProducionAvance($request->except('_token', 'IdProducto', 'IdProducion', 'Fecha', 'IdEmpleado','Cantidad','observaciones','CantidadBueno','CantidadMalo','status'));
-            //$detalleavance->save();
-            $detalle_produccion_avance->save();
+            $detalle = DetalleProducionAvance::CreateUpdateAvance($request, $IdProducion, $IdProducto, $detalle_produccion);
+            return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/avance-secado');
+            //dd($detalle);         
         }
         
         return view('produccion.detalle_secado', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
