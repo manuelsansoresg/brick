@@ -94,11 +94,17 @@ class DetalleProducionAvance extends Model
     static function CreateUpdateAvance($request, $IdProducion, $IdProducto, $detalle_produccion,$id = null){
         if ($id == null) 
         {
-            $addmore = $request->addmore;  
+            $CantidadBueno = $request->CantidadBueno;  
+            $CantidadMalo  = $request->CantidadMalo;
+            $IdEmpleado    = $request->IdEmpleado;
             //dd($addmore);
-            foreach($addmore as $add)
-            {               
-                $oExecutar = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->where('IdEmpleado',$add['IdEmpleado'])->update(['CantidadBueno' => $add['CantidadBueno'],'CantidadMalo'=> $add['CantidadBueno']]);                                
+            
+            foreach($CantidadBueno as $result=>$key)
+            {
+                $cont = $key-1;
+                if($key != 0){
+                    $oExecutar = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont],'CantidadMalo'=> $CantidadMalo[$cont]]);                                
+                }
             }
 
          /*   $detalle = new DetalleProducionAvance($request->except('_token'));
