@@ -1,4 +1,6 @@
 <?php
+
+use App\DetalleProducionAvance;
 use Verot\Upload\Upload;
 
 function uploadImage($file, $image_cover,  $path, $is_move = false, $pre = '', $is_corp = false, $width = 150, $height = 150)
@@ -38,4 +40,9 @@ function uploadImage($file, $image_cover,  $path, $is_move = false, $pre = '', $
 function precio($precio)
 {
     return number_format($precio, 2, '.', ',');
+}
+
+function  producccion_actual($IdProducion, $IdProducto)
+{
+    return DetalleProducionAvance::produccion_actual($IdProducion, $IdProducto);
 }

@@ -90,9 +90,9 @@
                                         </tr>
                                         @foreach($detalle_produccion as $detalle_produccion)
                                         <tr >
-                                            <td>{{ $detalle_produccion->Observaciones }}</td>
+                                            <td>{{ $detalle_produccion->descripcion }}</td>
                                             <td> {{ (int)$detalle_produccion->Cantidad }} </td>
-                                            <td> {{ $detalle_produccion->produccion_actual }}  </td>
+                                            <td> {{ producccion_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
                                             <td> {{ $detalle_produccion->diferencia }}  </td>
                                             <td>
                                                 <!--<a href="#" class="btn btn-secondary btn-sm"  v-if="detalle_produccion.estatus == 1" disabled >Detalle</a>-->

@@ -93,7 +93,7 @@ class ProduccionController extends Controller
     {
         $produccion = Produccion::setProduccion($pedido_id);  //si no existe produccion guarda en la tabla produccion
 
-        $pedido            = Pedido::getById($pedido_id); 
+        $pedido            = Pedido::getById($pedido_id);
         $clientes           = Cliente::getAll();
         $empleados          = Empleado::getAll();
         $cliente            = Cliente::getById($pedido->IdCliente);
@@ -113,7 +113,7 @@ class ProduccionController extends Controller
 
         if($_POST){
             $datelle = DetalleProducionAvance::createUpdate($request, $IdProducion, $IdProducto, $detalle_produccion);
-            return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/detalle-produccion');                          
+            return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/detalle-produccion');
             //dd($datelle);
         }
         return view('produccion.detalle_produccion', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
@@ -130,13 +130,13 @@ class ProduccionController extends Controller
         if($_POST){
             $detalle = DetalleProducionAvance::CreateUpdateAvance($request, $IdProducion, $IdProducto, $detalle_produccion);
             return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/avance-secado');
-            //dd($detalle);         
+            //dd($detalle);
         }
-        
+
         return view('produccion.detalle_secado', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
     }
 
-   
+
 
 
     /**
