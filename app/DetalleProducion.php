@@ -11,7 +11,7 @@ class DetalleProducion extends Model
 
     public static function getByProduccion($produccion_id)
     {
-        return  DetalleProducion::find($produccion_id)->get();
+        return DetalleProducion::where('IdProducion',$produccion_id)->get();               
     }
 
     public static function getByIds($IdProducion, $IdProducto)
