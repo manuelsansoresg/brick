@@ -93,7 +93,7 @@
                                             <td>{{ $detalle_produccion->descripcion }}</td>
                                             <td> {{ (int)$detalle_produccion->Cantidad }} </td>
                                             <td> {{ producccion_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
-                                            <td> {{ $detalle_produccion->diferencia }}  </td>
+                                            <td> {{ produccion_diferencia($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
                                             <td>
                                                 <!--<a href="#" class="btn btn-secondary btn-sm"  v-if="detalle_produccion.estatus == 1" disabled >Detalle</a>-->
                                                 @if($detalle_produccion->clasificacion == 'd')

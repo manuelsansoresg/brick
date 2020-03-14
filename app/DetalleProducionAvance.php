@@ -157,4 +157,19 @@ class DetalleProducionAvance extends Model
         return DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->sum('CantidadBueno');
     }
 
+    public static function produccion_diferencia($IdProducion, $IdProducto)
+    {
+        $produccion = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->get();
+        $bueno = 0;
+
+        foreach ($produccion as $row){
+            $bueno = $bueno + $row->CantidadBueno;
+        }
+
+        $detalle = DetalleProducion::find($IdProducion);
+
+        return $detalle->Cantidad - $bueno;
+
+    }
+
 }
