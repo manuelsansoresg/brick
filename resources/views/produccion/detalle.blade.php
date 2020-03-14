@@ -10,7 +10,7 @@
                 <div class="col-sm-6"></div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/home">INICIO</a></li>
                         <li class="breadcrumb-item"> <a href="/admin/produccion?step=process">PRODUCCIÓN </a> </li>
                         <li class="breadcrumb-item active">NUEVO</li>
                     </ol>
@@ -116,8 +116,8 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
-                                    <a href="#" class="btn btn-danger">Cancelar</a>
-                                    <a href="#" class="btn btn-success">Aceptar</a>
+                                    <a href="#" class="btn btn-danger">CANCELAR</a>
+                                    <a href="#" class="btn btn-success">ACEPTAR</a>
                                 </div>
                             </div>
 

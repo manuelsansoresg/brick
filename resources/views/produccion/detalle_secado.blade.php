@@ -28,7 +28,7 @@
                                         <div class="w-100" id="pedido"></div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <small>Total de articulos {{ (int)$detalle_produccion->Cantidad }} </small>
+                                        <small>TOTAL DE ARTICULOS : {{ (int)$detalle_produccion->Cantidad }} </small>
                                     </div>
                                     <div class="col-12">
                                         <table class="table">
@@ -41,56 +41,43 @@
                                                     <th>MALOS</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                {{ $cont = 0}}
+                                            <tbody>                                                
                                                 @foreach($detalle_produccion_avance as $detalle_produccion_avance)
-                                                @if ($detalle_produccion_avance->status == 1)
-                                                <tr>
-                                                    <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}</td>
-                                                    <td>{{ $detalle_produccion_avance->Nombre }}</td>
-                                                    <td>{{ (int)$detalle_produccion_avance->Cantidad }}</td>
-                                                    <td>{{ (int)$detalle_produccion_avance->CantidadBueno }}</td>
-                                                    <td>{{ (int)$detalle_produccion_avance->CantidadMalo }}</td>
-                                                </tr>
-                                                @elseif ($detalle_produccion_avance->status == 0)
-                                                <tr>
-                                                    <td>{{ date('Y-m-d', strtotime($detalle_produccion_avance->created_at)) }}
-                                                        <input type="hidden" name="Id[]" value="{{$detalle_produccion_avance->id }}">
-                                                    </td>
-                                                    <td>{{ $detalle_produccion_avance->Nombre }}<input type="hidden" name="IdEmpleado[]" value="{{$detalle_produccion_avance->IdEmpleado }}"></td>
-                                                    <td>{{ (int)$detalle_produccion_avance->Cantidad }} </td>
-                                                    <!--<td><input class="form-control" name="CantidadBueno" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->
-                                                    <!--<td><input class="form-control" name="CantidadMalo" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->
-                                                    <td><input class="form-control" type="number" name="CantidadBueno[]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0" /></td>
-                                                    <td><input class="form-control" type="number" name="CantidadMalo[]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0" /></td>
-
-                                                </tr>
-                                                @endif
-                                                {{ $cont = $cont +1 }}
-                                                @endforeach
-                                                <!--@if($total_detalle > 0)
-                                                    <tr>
-                                                        <td>{{ date('Y-m-d') }}</td>
-                                                        <td>
-                                                            <select name="IdEmpleado" id="" class="form-control">
-                                                                @foreach($empleados as $empleados)
-                                                                    <option value="{{ $empleados->Id }}">{{ $empleados->Nombre }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </td>
-                                                        <td> {{ $total_detalle }} </td>
-                                                        <td><input class="form-control" name="CantidadBueno" type="number" min="0" max="{{ $total_detalle }}" value="0"> </td>
-                                                        <td><input class="form-control" name="CantidadMalo" type="number" min="0" max="{{ $total_detalle }}" value="0"> </td>
-                                                    </tr>
-                                                @endif-->
+                                                    @if ($detalle_produccion_avance->status == 1)
+                                                        <tr>
+                                                            <td>{{ date('d-m-Y', strtotime($detalle_produccion_avance->created_at)) }}</td>
+                                                            <td>{{ $detalle_produccion_avance->Nombre }}</td>
+                                                            <td>{{ (int)$detalle_produccion_avance->Cantidad }}</td>
+                                                            <td>{{ (int)$detalle_produccion_avance->CantidadBueno }}</td>
+                                                            <td>{{ (int)$detalle_produccion_avance->CantidadMalo }}</td>                                                        
+                                                        </tr>
+                                                    @elseif ($detalle_produccion_avance->status == 0)
+                                                        <tr>
+                                                            <td>{{ date('d-m-Y', strtotime($detalle_produccion_avance->created_at)) }}
+                                                                <input type="hidden" name="Id[]" value="{{$detalle_produccion_avance->id }}">
+                                                            </td>
+                                                            <td>{{ $detalle_produccion_avance->Nombre }}<input type="hidden" name="IdEmpleado[]" value="{{$detalle_produccion_avance->IdEmpleado }}"></td>
+                                                            <td>{{ (int)$detalle_produccion_avance->Cantidad }} </td>
+                                                            <!--<td><input class="form-control" name="CantidadBueno" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->
+                                                            <!--<td><input class="form-control" name="CantidadMalo" type="number" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0"> </td>-->
+                                                            <td><input class="form-control" type="number" name="CantidadBueno[]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0" /></td>
+                                                            <td><input class="form-control" type="number" name="CantidadMalo[]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0" /></td>
+                                                        </tr>
+                                                    @endif                                                
+                                                @endforeach                                               
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-12 text-right pb-4">
-                                        <a href="#" class="btn btn-danger">Cancelar</a>
-                                        <button class="btn btn-success">Aceptar</button>
+                                       
+                                        @if (((int)$detalle_produccion->Cantidad) > ((int)$total_detalle)) 
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <button class="btn btn-success">ACEPTAR</button>
+                                        @else
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                        @endif
                                     </div>
                                 </div>
 

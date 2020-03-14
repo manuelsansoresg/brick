@@ -29,7 +29,7 @@
                                         <div class="w-100" id="pedido"></div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <small>TOTAL DE ARTÍCULOS {{ (int)$detalle_produccion->Cantidad }} </small>
+                                        <small>TOTAL DE ARTÍCULOS :  {{ (int)$detalle_produccion->Cantidad }} </small>
                                     </div>
                                     <div class="col-12">
                                         <table class="table">
@@ -70,12 +70,12 @@
                                     </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-12 text-right pb-4">                                         
+                                    <div class="col-12 text-right pb-4">                                                                            
                                         @if (((int)$detalle_produccion->Cantidad) > ((int)$total_detalle))                                       
-                                            <a href="#" class="btn btn-danger">Cancelar</a>
-                                            <button class="btn btn-success">Aceptar</button>                                            
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <button class="btn btn-success">ACEPTAR</button>                                            
                                         @else                                            
-                                            <a href="#" class="btn btn-danger">Cancelar</a>
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
                                         @endif
                                     </div>
                                 </div>

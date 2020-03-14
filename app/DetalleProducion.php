@@ -16,6 +16,6 @@ class DetalleProducion extends Model
 
     public static function getByIds($IdProducion, $IdProducto)
     {
-        return  DetalleProducion::where(array('IdProducion' => $IdProducion, 'IdProducto' => $IdProducto))->first();
+        return DetalleProducion::where(array('IdProducion' => $IdProducion, 'IdProducto' => $IdProducto))->first();       
     }
 }
