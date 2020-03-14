@@ -12,7 +12,7 @@ class DetalleProducion extends Model
 
     public static function getByProduccion($produccion_id)
     {
-         return DetalleProducion::select('articulo.descripcion as descripcion', 'detalleproducion.IdProducto', 'detalleproducion.IdProducion', 'detalleproducion.Cantidad', 'articulo.id as articulo_id')
+         return DetalleProducion::select('articulo.descripcion as descripcion', 'detalleproducion.clasificacion', 'detalleproducion.IdProducto', 'detalleproducion.IdProducion', 'detalleproducion.Cantidad', 'articulo.id as articulo_id')
                         ->join('articulo', 'articulo.id', '=', 'detalleproducion.IdProducto')->where('IdProducion',$produccion_id)->get();
 
        /* $detalle = DetalleProducion::select('detalleproducion.IdProducion','articulo.descripcion','detalleproducion.IdProducto','detalleproducion.Cantidad',
