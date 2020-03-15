@@ -139,7 +139,14 @@ class DetalleProducionAvance extends Model
         $Id            = $request->Id;
 
         // obtengo los valores iniciales
-        $detalle       = new DetalleProducionAvance($request->except('_token'));
+        //$detalle       = new DetalleProducionAvance($request->except('_token'));
+
+        $cont = -1;
+        foreach ($CantidadBueno as $result) {
+            $cont      = $cont + 1;
+            $oExecutar = DetalleProducionAvance::where('id', $Id[$cont])->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont], 'CantidadMalo' => $CantidadMalo[$cont],'status'=>1]);
+        }
+
         $detalleAvance = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->get();
         $total2        = 0;
 
@@ -152,12 +159,7 @@ class DetalleProducionAvance extends Model
         $cantidad_produccion = $detalle_produccion->Cantidad;
 
         if ($cantidad_produccion > $cantidad)
-        {
-            $cont = -1;
-            foreach ($CantidadBueno as $result) {
-                $cont      = $cont + 1;
-                $oExecutar = DetalleProducionAvance::where('id', $Id[$cont])->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont], 'CantidadMalo' => $CantidadMalo[$cont],'status'=>1]);
-            }
+        {            
             //actualizo el estatus de detalle produccion
             $objDetalleProduccion = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->update(['clasificacion' => 'd']);
             return true;

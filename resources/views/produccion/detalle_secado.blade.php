@@ -77,10 +77,10 @@
                                 <div class="row mt-3">
                                     <div class="col-12 text-right pb-4">
                                         @if ($total_elemento == $count )
-                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">REGRESAR</a>
 
                                         @else
-                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">REGRESAR</a>
                                             <button class="btn btn-success">ACEPTAR</button>
                                         @endif
                                     </div>

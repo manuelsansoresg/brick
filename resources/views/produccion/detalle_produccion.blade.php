@@ -72,10 +72,10 @@
                                 <div class="row mt-3">
                                     <div class="col-12 text-right pb-4">                                                                            
                                         @if (((int)$detalle_produccion->Cantidad) > ((int)$total_detalle))                                       
-                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">REGRESAR</a>
                                             <button class="btn btn-success">ACEPTAR</button>                                            
                                         @else                                            
-                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">REGRESAR</a>
                                         @endif
                                     </div>
                                 </div>
