@@ -159,7 +159,7 @@ class DetalleProducionAvance extends Model
         $cantidad_produccion = $detalle_produccion->Cantidad;
 
         if ($cantidad_produccion > $cantidad)
-        {            
+        {
             //actualizo el estatus de detalle produccion
             $objDetalleProduccion = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->update(['clasificacion' => 'd']);
             return true;
@@ -185,10 +185,22 @@ class DetalleProducionAvance extends Model
             $bueno = $bueno + $row->CantidadBueno;
         }
 
-        $detalle = DetalleProducion::find($IdProducion);
+        $detalle = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->first();
 
-        return $detalle->Cantidad - $bueno;
+        return (int)$detalle->Cantidad - $bueno;
 
+    }
+    public static function total_actual($IdProducion, $IdProducto)
+    {
+        $produccion = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->get();
+        $bueno = 0;
+        $malo = 0;
+        foreach ($produccion as $row){
+            $bueno = $bueno + (int)$row->CantidadBueno;
+            $malo = $malo + (int)$row->CantidadMalo;
+        }
+
+        return $bueno + $malo;
     }
 
 }

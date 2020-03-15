@@ -76,6 +76,7 @@
                                             <th>DESCRIPCIÓN</th>
                                             <th>CANT</th>
                                             <th>PRODUCCIÓN ACTUAL</th>
+                                            <th>EXCELENTES</th>
                                             <th>DIFERENCIA</th>
                                             <th></th>
                                         </tr>
@@ -92,8 +93,10 @@
                                         <tr >
                                             <td>{{ $detalle_produccion->descripcion }}</td>
                                             <td> {{ (int)$detalle_produccion->Cantidad }} </td>
-                                            <td> {{ producccion_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
-                                            <td> {{ produccion_diferencia($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
+                                            <td> {{ $total_actual =  total_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
+                                            <td> {{ $produccion_actual = producccion_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
+
+                                            <td> {{ $total_actual -$produccion_actual }}  </td>
                                             <td>
                                                 <!--<a href="#" class="btn btn-secondary btn-sm"  v-if="detalle_produccion.estatus == 1" disabled >Detalle</a>-->
                                                 @if($detalle_produccion->clasificacion == 'd')
@@ -117,7 +120,11 @@
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
                                     <a href="#" class="btn btn-danger">CANCELAR</a>
+                                    @if($status_detalle== false)
                                     <a href="#" class="btn btn-success">ACEPTAR</a>
+                                        @else
+                                        <a href="#" class="btn btn-success">FINALIZAR</a>
+                                    @endif
                                 </div>
                             </div>
 

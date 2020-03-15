@@ -99,8 +99,10 @@ class ProduccionController extends Controller
         $cliente            = Cliente::getById($pedido->IdCliente);
         $domicilio          = ($cliente!= "") ? 'Calle:' . $cliente->Calle . ' No° Ext:' . $cliente->NumeroExterior . ' No° Int' . $cliente->NumeroInterior . ' Colonia:' . $cliente->Colonia : '';
         $detalle_produccion = DetalleProducion::getByProduccion($produccion->Id);
+        $status_detalle     = DetalleProducion::statusDetalle($produccion->Id);
 
-        return view('produccion.detalle', compact('pedido', 'clientes', 'empleados', 'domicilio', 'detalle_produccion', 'produccion'));
+
+        return view('produccion.detalle', compact('pedido', 'status_detalle', 'clientes', 'empleados', 'domicilio', 'detalle_produccion', 'produccion'));
     }
 
     public function detalle_produccion(Request $request, $IdProducion, $IdProducto)

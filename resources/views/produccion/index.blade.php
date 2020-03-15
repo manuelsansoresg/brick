@@ -120,7 +120,7 @@
                                                         <td>{{ date('Y-m-d', strtotime($pedido_terminado->created_at)) }}</td>
                                                         <td>{{ date('Y-m-d', strtotime($pedido_terminado->FechaEntrega)) }}</td>
                                                         <td>
-
+                                                            <a href="/admin/pedido/pdf/create/{{ $pedido_terminado->IdPedido }}" target="_blank" class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf"></i></a>
 
                                                         </td>
                                                     </tr>

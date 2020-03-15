@@ -27,7 +27,17 @@ class DetalleProducion extends Model
 
     }
 
+    public static function statusDetalle($IdProducion)
+    {
+        $detalle = (int)DetalleProducion::where('IdProducion', $IdProducion)->sum('Cantidad');
+        $get_avance = (int)DetalleProducionAvance::where('IdProducion', $IdProducion)->sum('CantidadBueno');
 
+        if($detalle == $get_avance){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public static function getByIds($IdProducion, $IdProducto)
     {
