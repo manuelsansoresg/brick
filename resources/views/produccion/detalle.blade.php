@@ -99,12 +99,18 @@
                                             <td> {{ $total_actual -$produccion_actual }}  </td>
                                             <td>
                                                 <!--<a href="#" class="btn btn-secondary btn-sm"  v-if="detalle_produccion.estatus == 1" disabled >Detalle</a>-->
-                                                @if($detalle_produccion->clasificacion == 'd')
-                                                    <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/detalle-produccion" class="btn btn-success btn-sm" >DETALLE</a>
-                                                    <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
+                                                @if($status_detalle == false)
+                                                    @if($detalle_produccion->clasificacion == 'd')
+                                                        <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/detalle-produccion" class="btn btn-success btn-sm" >DETALLE</a>
+                                                        <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
+                                                        @else
+                                                        <a class="btn btn-secondary btn-sm text-white">DETALLE</a>
+                                                        <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/avance-secado" class="btn btn-primary btn-sm">AVANCE SECADO</a>
+                                                    @endif
+                                                        <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
+                                                        <a class="btn btn-secondary btn-sm text-white">DETALLE</a>
                                                     @else
-                                                    <a class="btn btn-secondary btn-sm text-white">DETALLE</a>
-                                                    <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/avance-secado" class="btn btn-primary btn-sm">AVANCE SECADO</a>
+
                                                 @endif
 
 
