@@ -204,9 +204,9 @@
                             <div class="row mt-3">
                                 <div class="col-12 text-right pb-4">
                                     @if($is_autorizar == false)
-                                        <button class="btn btn-primary">Guardar</button>
+                                        <button class="btn btn-primary">ACEPTAR</button>
                                         @else
-                                        <a class="btn btn-primary" href="/admin/produccion/{{ $pedido->IdPedido }}/autorizar/1">Autorizar</a>
+                                        <a class="btn btn-primary" href="/admin/produccion/{{ $pedido->IdPedido }}/autorizar/1">AUTORIZAR</a>
                                     @endif
                                 </div>
                             </div>
