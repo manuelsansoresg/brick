@@ -108,8 +108,8 @@
                                                         <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/avance-secado" class="btn btn-primary btn-sm">AVANCE SECADO</a>
                                                     @endif
                                                 @else
-                                                    <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
                                                     <a class="btn btn-secondary btn-sm text-white">DETALLE</a>
+                                                    <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
                                                 @endif
 
 
