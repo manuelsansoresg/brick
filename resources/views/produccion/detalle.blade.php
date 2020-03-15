@@ -92,14 +92,14 @@
                                         @foreach($detalle_produccion as $detalle_produccion)
                                         <tr >
                                             <td>{{ $detalle_produccion->descripcion }}</td>
-                                            <td> {{ (int)$detalle_produccion->Cantidad }} </td>
+                                            <td> {{ $cantidad = (int)$detalle_produccion->Cantidad }} </td>
                                             <td> {{ $total_actual =  total_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
                                             <td> {{ $produccion_actual = producccion_actual($detalle_produccion->IdProducion, $detalle_produccion->IdProducto) }}  </td>
 
                                             <td> {{ $total_actual -$produccion_actual }}  </td>
                                             <td>
                                                 <!--<a href="#" class="btn btn-secondary btn-sm"  v-if="detalle_produccion.estatus == 1" disabled >Detalle</a>-->
-                                                @if($status_detalle == false)
+                                                @if($cantidad != $produccion_actual)
                                                     @if($detalle_produccion->clasificacion == 'd')
                                                         <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/detalle-produccion" class="btn btn-success btn-sm" >DETALLE</a>
                                                         <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
@@ -107,8 +107,7 @@
                                                         <a class="btn btn-secondary btn-sm text-white">DETALLE</a>
                                                         <a href="/admin/produccion/{{ $detalle_produccion->IdProducion }}/{{ $detalle_produccion->IdProducto  }}/avance-secado" class="btn btn-primary btn-sm">AVANCE SECADO</a>
                                                     @endif
-
-                                                    @else
+                                                @else
                                                     <a class="btn btn-secondary btn-sm text-white">AVANCE SECADO</a>
                                                     <a class="btn btn-secondary btn-sm text-white">DETALLE</a>
                                                 @endif
