@@ -28,6 +28,27 @@ class DetalleProducionAvance extends Model
         return $detalle;
     }
 
+    public static function getTotalSecado($IdProducion, $IdProducto, $detalle_produccion)
+    {
+        $detalleAvance = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->get();
+        $total2 = 0;
+
+        foreach ($detalleAvance as $detalles){
+            $cant   = (int)$detalles->CantidadBueno;
+            $total2 = $total2 + $cant;
+        }
+
+        $cantidad            = $total2;
+        $cantidad_produccion = $detalle_produccion->Cantidad;
+
+        if ($cantidad_produccion > $cantidad)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public static function getTotalDetalle($detalle_produccion_avance, $detalle_produccion)
     {
         $total = 0;
@@ -68,11 +89,9 @@ class DetalleProducionAvance extends Model
             $IdProducto =$detalle_produccion->IdProducto ;
             $IdProducion = $detalle_produccion->IdProducion;
 
-            $detalleProduccion = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->get();
+            $detalleProduccion = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->first();
 
-            foreach ($detalleProduccion as $detalles){
-                $qletra = $detalles->clasificacion;
-            }
+            $qletra = $detalleProduccion->clasificacion;
 
             if ($qletra =='d'){
                 return $maximo - $total;
@@ -119,33 +138,31 @@ class DetalleProducionAvance extends Model
         $IdEmpleado    = $request->IdEmpleado;
         $Id            = $request->Id;
 
-        $cont = -1;
-        foreach ($CantidadBueno as $result) {
-            $cont = $cont + 1;
-
-            $oExecutar = DetalleProducionAvance::where('id', $Id[$cont])->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont], 'CantidadMalo' => $CantidadMalo[$cont],'status'=>1]);
-        }
-
         // obtengo los valores iniciales
-        $detalle = new DetalleProducionAvance($request->except('_token'));
+        $detalle       = new DetalleProducionAvance($request->except('_token'));
         $detalleAvance = DetalleProducionAvance::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->get();
-        $total2 = 0;
+        $total2        = 0;
 
         foreach ($detalleAvance as $detalles){
             $cant = (int)$detalles->CantidadBueno;
             $total2 = $total2 + $cant;
         }
 
-        $cantidad = $total2;
+        $cantidad            = $total2;
         $cantidad_produccion = $detalle_produccion->Cantidad;
 
         if ($cantidad_produccion > $cantidad)
         {
+            $cont = -1;
+            foreach ($CantidadBueno as $result) {
+                $cont      = $cont + 1;
+                $oExecutar = DetalleProducionAvance::where('id', $Id[$cont])->where('IdProducto', $IdProducto)->where('IdEmpleado', $IdEmpleado[$cont])->update(['CantidadBueno' => $CantidadBueno[$cont], 'CantidadMalo' => $CantidadMalo[$cont],'status'=>1]);
+            }
             //actualizo el estatus de detalle produccion
             $objDetalleProduccion = DetalleProducion::where('IdProducion', $IdProducion)->where('IdProducto', $IdProducto)->update(['clasificacion' => 'd']);
-            return 1;
+            return true;
         }else{
-            return 0;
+            return false;
         }
 
 

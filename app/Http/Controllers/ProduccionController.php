@@ -126,14 +126,17 @@ class ProduccionController extends Controller
         $detalle_produccion_avance = DetalleProducionAvance::getById($IdProducion,$IdProducto);
         $total_detalle             = DetalleProducionAvance::getTotalDetalle($detalle_produccion_avance, $detalle_produccion);
         $empleados                 = Empleado::all();
+        $isAceptar               = DetalleProducionAvance::getTotalSecado($IdProducion, $IdProducto, $detalle_produccion);
+
+
 
         if($_POST){
-            $detalle = DetalleProducionAvance::CreateUpdateAvance($request, $IdProducion, $IdProducto, $detalle_produccion);
+            $isAceptar = DetalleProducionAvance::CreateUpdateAvance($request, $IdProducion, $IdProducto, $detalle_produccion);
             return redirect('/admin/produccion/' .$IdProducion. '/'. $IdProducto. '/avance-secado');
             //dd($detalle);
         }
 
-        return view('produccion.detalle_secado', compact('detalle_produccion', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
+        return view('produccion.detalle_secado', compact('detalle_produccion', 'isAceptar', 'produccion', 'detalle_produccion_avance', 'total_detalle', 'empleados'));
     }
 
 

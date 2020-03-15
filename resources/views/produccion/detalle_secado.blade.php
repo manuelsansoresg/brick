@@ -41,15 +41,20 @@
                                                     <th>MALOS</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>                                                
+                                            <tbody>
+                                                <?php  $total_elemento= count($detalle_produccion_avance); ?>
+                                                <?php $count = 0; ?>
                                                 @foreach($detalle_produccion_avance as $detalle_produccion_avance)
                                                     @if ($detalle_produccion_avance->status == 1)
                                                         <tr>
                                                             <td>{{ date('d-m-Y', strtotime($detalle_produccion_avance->created_at)) }}</td>
                                                             <td>{{ $detalle_produccion_avance->Nombre }}</td>
                                                             <td>{{ (int)$detalle_produccion_avance->Cantidad }}</td>
-                                                            <td>{{ (int)$detalle_produccion_avance->CantidadBueno }}</td>
-                                                            <td>{{ (int)$detalle_produccion_avance->CantidadMalo }}</td>                                                        
+                                                            <td>
+                                                                {{ (int)$detalle_produccion_avance->CantidadBueno }}
+                                                                <?php $count = $count +1; ?>
+                                                            </td>
+                                                            <td>{{ (int)$detalle_produccion_avance->CantidadMalo }}</td>
                                                         </tr>
                                                     @elseif ($detalle_produccion_avance->status == 0)
                                                         <tr>
@@ -63,20 +68,20 @@
                                                             <td><input class="form-control" type="number" name="CantidadBueno[]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0" /></td>
                                                             <td><input class="form-control" type="number" name="CantidadMalo[]" min="0" max="{{ (int)$detalle_produccion_avance->Cantidad }}" value="0" /></td>
                                                         </tr>
-                                                    @endif                                                
-                                                @endforeach                                               
+                                                    @endif
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-12 text-right pb-4">
-                                       
-                                        @if (((int)$detalle_produccion->Cantidad) > ((int)$total_detalle)) 
+                                        @if ($total_elemento == $count )
                                             <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
-                                            <button class="btn btn-success">ACEPTAR</button>
+
                                         @else
                                             <a href="/admin/produccion/{{ $produccion->IdPedido }}/detalle" class="btn btn-danger">CANCELAR</a>
+                                            <button class="btn btn-success">ACEPTAR</button>
                                         @endif
                                     </div>
                                 </div>
