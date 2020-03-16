@@ -54,3 +54,7 @@ function produccion_diferencia($IdProducion, $IdProducto){
 function total_actual($IdProducion, $IdProducto){
     return DetalleProducionAvance::total_actual($IdProducion, $IdProducto);
 }
+
+
+
+

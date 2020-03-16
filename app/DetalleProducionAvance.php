@@ -203,4 +203,6 @@ class DetalleProducionAvance extends Model
         return $bueno + $malo;
     }
 
+
+
 }

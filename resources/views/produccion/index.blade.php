@@ -121,7 +121,7 @@
                                                         <td>{{ date('Y-m-d', strtotime($pedido_terminado->FechaEntrega)) }}</td>
                                                         <td>
                                                             <a href="/admin/pedido/pdf/create/{{ $pedido_terminado->IdPedido }}" target="_blank" class="btn btn-secondary btn-sm"><i class="fas fa-file-pdf"></i></a>
-
+                                                            <a href="/admin/entrada/save/{{ $pedido_terminado->Id }}" class="btn btn-primary btn-sm"><i class="fas fa-truck-loading"></i></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

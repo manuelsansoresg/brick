@@ -39,8 +39,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/produccion/{IdProducion}/{IdProducto}/avance-secado', 'ProduccionController@avace_secado');
     Route::post('/produccion/{IdProducion}/{IdProducto}/avance-secado', 'ProduccionController@avace_secado');
-    
-  
+
+
 
 
     Route::get('/produccion/{pedido_id}/setProduccion', 'ProduccionController@setProduccion');
@@ -67,5 +67,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('/entrada', 'EntradaController');
     Route::resource('/salida', 'SalidaController');
+
+    Route::get('/entrada/save/{IdProduccion}', 'EntradaSalidaController@entrada');
+    Route::get('/salida/save/{IdProduccion}', 'EntradaSalidaController@salida');
 
 });

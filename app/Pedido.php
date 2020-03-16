@@ -61,10 +61,11 @@ class Pedido extends Model
     static function getAll($statusPedido = '')
     {
         /*DB::enableQueryLog();*/
-        $pedido = Pedido::select('pedido.IdPedido', 'FechaEntrega', 'pedido.created_at', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Nombre', 'Iva', 'descuento', 'Importe', 'pedido.Estatus')
+        $pedido = Pedido::select('pedido.IdPedido', 'FechaEntrega', 'produccion.Id', 'pedido.created_at', 'clientes.Nombre as cliente', 'tipo_modelo.descripcion as modelo', 'Subtotal', 'Nombre', 'Iva', 'descuento', 'Importe', 'pedido.Estatus')
                             ->join('clientes', 'clientes.Id', '=', 'pedido.IdCliente', 'left')
-                            ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo', 'left')
-                            ->join('produccion', 'produccion.Id', '=', 'pedido.IdPedido', 'left');
+                            ->join('produccion', 'produccion.IdPedido', '=', 'pedido.IdPedido', 'left')
+                            ->join('tipo_modelo', 'tipo_modelo.id', '=', 'pedido.TipoModelo', 'left');
+
 
         if($statusPedido !== ''){
             $pedido = $pedido->where('statusPedido', $statusPedido);
